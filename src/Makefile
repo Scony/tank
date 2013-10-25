@@ -1,6 +1,6 @@
 CFLAGS=-Wall
 LDFLAGS=-lalleg
-OBJS=main.o Exception.o TestGame2.o Game.o Spriter.o Map.o TestMap.o Point.o
+OBJS=main.o Exception.o TutorialGame.o Game.o Spriter.o Map.o TutorialMap.o Point.o
 EXE=main.out
 
 all: $(EXE)

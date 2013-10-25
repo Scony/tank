@@ -1,5 +1,5 @@
 #include "Game.hpp"
-#include "TestGame2.hpp"
+#include "TutorialGame.hpp"
 
 #define WINDOW_WIDTH 800
 #define WINDOW_HEIGHT 608
@@ -25,11 +25,11 @@ int main()
   set_color_depth(32);
   set_gfx_mode(GFX_AUTODETECT_WINDOWED,WINDOW_WIDTH,WINDOW_HEIGHT,0,0);
 
-  Game * game = new TestGame2(screen);
+  Game * game = new TutorialGame(screen);
 
-  while(1)
+  while(!key[KEY_ESC])
     {
-      for(;speed > 0;speed--)
+      for(;speed > 0 && !key[KEY_ESC];speed--)
 	{
 	  game->move();
 	  game->draw();
