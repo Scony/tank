@@ -10,7 +10,7 @@ class Terrain
   Spriter * spriter;
 public:
   Terrain(Spriter * spriter);
-  ~Terrain();
+  virtual ~Terrain();
 
   virtual BITMAP * getBuffer() = 0;
 };
