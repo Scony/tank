@@ -64,7 +64,7 @@ void TutorialMap::move()
   for(list<TankBox>::iterator it = tanks.begin(); it != tanks.end(); it++)
     rectfill(buffer,it->getX(),it->getY(),it->getX()+31,it->getY()+31,makecol(0,0,0));
 
-  // handle tank intents + collisions
+  // handle tank intents + terrain collisions
   for(list<TankBox>::iterator it = tanks.begin(); it != tanks.end(); it++)
     {
       int intent = it->getTank()->move();
@@ -114,10 +114,38 @@ void TutorialMap::move()
 	  it->resetChanges();
 	  continue;
 	}
-
-      // success
-      it->applyChanges();
     }
+
+  // handle tank vs tank collisions
+  for(list<TankBox>::iterator it = tanks.begin(); it != tanks.end(); it++)
+    for(list<TankBox>::iterator itt = tanks.begin(); itt != tanks.end(); itt++)
+      {
+	if(it != itt)
+	  {
+	    int x11 = it->getNewX();
+	    int y11 = it->getNewY();
+	    int x12 = it->getNewX() + 31;
+	    int y12 = it->getNewY() + 31;
+
+	    int x21 = itt->getNewX();
+	    int y21 = itt->getNewY();
+	    int x22 = itt->getNewX() + 31;
+	    int y22 = itt->getNewY() + 31;
+
+	    if((x11 <= x21 && x21 <= x12 && y11 <= y21 && y21 <= y12) ||
+	       (x11 <= x21 && x21 <= x12 && y11 <= y22 && y22 <= y12) ||
+	       (x11 <= x22 && x22 <= x12 && y11 <= y22 && y22 <= y12) ||
+	       (x11 <= x22 && x22 <= x12 && y11 <= y21 && y21 <= y12))
+	      {
+		it->resetChanges();
+		itt->resetChanges();
+	      }
+	  }
+      }
+
+  // apply changes
+  for(list<TankBox>::iterator it = tanks.begin(); it != tanks.end(); it++)
+    it->applyChanges();
 
   // redraw
   // clear_to_color(buffer,makecol(0,0,0));
