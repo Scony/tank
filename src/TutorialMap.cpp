@@ -23,10 +23,10 @@ TutorialMap::TutorialMap(Spriter * spriter, int width, int height) :
 	terrains[i][j] = NULL;
 
   // tanks init
-  tanks.push_back(TankBox(0,0,1,new DummyTank(spriter)));
   tanks.push_back(TankBox(0,32,1,new PlayerTank(spriter)));
+  tanks.push_back(TankBox(0,0,1,new DummyTank(spriter)));
   // tanks.push_back(TankBox(0,64,1,new PlayerTank(spriter)));
-  tanks.push_back(TankBox(0,96,1,new AITank(spriter)));
+  tanks.push_back(TankBox(0,160,1,new AITank(spriter)));
   tanks.push_back(TankBox(0,128,1,new AITank(spriter)));
 
   // initial draw
@@ -161,5 +161,7 @@ void TutorialMap::move()
 
 Point TutorialMap::getFocus()
 {
-  return Point(width*16/2,height*16/2);
+  list<TankBox>::iterator it = tanks.begin();
+  return Point(it->getX() + 16, it->getY() + 16);
+  // return Point(width*16/2,height*16/2);
 }

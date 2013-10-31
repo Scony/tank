@@ -4,7 +4,7 @@
 TutorialGame::TutorialGame(BITMAP * screen) : Game(screen)
 {
   spriter = new Spriter("/home/scony/Allegro/tank/src/sprite.bmp");
-  map = new TutorialMap(spriter,30,30);
+  map = new TutorialMap(spriter,100,100);
 }
 
 TutorialGame::~TutorialGame()
@@ -40,6 +40,8 @@ void TutorialGame::draw()
   else
     {
       buffX = focus.getX() - (screen->w / 2);
+      buffX = buffX < 0 ? 0 : buffX;
+      buffX = buffX > buff->w - screen->w ? buff->w - screen->w : buffX;
       screenX = 0;
       wtc = screen->w;
     }
@@ -54,6 +56,8 @@ void TutorialGame::draw()
   else
     {
       buffY = focus.getY() - (screen->h / 2);
+      buffY = buffY < 0 ? 0 : buffY;
+      buffY = buffY > buff->h - screen->h ? buff->h - screen->h : buffY;
       screenY = 0;
       htc = screen->h;
     }
