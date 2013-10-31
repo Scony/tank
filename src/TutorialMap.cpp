@@ -23,16 +23,16 @@ TutorialMap::TutorialMap(Spriter * spriter, int width, int height) :
 	terrains[i][j] = NULL;
 
   // tanks init
-  tanks.push_back(TankBox(0,0,new DummyTank(spriter),1));
-  tanks.push_back(TankBox(0,32,new PlayerTank(spriter),1));
-  // tanks.push_back(TankBox(0,64,new PlayerTank(spriter),1));
-  tanks.push_back(TankBox(0,96,new AITank(spriter),1));
-  tanks.push_back(TankBox(0,128,new AITank(spriter),1));
+  tanks.push_back(TankBox(0,0,1,new DummyTank(spriter)));
+  tanks.push_back(TankBox(0,32,1,new PlayerTank(spriter)));
+  // tanks.push_back(TankBox(0,64,1,new PlayerTank(spriter)));
+  tanks.push_back(TankBox(0,96,1,new AITank(spriter)));
+  tanks.push_back(TankBox(0,128,1,new AITank(spriter)));
 
   // initial draw
   clear_to_color(buffer,makecol(0,0,0));
-  for(list<TankBox>::iterator i = tanks.begin(); i != tanks.end(); i++)
-    blit(i->tank->getBuffer(),buffer,0,0,i->x,i->y,32,32);
+  for(list<TankBox>::iterator it = tanks.begin(); it != tanks.end(); it++)
+    blit(it->getTank()->getBuffer(),buffer,0,0,it->getX(),it->getY(),32,32);
   for(int i = 0; i < width; i++)
     for(int j = 0; j < height; j++)
       {
@@ -43,8 +43,8 @@ TutorialMap::TutorialMap(Spriter * spriter, int width, int height) :
 
 TutorialMap::~TutorialMap()
 {
-  for(list<TankBox>::iterator i = tanks.begin(); i != tanks.end(); i++)
-    delete i->tank;
+  for(list<TankBox>::iterator it = tanks.begin(); it != tanks.end(); it++)
+    delete it->getTank();
 
   for(int i = 0; i < width; i++)
     for(int j = 0; j < height; j++)
@@ -61,67 +61,68 @@ TutorialMap::~TutorialMap()
 void TutorialMap::move()
 {
   // clear tanks
-  for(list<TankBox>::iterator i = tanks.begin(); i != tanks.end(); i++)
-    rectfill(buffer,i->x,i->y,i->x+31,i->y+31,makecol(0,0,0));
+  for(list<TankBox>::iterator it = tanks.begin(); it != tanks.end(); it++)
+    rectfill(buffer,it->getX(),it->getY(),it->getX()+31,it->getY()+31,makecol(0,0,0));
 
   // handle tank intents + collisions
-  for(list<TankBox>::iterator i = tanks.begin(); i != tanks.end(); i++)
+  for(list<TankBox>::iterator it = tanks.begin(); it != tanks.end(); it++)
     {
-      int x = i->x;
-      int y = i->y;
-
-      int intent = i->tank->move();
-      if(intent == 0 || i->dir == intent)
+      int intent = it->getTank()->move();
+      if(intent == 0 || it->getDirection() == intent)
 	switch(intent)
 	  {
 	  case 1:
-	    y--;
+	    it->setNewY(it->getY()-1);
 	    break;
 	  case 2:
-	    x++;
+	    it->setNewX(it->getX()+1);
 	    break;
 	  case 3:
-	    y++;
+	    it->setNewY(it->getY()+1);
 	    break;
 	  case 4:
-	    x--;
-	    break;
+	    it->setNewX(it->getX()-1);
 	  }
       else
 	{
-	  x = round((double)x / 16) * 16;
-	  y = round((double)y / 16) * 16;
+	  it->setNewX(round((double)it->getX() / 16) * 16);
+	  it->setNewY(round((double)it->getY() / 16) * 16);
 	}
 
       if(intent)
-	i->dir = intent;
+	it->setNewDirection(intent);
       
       // map bounds
-      if(x < 0 || x + 32 > width * 16 || y < 0 || y + 32 > height * 16)
-	continue;
+      if(it->getNewX() < 0 || it->getNewX() + 32 > width * 16 || it->getNewY() < 0 || it->getNewY() + 32 > height * 16)
+	{
+	  it->resetChanges();
+	  continue;
+	}
 
       // terrain collisions
-      int ix = x / 16;
-      int iy = y / 16;
-      int ixx = (x + 31) / 16;
-      int iyy = (y + 31) / 16;
+      int ix = it->getNewX() / 16;
+      int iy = it->getNewY() / 16;
+      int ixx = (it->getNewX() + 31) / 16;
+      int iyy = (it->getNewY() + 31) / 16;
       bool collision = false;
-      for(int j = ix; j <= ixx && !collision; j++)
-	for(int k = iy; k <= iyy && !collision; k++)
-	  if(terrains[j][k] != NULL && terrains[j][k]->isCollisionable())
+      for(int i = ix; i <= ixx && !collision; i++)
+	for(int j = iy; j <= iyy && !collision; j++)
+	  if(terrains[i][j] != NULL && terrains[i][j]->isCollisionable())
 	    collision = true;
       if(collision)
-	continue;
+	{
+	  it->resetChanges();
+	  continue;
+	}
 
       // success
-      i->x = x;
-      i->y = y;
+      it->applyChanges();
     }
 
   // redraw
   // clear_to_color(buffer,makecol(0,0,0));
-  for(list<TankBox>::iterator i = tanks.begin(); i != tanks.end(); i++)
-    blit(i->tank->getBuffer(),buffer,0,0,i->x,i->y,32,32);
+  for(list<TankBox>::iterator it = tanks.begin(); it != tanks.end(); it++)
+    blit(it->getTank()->getBuffer(),buffer,0,0,it->getX(),it->getY(),32,32);
   // for(int i = 0; i < width; i++)
   //   for(int j = 0; j < height; j++)
   //     {

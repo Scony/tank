@@ -5,22 +5,7 @@
 
 #include "Map.hpp"
 #include "Terrain.hpp"
-#include "Tank.hpp"
-
-struct TankBox
-{
-  int x;
-  int y;
-  int dir;
-  Tank * tank;
-  TankBox(int x, int y, Tank * tank, int dir)
-  {
-    this->x = x;
-    this->y = y;
-    this->dir = dir;
-    this->tank = tank;
-  }
-};
+#include "TankBox.hpp"
 
 class TutorialMap : public Map
 {
