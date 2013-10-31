@@ -6,7 +6,7 @@ Spriter::Spriter(std::string path)
   // sprite
   sprite = load_bmp(path.c_str(),default_palette);
   if(!sprite)
-    throw new Exception("Can not load sprite.bmp");
+    throw new Exception("Can not load " + path);
 
   // terrain
   for(int i = 0; i < 4; i++)
@@ -64,4 +64,11 @@ BITMAP * Spriter::getTerrain(int index)
   if(index >= 4 || index < 0)
     throw new Exception("Terrain index out of bounds");
   return terrain[index];
+}
+
+BITMAP * Spriter::getTank(int index)
+{
+  if(index >= 8 || index < 0)
+    throw new Exception("Tank index out of bounds");
+  return tank[index];
 }

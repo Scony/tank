@@ -3,8 +3,8 @@
 
 TutorialGame::TutorialGame(BITMAP * screen) : Game(screen)
 {
-  spriter = new Spriter("sprite.bmp");
-  map = new TutorialMap(spriter,10,10);
+  spriter = new Spriter("/home/scony/Allegro/tank/src/sprite.bmp");
+  map = new TutorialMap(spriter,30,30);
 }
 
 TutorialGame::~TutorialGame()

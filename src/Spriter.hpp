@@ -16,6 +16,7 @@ public:
   ~Spriter();
   BITMAP * getSprite();
   BITMAP * getTerrain(int index);
+  BITMAP * getTank(int index);
 };
 
 #endif

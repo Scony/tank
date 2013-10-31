@@ -7,10 +7,23 @@
 #include "Terrain.hpp"
 #include "Tank.hpp"
 
+struct TankBox
+{
+  int x;
+  int y;
+  Tank * tank;
+  TankBox(int x, int y, Tank * tank)
+  {
+    this->x = x;
+    this->y = y;
+    this->tank = tank;
+  }
+};
+
 class TutorialMap : public Map
 {
   Terrain *** terrains;
-  // std::List<Tank*> tanks;	// pointer copying may cause problem
+  std::list<TankBox> tanks;
 public:
   TutorialMap(Spriter * spriter, int width, int height);
   ~TutorialMap();
