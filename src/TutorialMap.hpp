@@ -11,11 +11,13 @@ struct TankBox
 {
   int x;
   int y;
+  int dir;
   Tank * tank;
-  TankBox(int x, int y, Tank * tank)
+  TankBox(int x, int y, Tank * tank, int dir)
   {
     this->x = x;
     this->y = y;
+    this->dir = dir;
     this->tank = tank;
   }
 };

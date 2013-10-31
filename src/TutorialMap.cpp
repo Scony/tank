@@ -1,3 +1,5 @@
+#include <math.h>
+
 #include "TutorialMap.hpp"
 #include "BrickTerrain.hpp"
 #include "DummyTank.hpp"
@@ -21,11 +23,11 @@ TutorialMap::TutorialMap(Spriter * spriter, int width, int height) :
 	terrains[i][j] = NULL;
 
   // tanks init
-  // tanks.push_back(TankBox(10,10,new DummyTank(spriter)));
-  tanks.push_back(TankBox(10,42,new PlayerTank(spriter)));
-  // tanks.push_back(TankBox(10,74,new PlayerTank(spriter)));
-  tanks.push_back(TankBox(10,106,new AITank(spriter)));
-  tanks.push_back(TankBox(106,106,new AITank(spriter)));
+  tanks.push_back(TankBox(0,0,new DummyTank(spriter),1));
+  tanks.push_back(TankBox(0,32,new PlayerTank(spriter),1));
+  // tanks.push_back(TankBox(0,64,new PlayerTank(spriter),1));
+  tanks.push_back(TankBox(0,96,new AITank(spriter),1));
+  tanks.push_back(TankBox(0,128,new AITank(spriter),1));
 
   // initial draw
   clear_to_color(buffer,makecol(0,0,0));
@@ -68,22 +70,32 @@ void TutorialMap::move()
       int x = i->x;
       int y = i->y;
 
-      switch(i->tank->move())
+      int intent = i->tank->move();
+      if(intent == 0 || i->dir == intent)
+	switch(intent)
+	  {
+	  case 1:
+	    y--;
+	    break;
+	  case 2:
+	    x++;
+	    break;
+	  case 3:
+	    y++;
+	    break;
+	  case 4:
+	    x--;
+	    break;
+	  }
+      else
 	{
-	case 1:
-	  y--;
-	  break;
-	case 2:
-	  x++;
-	  break;
-	case 3:
-	  y++;
-	  break;
-	case 4:
-	  x--;
-	  break;
+	  x = round((double)x / 16) * 16;
+	  y = round((double)y / 16) * 16;
 	}
 
+      if(intent)
+	i->dir = intent;
+      
       // map bounds
       if(x < 0 || x + 32 > width * 16 || y < 0 || y + 32 > height * 16)
 	continue;
