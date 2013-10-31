@@ -1,7 +1,7 @@
 #include "DummyTank.hpp"
 
-DummyTank::DummyTank(Spriter * spriter, int speed) :
-  Tank(spriter,speed)
+DummyTank::DummyTank(Spriter * spriter) :
+  Tank(spriter)
 {
   buffer = spriter->getTank(0);
 }

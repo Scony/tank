@@ -1,10 +1,9 @@
 #include "Tank.hpp"
 
-Tank::Tank(Spriter * spriter, int speed)
+Tank::Tank(Spriter * spriter)
 {
   this->spriter = spriter;
   buffer = NULL;
-  this->speed= speed;
 }
 
 Tank::~Tank()
@@ -14,11 +13,6 @@ Tank::~Tank()
 BITMAP * Tank::getBuffer()
 {
   return buffer;
-}
-
-int Tank::getSpeed()
-{
-  return speed;
 }
 
 int Tank::getSize()

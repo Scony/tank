@@ -6,7 +6,7 @@
 class DummyTank : public Tank
 {
 public:
-  DummyTank(Spriter * spriter, int speed);
+  DummyTank(Spriter * spriter);
   ~DummyTank();
 
   int move();

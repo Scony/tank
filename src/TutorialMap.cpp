@@ -21,11 +21,11 @@ TutorialMap::TutorialMap(Spriter * spriter, int width, int height) :
 	terrains[i][j] = NULL;
 
   // tanks init
-  // tanks.push_back(TankBox(10,10,new DummyTank(spriter,1)));
-  tanks.push_back(TankBox(10,42,new PlayerTank(spriter,1)));
-  // tanks.push_back(TankBox(10,74,new PlayerTank(spriter,3)));
-  tanks.push_back(TankBox(10,106,new AITank(spriter,1)));
-  tanks.push_back(TankBox(106,106,new AITank(spriter,1)));
+  // tanks.push_back(TankBox(10,10,new DummyTank(spriter)));
+  tanks.push_back(TankBox(10,42,new PlayerTank(spriter)));
+  // tanks.push_back(TankBox(10,74,new PlayerTank(spriter)));
+  tanks.push_back(TankBox(10,106,new AITank(spriter)));
+  tanks.push_back(TankBox(106,106,new AITank(spriter)));
 
   // initial draw
   clear_to_color(buffer,makecol(0,0,0));
@@ -68,26 +68,26 @@ void TutorialMap::move()
       switch(i->tank->move())
 	{
 	case 1:
-	  if(i->y - i->tank->getSpeed() >= 0)
-	    i->y -= i->tank->getSpeed();
+	  if(i->y - 1 >= 0)
+	    i->y -= 1;
 	  else
 	    i->y = 0;
 	  break;
 	case 2:
-	  if(i->x + i->tank->getSpeed() + 32 <= width * 16)
-	    i->x += i->tank->getSpeed();
+	  if(i->x + 1 + 32 <= width * 16)
+	    i->x += 1;
 	  else
 	    i->x = (width * 16) - 32;
 	  break;
 	case 3:
-	  if(i->y + i->tank->getSpeed() + 32 <= height * 16)
-	    i->y += i->tank->getSpeed();
+	  if(i->y + 1 + 32 <= height * 16)
+	    i->y += 1;
 	  else
 	    i->y = (height * 16) - 32;
 	  break;
 	case 4:
-	  if(i->x - i->tank->getSpeed() >= 0)
-	    i->x -= i->tank->getSpeed();
+	  if(i->x - 1 >= 0)
+	    i->x -= 1;
 	  else
 	    i->x = 0;
 	  break;

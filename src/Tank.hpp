@@ -11,14 +11,12 @@ protected:
   Spriter * spriter;
 
   BITMAP * buffer;
-  int speed;
 public:
-  Tank(Spriter * spriter, int speed);
+  Tank(Spriter * spriter);
   virtual ~Tank();
 
   virtual int move() = 0;
   BITMAP * getBuffer();
-  int getSpeed();
   int getSize();
 };
 

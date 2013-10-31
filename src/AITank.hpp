@@ -9,7 +9,7 @@ class AITank : public Tank
   int intent;
   int length;
 public:
-  AITank(Spriter * spriter, int speed);
+  AITank(Spriter * spriter);
   ~AITank();
 
   int move();

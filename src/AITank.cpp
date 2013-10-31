@@ -1,7 +1,7 @@
 #include "AITank.hpp"
 
-AITank::AITank(Spriter * spriter, int speed) :
-  Tank(spriter,speed)
+AITank::AITank(Spriter * spriter) :
+  Tank(spriter)
 {
   buffer = spriter->getTank(0);
   offset = 0;

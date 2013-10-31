@@ -1,7 +1,7 @@
 #include "PlayerTank.hpp"
 
-PlayerTank::PlayerTank(Spriter * spriter, int speed) :
-  Tank(spriter,speed)
+PlayerTank::PlayerTank(Spriter * spriter) :
+  Tank(spriter)
 {
   buffer = spriter->getTank(0);
   offset = 0;

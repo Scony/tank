@@ -7,7 +7,7 @@ class PlayerTank : public Tank
 {
   int offset;
 public:
-  PlayerTank(Spriter * spriter, int speed);
+  PlayerTank(Spriter * spriter);
   ~PlayerTank();
 
   int move();
