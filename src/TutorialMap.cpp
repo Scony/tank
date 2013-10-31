@@ -60,38 +60,50 @@ void TutorialMap::move()
 {
   // clear tanks
   for(list<TankBox>::iterator i = tanks.begin(); i != tanks.end(); i++)
-    rectfill(buffer,i->x,i->y,i->x+32,i->y+32,makecol(0,0,0));
+    rectfill(buffer,i->x,i->y,i->x+31,i->y+31,makecol(0,0,0));
 
   // handle tank intents + collisions
   for(list<TankBox>::iterator i = tanks.begin(); i != tanks.end(); i++)
     {
+      int x = i->x;
+      int y = i->y;
+
       switch(i->tank->move())
 	{
 	case 1:
-	  if(i->y - 1 >= 0)
-	    i->y -= 1;
-	  else
-	    i->y = 0;
+	  y--;
 	  break;
 	case 2:
-	  if(i->x + 1 + 32 <= width * 16)
-	    i->x += 1;
-	  else
-	    i->x = (width * 16) - 32;
+	  x++;
 	  break;
 	case 3:
-	  if(i->y + 1 + 32 <= height * 16)
-	    i->y += 1;
-	  else
-	    i->y = (height * 16) - 32;
+	  y++;
 	  break;
 	case 4:
-	  if(i->x - 1 >= 0)
-	    i->x -= 1;
-	  else
-	    i->x = 0;
+	  x--;
 	  break;
 	}
+
+      // map bounds
+      if(x < 0 || x + 32 > width * 16 || y < 0 || y + 32 > height * 16)
+	continue;
+
+      // terrain collisions
+      int ix = x / 16;
+      int iy = y / 16;
+      int ixx = (x + 31) / 16;
+      int iyy = (y + 31) / 16;
+      bool collision = false;
+      for(int j = ix; j <= ixx && !collision; j++)
+	for(int k = iy; k <= iyy && !collision; k++)
+	  if(terrains[j][k] != NULL && terrains[j][k]->isCollisionable())
+	    collision = true;
+      if(collision)
+	continue;
+
+      // success
+      i->x = x;
+      i->y = y;
     }
 
   // redraw
