@@ -11,6 +11,7 @@ public:
   ~BrickTerrain();
 
   BITMAP * getBuffer();
+  bool isCollisionable();
 };
 
 #endif

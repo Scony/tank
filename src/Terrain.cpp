@@ -8,3 +8,8 @@ Terrain::Terrain(Spriter * spriter)
 Terrain::~Terrain()
 {
 }
+
+int Terrain::getSize()
+{
+  return spriter->getTerrainSize();
+}

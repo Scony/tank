@@ -20,3 +20,8 @@ int Tank::getSpeed()
 {
   return speed;
 }
+
+int Tank::getSize()
+{
+  return spriter->getTankSize();
+}

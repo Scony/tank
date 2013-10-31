@@ -72,3 +72,13 @@ BITMAP * Spriter::getTank(int index)
     throw new Exception("Tank index out of bounds");
   return tank[index];
 }
+
+int Spriter::getTankSize()
+{
+  return 32;
+}
+
+int Spriter::getTerrainSize()
+{
+  return 16;
+}

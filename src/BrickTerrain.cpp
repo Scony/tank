@@ -14,3 +14,8 @@ BITMAP * BrickTerrain::getBuffer()
 {
   return buffer;
 }
+
+bool BrickTerrain::isCollisionable()
+{
+  return true;
+}

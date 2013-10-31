@@ -19,6 +19,7 @@ public:
   virtual int move() = 0;
   BITMAP * getBuffer();
   int getSpeed();
+  int getSize();
 };
 
 #endif

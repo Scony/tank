@@ -34,6 +34,7 @@ int main()
   set_color_depth(32);
   set_gfx_mode(GFX_AUTODETECT_WINDOWED,WINDOW_WIDTH,WINDOW_HEIGHT,0,0);
 
+  clear_to_color(screen,makecol(255,255,255));
   Game * game = new TutorialGame(screen);
 
   while(!key[KEY_ESC] && !close_button)
