@@ -2,6 +2,10 @@
 
 #include "TutorialMap.hpp"
 #include "BrickTerrain.hpp"
+#include "ConcreteTerrain.hpp"
+#include "PavementTerrain.hpp"
+#include "BushTerrain.hpp"
+#include "WaterTerrain.hpp"
 #include "DummyTank.hpp"
 #include "PlayerTank.hpp"
 #include "AITank.hpp"
@@ -18,7 +22,26 @@ TutorialMap::TutorialMap(Spriter * spriter, int width, int height) :
   for(int i = 0; i < width; i++)
     for(int j = 0; j < height; j++)
       if(rand()%100 > 96)
-	terrains[i][j] = new BrickTerrain(spriter);
+	{
+	  switch(rand() % 5)
+	    {
+	    case 0:
+	      terrains[i][j] = new BrickTerrain(spriter);
+	      break;
+	    case 1:
+	      terrains[i][j] = new ConcreteTerrain(spriter);
+	      break;
+	    case 2:
+	      terrains[i][j] = new PavementTerrain(spriter);
+	      break;
+	    case 3:
+	      terrains[i][j] = new BushTerrain(spriter);
+	      break;
+	    case 4:
+	      terrains[i][j] = new WaterTerrain(spriter);
+	      break;
+	    }
+	}
       else
 	terrains[i][j] = NULL;
 

@@ -8,7 +8,7 @@ class Spriter
 {
 protected:
   BITMAP * sprite;
-  BITMAP * terrain[4];
+  BITMAP * terrain[5];
   BITMAP * tank[8];
   BITMAP * bang[3];
   BITMAP * bullet[4];

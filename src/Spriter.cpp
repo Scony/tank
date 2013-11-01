@@ -9,7 +9,7 @@ Spriter::Spriter(std::string path)
     throw new Exception("Can not load " + path);
 
   // terrain
-  for(int i = 0; i < 4; i++)
+  for(int i = 0; i < 5; i++)
     {
       terrain[i] = create_bitmap(16,16);
       blit(sprite,terrain[i],0,256+i*16,0,0,16,16);
@@ -61,7 +61,7 @@ BITMAP * Spriter::getSprite()
 
 BITMAP * Spriter::getTerrain(int index)
 {
-  if(index >= 4 || index < 0)
+  if(index >= 5 || index < 0)
     throw new Exception("Terrain index out of bounds");
   return terrain[index];
 }

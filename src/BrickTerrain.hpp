@@ -5,7 +5,6 @@
 
 class BrickTerrain : public Terrain
 {
-  BITMAP * buffer;
 public:
   BrickTerrain(Spriter * spriter);
   ~BrickTerrain();

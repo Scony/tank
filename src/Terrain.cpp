@@ -13,3 +13,8 @@ int Terrain::getSize()
 {
   return spriter->getTerrainSize();
 }
+
+BITMAP * Terrain::getBuffer()
+{
+  return buffer;
+}

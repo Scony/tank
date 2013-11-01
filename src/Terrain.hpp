@@ -9,11 +9,12 @@ class Terrain
 {
 protected:
   Spriter * spriter;
+  BITMAP * buffer;
 public:
   Terrain(Spriter * spriter);
   virtual ~Terrain();
 
-  virtual BITMAP * getBuffer() = 0;
+  BITMAP * getBuffer();
   int getSize();
   virtual bool isCollisionable() = 0;
 };
