@@ -8,6 +8,12 @@ Spriter::Spriter(std::string path)
   if(!sprite)
     throw new Exception("Can not load " + path);
 
+  // convert #000000 to #ff00ff (magic pink)
+  for(int i = 0; i < sprite->w; i++)
+    for(int j = 0; j < sprite->h; j++)
+      if(getpixel(sprite,i,j) == 0)
+	putpixel(sprite,i,j,16711935);
+
   // terrain
   for(int i = 0; i < 5; i++)
     {

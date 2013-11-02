@@ -1,3 +1,6 @@
+#include <iostream>
+
+#include "Exception.hpp"
 #include "Game.hpp"
 #include "TutorialGame.hpp"
 
@@ -35,18 +38,29 @@ int main()
   set_gfx_mode(GFX_AUTODETECT_WINDOWED,WINDOW_WIDTH,WINDOW_HEIGHT,0,0);
 
   clear_to_color(screen,makecol(255,255,255));
-  Game * game = new TutorialGame(screen);
 
-  while(!key[KEY_ESC] && !close_button)
+  try
     {
-      for(;speed > 0 && !key[KEY_ESC] && !close_button;speed--)
+      Game * game = new TutorialGame(screen);
+
+      while(!key[KEY_ESC] && !close_button)
 	{
-	  game->move();
-	  game->draw();
+	  for(;speed > 0 && !key[KEY_ESC] && !close_button;speed--)
+	    {
+	      game->move();
+	      game->draw();
+	      // std::cout << getpixel(screen,16,16) << std::endl;
+	    }
 	}
+
+      delete game;
+    }
+  catch(Exception * e)
+    {
+      std::cout << e->toString() << std::endl;
+      delete e;
     }
 
-  delete game;
   remove_int(increment_speed);
   allegro_exit();
 

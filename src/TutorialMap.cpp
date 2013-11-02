@@ -55,12 +55,12 @@ TutorialMap::TutorialMap(Spriter * spriter, int width, int height) :
   // initial draw
   clear_to_color(buffer,makecol(0,0,0));
   for(list<TankBox>::iterator it = tanks.begin(); it != tanks.end(); it++)
-    blit(it->getTank()->getBuffer(),buffer,0,0,it->getX(),it->getY(),32,32);
+    masked_blit(it->getTank()->getBuffer(),buffer,0,0,it->getX(),it->getY(),32,32);
   for(int i = 0; i < width; i++)
     for(int j = 0; j < height; j++)
       {
 	if(terrains[i][j])
-	  blit(terrains[i][j]->getBuffer(),buffer,0,0,i*16,j*16,16,16);
+	  masked_blit(terrains[i][j]->getBuffer(),buffer,0,0,i*16,j*16,16,16);
       }
 }
 
@@ -94,8 +94,8 @@ void TutorialMap::move()
       int iyy = (it->getY() + 31) / 16;
       for(int i = ix; i <= ixx; i++)
 	for(int j = iy; j <= iyy; j++)
-	  if(terrains[i][j] != NULL && terrains[i][j]->getLevel() == -1)
-	    blit(terrains[i][j]->getBuffer(),buffer,0,0,i*16,j*16,16,16);
+	  if(terrains[i][j] != NULL && terrains[i][j]->getLevel() != 0)
+	    masked_blit(terrains[i][j]->getBuffer(),buffer,0,0,i*16,j*16,16,16);
     }
 
   // handle tank intents + terrain collisions
@@ -182,7 +182,7 @@ void TutorialMap::move()
     {
       it->applyChanges();
 
-      blit(it->getTank()->getBuffer(),buffer,0,0,it->getX(),it->getY(),32,32);
+      masked_blit(it->getTank()->getBuffer(),buffer,0,0,it->getX(),it->getY(),32,32);
 
       int ix = it->getX() / 16;
       int iy = it->getY() / 16;
@@ -191,7 +191,7 @@ void TutorialMap::move()
       for(int i = ix; i <= ixx; i++)
 	for(int j = iy; j <= iyy; j++)
 	  if(terrains[i][j] != NULL && terrains[i][j]->getLevel() == 1)
-	    blit(terrains[i][j]->getBuffer(),buffer,0,0,i*16,j*16,16,16);
+	    masked_blit(terrains[i][j]->getBuffer(),buffer,0,0,i*16,j*16,16,16);
     }
 }
 
