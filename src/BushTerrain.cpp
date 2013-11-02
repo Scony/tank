@@ -14,3 +14,8 @@ bool BushTerrain::isCollisionable()
 {
   return false;
 }
+
+int BushTerrain::getLevel()
+{
+  return 1;
+}

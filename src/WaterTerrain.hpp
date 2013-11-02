@@ -10,6 +10,7 @@ public:
   ~WaterTerrain();
 
   bool isCollisionable();
+  int getLevel();
 };
 
 #endif

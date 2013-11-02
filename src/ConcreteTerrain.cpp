@@ -14,3 +14,8 @@ bool ConcreteTerrain::isCollisionable()
 {
   return true;
 }
+
+int ConcreteTerrain::getLevel()
+{
+  return 0;
+}

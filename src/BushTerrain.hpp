@@ -10,6 +10,7 @@ public:
   ~BushTerrain();
 
   bool isCollisionable();
+  int getLevel();
 };
 
 #endif

@@ -14,3 +14,8 @@ bool BrickTerrain::isCollisionable()
 {
   return true;
 }
+
+int BrickTerrain::getLevel()
+{
+  return 0;
+}

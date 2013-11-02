@@ -11,6 +11,7 @@ public:
 
   BITMAP * getBuffer();
   bool isCollisionable();
+  int getLevel();
 };
 
 #endif

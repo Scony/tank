@@ -85,7 +85,18 @@ void TutorialMap::move()
 {
   // clear tanks
   for(list<TankBox>::iterator it = tanks.begin(); it != tanks.end(); it++)
-    rectfill(buffer,it->getX(),it->getY(),it->getX()+31,it->getY()+31,makecol(0,0,0));
+    {
+      rectfill(buffer,it->getX(),it->getY(),it->getX()+31,it->getY()+31,makecol(0,0,0));
+
+      int ix = it->getX() / 16;
+      int iy = it->getY() / 16;
+      int ixx = (it->getX() + 31) / 16;
+      int iyy = (it->getY() + 31) / 16;
+      for(int i = ix; i <= ixx; i++)
+	for(int j = iy; j <= iyy; j++)
+	  if(terrains[i][j] != NULL && terrains[i][j]->getLevel() == -1)
+	    blit(terrains[i][j]->getBuffer(),buffer,0,0,i*16,j*16,16,16);
+    }
 
   // handle tank intents + terrain collisions
   for(list<TankBox>::iterator it = tanks.begin(); it != tanks.end(); it++)
@@ -166,20 +177,22 @@ void TutorialMap::move()
 	  }
       }
 
-  // apply changes
-  for(list<TankBox>::iterator it = tanks.begin(); it != tanks.end(); it++)
-    it->applyChanges();
-
   // redraw
-  // clear_to_color(buffer,makecol(0,0,0));
   for(list<TankBox>::iterator it = tanks.begin(); it != tanks.end(); it++)
-    blit(it->getTank()->getBuffer(),buffer,0,0,it->getX(),it->getY(),32,32);
-  // for(int i = 0; i < width; i++)
-  //   for(int j = 0; j < height; j++)
-  //     {
-  // 	if(terrains[i][j])
-  // 	  blit(terrains[i][j]->getBuffer(),buffer,0,0,i*16,j*16,16,16);
-  //     }
+    {
+      it->applyChanges();
+
+      blit(it->getTank()->getBuffer(),buffer,0,0,it->getX(),it->getY(),32,32);
+
+      int ix = it->getX() / 16;
+      int iy = it->getY() / 16;
+      int ixx = (it->getX() + 31) / 16;
+      int iyy = (it->getY() + 31) / 16;
+      for(int i = ix; i <= ixx; i++)
+	for(int j = iy; j <= iyy; j++)
+	  if(terrains[i][j] != NULL && terrains[i][j]->getLevel() == 1)
+	    blit(terrains[i][j]->getBuffer(),buffer,0,0,i*16,j*16,16,16);
+    }
 }
 
 Point TutorialMap::getFocus()

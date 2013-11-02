@@ -10,6 +10,7 @@ public:
   ~ConcreteTerrain();
 
   bool isCollisionable();
+  int getLevel();
 };
 
 #endif

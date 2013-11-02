@@ -14,3 +14,8 @@ bool PavementTerrain::isCollisionable()
 {
   return false;
 }
+
+int PavementTerrain::getLevel()
+{
+  return -1;
+}

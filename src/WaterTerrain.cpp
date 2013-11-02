@@ -14,3 +14,8 @@ bool WaterTerrain::isCollisionable()
 {
   return true;
 }
+
+int WaterTerrain::getLevel()
+{
+  return -1;
+}
