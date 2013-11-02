@@ -1,6 +1,6 @@
 CFLAGS=-Wall
 LDFLAGS=-lalleg
-OBJS=main.o Exception.o TutorialGame.o Game.o Spriter.o Map.o TutorialMap.o Point.o Terrain.o BrickTerrain.o ConcreteTerrain.o PavementTerrain.o BushTerrain.o WaterTerrain.o Tank.o DummyTank.o PlayerTank.o AITank.o TankBox.o
+OBJS=main.o Exception.o TutorialGame.o Game.o Spriter.o Map.o TutorialMap.o Point.o Terrain.o BrickTerrain.o ConcreteTerrain.o PavementTerrain.o BushTerrain.o WaterTerrain.o Tank.o DummyTank.o PlayerTank.o AITank.o Box.o TankBox.o
 EXE=main.out
 
 all: $(EXE)
