@@ -17,11 +17,11 @@ protected:
   int ndirection;
 public:
   Wrapper(int x, int y, int direction);
-  ~Wrapper();
+  virtual ~Wrapper();
 
   virtual bool isClerable() = 0;
   virtual bool isDeath() = 0;
-  virtual bool isCollisionable();
+  virtual bool isCollisionable() = 0;
 
   virtual int move() = 0;
   virtual BITMAP * getBuffer() = 0;

@@ -7,12 +7,12 @@
 #include "Map.hpp"
 #include "Terrain.hpp"
 #include "Tank.hpp"
-#include "Wrapper.hpp"
+#include "WrapperBox.hpp"
 
 class TutorialMap : public Map
 {
   Terrain *** terrains;
-  std::list<Wrapper*> objects;
+  std::list<WrapperBox> objects;
 public:
   TutorialMap(Spriter * spriter, std::string fileName);
   ~TutorialMap();

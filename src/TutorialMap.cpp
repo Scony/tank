@@ -204,8 +204,9 @@ void TutorialMap::move()
 
 Point TutorialMap::getFocus()
 {
-  list<Wrapper*>::iterator it = objects.begin();
-  return Point((*it)->getX() + 16, (*it)->getY() + 16);
+  list<WrapperBox>::iterator it = objects.begin();
+  Wrapper * w = it->getWrapper();
+  return Point(w->getX() + 16, w->getY() + 16);
 }
 
 void TutorialMap::addTank(Tank * tank)
@@ -254,5 +255,5 @@ void TutorialMap::addTank(Tank * tank)
   for(int i = 0; i < rnd; i++)
     it++;
 
-  objects.push_back(new TankWrapper(it->getX(),it->getY(),1,tank)); // get this 1 from tank
+  objects.push_back(WrapperBox(new TankWrapper(it->getX(),it->getY(),1,tank))); // get this 1 from tank
 }
