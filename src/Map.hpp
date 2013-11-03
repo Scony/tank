@@ -16,6 +16,7 @@ protected:
   BITMAP * buffer;
 public:
   Map(Spriter * spriter, int width, int height);
+  Map();
   virtual ~Map();
 
   virtual void move() = 0;

@@ -1,3 +1,4 @@
+#include <fstream>
 #include <math.h>
 
 #include "TutorialMap.hpp"
@@ -51,6 +52,72 @@ TutorialMap::TutorialMap(Spriter * spriter, int width, int height) :
   // tanks.push_back(TankBox(0,64,1,new PlayerTank(spriter)));
   tanks.push_back(TankBox(0,160,1,new AITank(spriter)));
   tanks.push_back(TankBox(0,128,1,new AITank(spriter)));
+
+  // initial draw
+  clear_to_color(buffer,makecol(0,0,0));
+  for(list<TankBox>::iterator it = tanks.begin(); it != tanks.end(); it++)
+    masked_blit(it->getTank()->getBuffer(),buffer,0,0,it->getX(),it->getY(),32,32);
+  for(int i = 0; i < width; i++)
+    for(int j = 0; j < height; j++)
+      {
+	if(terrains[i][j])
+	  masked_blit(terrains[i][j]->getBuffer(),buffer,0,0,i*16,j*16,16,16);
+      }
+}
+
+TutorialMap::TutorialMap(Spriter * spriter, string fileName)
+{
+  this->spriter = spriter;
+
+  ifstream in(fileName.c_str());
+  if(!in)
+    throw new Exception("Can not load " + fileName);
+
+  in >> width;
+  in >> height;
+
+  buffer = create_bitmap(width*16,height*16); // HARDCODE ! todo
+  if(!buffer)
+    throw new Exception("Can not create bitmap");
+
+  // terrains init
+  terrains = new Terrain ** [width];
+  for(int i = 0; i < width; i++)
+    terrains[i] = new Terrain * [height];
+  for(int j = 0; j < height; j++)
+    for(int i = 0; i < width; i++)
+      {
+	int kind;
+	in >> kind;
+	switch(kind)
+	  {
+	  default:
+	    terrains[i][j] = NULL;
+	    break;
+	  case 1:
+	    terrains[i][j] = new BrickTerrain(spriter);
+	    break;
+	  case 2:
+	    terrains[i][j] = new ConcreteTerrain(spriter);
+	    break;
+	  case 3:
+	    terrains[i][j] = new PavementTerrain(spriter);
+	    break;
+	  case 4:
+	    terrains[i][j] = new BushTerrain(spriter);
+	    break;
+	  case 5:
+	    terrains[i][j] = new WaterTerrain(spriter);
+	    break;
+	  }
+      }
+
+  // tanks init
+  tanks.push_back(TankBox(0,0,1,new PlayerTank(spriter)));
+  // tanks.push_back(TankBox(0,0,1,new DummyTank(spriter)));
+  // // tanks.push_back(TankBox(0,64,1,new PlayerTank(spriter)));
+  tanks.push_back(TankBox(8*16,8*16,1,new AITank(spriter)));
+  // tanks.push_back(TankBox(0,128,1,new AITank(spriter)));
 
   // initial draw
   clear_to_color(buffer,makecol(0,0,0));

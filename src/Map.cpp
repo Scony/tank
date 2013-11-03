@@ -11,6 +11,10 @@ Map::Map(Spriter * spriter, int width, int height)
     throw new Exception("Can not create bitmap");
 }
 
+Map::Map()
+{
+}
+
 Map::~Map()
 {
   destroy_bitmap(buffer);

@@ -2,6 +2,7 @@
 #define TUTORIAL_MAP_HPP
 
 #include <list>
+#include <iostream>
 
 #include "Map.hpp"
 #include "Terrain.hpp"
@@ -13,6 +14,7 @@ class TutorialMap : public Map
   std::list<TankBox> tanks;
 public:
   TutorialMap(Spriter * spriter, int width, int height);
+  TutorialMap(Spriter * spriter, std::string fileName);
   ~TutorialMap();
 
   void move();
