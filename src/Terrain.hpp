@@ -18,6 +18,7 @@ public:
   int getSize();
   virtual bool isCollisionable() = 0;
   virtual int getLevel() = 0;
+  virtual bool isSpawnable();
 };
 
 #endif

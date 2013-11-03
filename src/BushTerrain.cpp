@@ -19,3 +19,8 @@ int BushTerrain::getLevel()
 {
   return 1;
 }
+
+bool BushTerrain::isSpawnable()
+{
+  return true;
+}

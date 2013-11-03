@@ -13,12 +13,12 @@ class TutorialMap : public Map
   Terrain *** terrains;
   std::list<TankBox> tanks;
 public:
-  TutorialMap(Spriter * spriter, int width, int height);
   TutorialMap(Spriter * spriter, std::string fileName);
   ~TutorialMap();
 
   void move();
   Point getFocus();
+  void addTank(Tank * tank);
 };
 
 #endif

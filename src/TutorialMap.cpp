@@ -7,63 +7,8 @@
 #include "PavementTerrain.hpp"
 #include "BushTerrain.hpp"
 #include "WaterTerrain.hpp"
-#include "DummyTank.hpp"
-#include "PlayerTank.hpp"
-#include "AITank.hpp"
 
 using namespace std;
-
-TutorialMap::TutorialMap(Spriter * spriter, int width, int height) :
-  Map(spriter,width,height)
-{
-  // terrains init
-  terrains = new Terrain ** [width];
-  for(int i = 0; i < width; i++)
-    terrains[i] = new Terrain * [height];
-  for(int i = 0; i < width; i++)
-    for(int j = 0; j < height; j++)
-      if(rand()%100 > 96)
-	{
-	  switch(rand() % 5)
-	    {
-	    case 0:
-	      terrains[i][j] = new BrickTerrain(spriter);
-	      break;
-	    case 1:
-	      terrains[i][j] = new ConcreteTerrain(spriter);
-	      break;
-	    case 2:
-	      terrains[i][j] = new PavementTerrain(spriter);
-	      break;
-	    case 3:
-	      terrains[i][j] = new BushTerrain(spriter);
-	      break;
-	    case 4:
-	      terrains[i][j] = new WaterTerrain(spriter);
-	      break;
-	    }
-	}
-      else
-	terrains[i][j] = NULL;
-
-  // tanks init
-  tanks.push_back(TankBox(0,32,1,new PlayerTank(spriter)));
-  tanks.push_back(TankBox(0,0,1,new DummyTank(spriter)));
-  // tanks.push_back(TankBox(0,64,1,new PlayerTank(spriter)));
-  tanks.push_back(TankBox(0,160,1,new AITank(spriter)));
-  tanks.push_back(TankBox(0,128,1,new AITank(spriter)));
-
-  // initial draw
-  clear_to_color(buffer,makecol(0,0,0));
-  for(list<TankBox>::iterator it = tanks.begin(); it != tanks.end(); it++)
-    masked_blit(it->getTank()->getBuffer(),buffer,0,0,it->getX(),it->getY(),32,32);
-  for(int i = 0; i < width; i++)
-    for(int j = 0; j < height; j++)
-      {
-	if(terrains[i][j])
-	  masked_blit(terrains[i][j]->getBuffer(),buffer,0,0,i*16,j*16,16,16);
-      }
-}
 
 TutorialMap::TutorialMap(Spriter * spriter, string fileName)
 {
@@ -112,12 +57,7 @@ TutorialMap::TutorialMap(Spriter * spriter, string fileName)
 	  }
       }
 
-  // tanks init
-  tanks.push_back(TankBox(0,0,1,new PlayerTank(spriter)));
-  // tanks.push_back(TankBox(0,0,1,new DummyTank(spriter)));
-  // // tanks.push_back(TankBox(0,64,1,new PlayerTank(spriter)));
-  tanks.push_back(TankBox(8*16,8*16,1,new AITank(spriter)));
-  // tanks.push_back(TankBox(0,128,1,new AITank(spriter)));
+  in.close();
 
   // initial draw
   clear_to_color(buffer,makecol(0,0,0));
@@ -266,5 +206,51 @@ Point TutorialMap::getFocus()
 {
   list<TankBox>::iterator it = tanks.begin();
   return Point(it->getX() + 16, it->getY() + 16);
-  // return Point(width*16/2,height*16/2);
+}
+
+void TutorialMap::addTank(Tank * tank)
+{
+  // todo: check if randed spot is not in collision with tank/bullet in move
+
+  bool spotMap[width][height];
+
+  for(int i = 0; i < width; i++)
+    for(int j = 0; j < height; j++)
+      spotMap[i][j] = false;
+
+  for(int i = 0; i < width; i++)
+    for(int j = 0; j < height; j++)
+      if(terrains[i][j] == NULL || terrains[i][j]->isSpawnable())
+	spotMap[i][j] = true;
+
+  list<Point> spots;
+
+  for(int i = 0; i < width - 1; i++)
+    for(int j = 0; j < height - 1; j++)
+      {
+	bool spot = true;
+	for(int ii = 0; ii < 2; ii++)
+	  for(int jj = 0; jj < 2; jj++)
+	    if(!spotMap[i+ii][j+jj])
+	      spot = false;
+
+	if(spot)
+	  {
+	    spots.push_back(Point(i*16,j*16));
+	    for(int ii = 0; ii < 2; ii++)
+	      for(int jj = 0; jj < 2; jj++)
+		spotMap[i+ii][j+jj] = false;
+	  }
+      }
+
+  if(!spots.size())
+    throw new Exception("Can not find spawn spot");
+
+  int rnd = rand() % spots.size();
+  list<Point>::iterator it = spots.begin();
+
+  for(int i = 0; i < rnd; i++)
+    it++;
+
+  tanks.push_back(TankBox(it->getX(),it->getY(),1,tank));
 }

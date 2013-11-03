@@ -19,3 +19,8 @@ int PavementTerrain::getLevel()
 {
   return -1;
 }
+
+bool PavementTerrain::isSpawnable()
+{
+  return true;
+}
