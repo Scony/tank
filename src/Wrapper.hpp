@@ -33,6 +33,7 @@ public:
   int getY();
   int getDirection();
   virtual int getSize() = 0;
+  virtual int getSpeed() = 0;
 
   int getNewX();
   void setNewX(int x);

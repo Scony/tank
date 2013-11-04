@@ -2,14 +2,16 @@
 #include "TutorialMap.hpp"
 #include "DummyTank.hpp"
 #include "PlayerTank.hpp"
+#include "Player2Tank.hpp"
 #include "AITank.hpp"
 
 TutorialGame::TutorialGame(BITMAP * screen) : Game(screen)
 {
   spriter = new Spriter("/home/scony/Allegro/tank/src/sprite.bmp");
-  TutorialMap * tmap = new TutorialMap(spriter,"/home/scony/Allegro/tank/src/tiny.map");
+  TutorialMap * tmap = new TutorialMap(spriter,"/home/scony/Allegro/tank/src/tiny_blank.map");
   tmap->addTank(new PlayerTank(spriter));
-  tmap->addTank(new AITank(spriter));
+  tmap->addTank(new Player2Tank(spriter));
+  // tmap->addTank(new AITank(spriter));
   map = tmap;
 }
 

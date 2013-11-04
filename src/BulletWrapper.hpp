@@ -16,6 +16,7 @@ public:
   Bullet * getBullet();
   BITMAP * getBuffer();
   int getSize();
+  int getSpeed();
 
   bool isClerable();
   bool isDeath();

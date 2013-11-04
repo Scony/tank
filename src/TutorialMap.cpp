@@ -131,16 +131,16 @@ void TutorialMap::move()
   	switch(intent)
   	  {
   	  case 1:
-  	    pw->setNewY(pw->getY()-1);
+  	    pw->setNewY(pw->getY()-pw->getSpeed());
   	    break;
   	  case 2:
-  	    pw->setNewX(pw->getX()+1);
+  	    pw->setNewX(pw->getX()+pw->getSpeed());
   	    break;
   	  case 3:
-  	    pw->setNewY(pw->getY()+1);
+  	    pw->setNewY(pw->getY()+pw->getSpeed());
   	    break;
   	  case 4:
-  	    pw->setNewX(pw->getX()-1);
+  	    pw->setNewX(pw->getX()-pw->getSpeed());
   	  }
       else
   	{
@@ -187,6 +187,8 @@ void TutorialMap::move()
 
 	    if(!pw1->isCollisionable() || !pw2->isCollisionable())
 	      continue;
+
+	    // handle complex collisions todo
 
   	    int x11 = pw1->getNewX();
   	    int y11 = pw1->getNewY();

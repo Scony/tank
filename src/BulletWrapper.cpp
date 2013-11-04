@@ -30,6 +30,11 @@ int BulletWrapper::getSize()	// todo
   return 8;
 }
 
+int BulletWrapper::getSpeed()	// todo
+{
+  return 2;
+}
+
 bool BulletWrapper::isClerable()	// todo
 {
   return true;

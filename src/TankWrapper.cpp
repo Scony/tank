@@ -30,6 +30,11 @@ int TankWrapper::getSize()	// todo
   return 32;
 }
 
+int TankWrapper::getSpeed()	// todo
+{
+  return 1;
+}
+
 bool TankWrapper::isClerable()	// todo
 {
   return true;
