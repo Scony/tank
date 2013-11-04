@@ -139,13 +139,12 @@ void TutorialMap::move()
     }
       
 
-  // handle intents + terrain collisions
+  // handle moves (intents)
   for(list<WrapperBox>::iterator it = objects.begin(); it != objects.end(); it++)
     {
       Wrapper * pw = it->getWrapper();
 
       int intent = pw->move();
-      // if(intent == 0 || pw->getDirection() == intent)
       if(intent == 0 || pw->getDirection() == intent || abs(pw->getDirection() - intent) == 2)
   	switch(intent)
   	  {
@@ -169,30 +168,36 @@ void TutorialMap::move()
 
       if(intent)
   	pw->setNewDirection(intent);
-      
-      // map bounds
-      if(pw->getNewX() < 0 || pw->getNewX() + pw->getSize() > width * 16 || pw->getNewY() < 0 || pw->getNewY() + pw->getSize() > height * 16)
-  	{
-  	  pw->resetChanges();
-  	  continue;
-  	}
+    }
 
-      // terrain collisions
-      // todo handle bangs
+  // object vs map bounds collisions todo: bangs
+  for(list<WrapperBox>::iterator it = objects.begin(); it != objects.end(); it++)
+    {
+      Wrapper * pw = it->getWrapper();
+
+      if(pw->getNewX() < 0 || pw->getNewX() + pw->getSize() > width * 16 || pw->getNewY() < 0 || pw->getNewY() + pw->getSize() > height * 16)
+	pw->resetChanges();
+    }
+
+  // object vs terrains collisions todo: bangs
+  for(list<WrapperBox>::iterator it = objects.begin(); it != objects.end(); it++)
+    {
+      Wrapper * pw = it->getWrapper();
+
       int ix = pw->getNewX() / 16;
       int iy = pw->getNewY() / 16;
       int ixx = (pw->getNewX() + pw->getSize() - 1) / 16;
       int iyy = (pw->getNewY() + pw->getSize() - 1) / 16;
+
       bool collision = false;
+
       for(int i = ix; i <= ixx && !collision; i++)
   	for(int j = iy; j <= iyy && !collision; j++)
   	  if(terrains[i][j] != NULL && terrains[i][j]->isCollisionable())
   	    collision = true;
+
       if(collision)
-  	{
-  	  pw->resetChanges();
-  	  continue;
-  	}
+	pw->resetChanges();
     }
 
   // object vs object collisions todo: bangs
@@ -260,12 +265,19 @@ void TutorialMap::move()
   	  }
       }
 
-  // redraw
+  // apply changes
+
   for(list<WrapperBox>::iterator it = objects.begin(); it != objects.end(); it++)
     {
       Wrapper * pw = it->getWrapper();
 
       pw->applyChanges();
+    }
+
+  // redraw
+  for(list<WrapperBox>::iterator it = objects.begin(); it != objects.end(); it++)
+    {
+      Wrapper * pw = it->getWrapper();
 
       masked_blit(pw->getBuffer(),buffer,0,0,pw->getX(),pw->getY(),pw->getSize(),pw->getSize());
 
