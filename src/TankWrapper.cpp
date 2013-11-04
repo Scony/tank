@@ -17,6 +17,11 @@ int TankWrapper::move()
   return tank->move();
 }
 
+void TankWrapper::bang()
+{
+  // todo
+}
+
 Wrapper * TankWrapper::breed()
 {
   Bullet * bullet = tank->breed();
@@ -84,4 +89,9 @@ bool TankWrapper::isDeath()	// todo
 bool TankWrapper::isCollisionable() // todo
 {
   return true;
+}
+
+bool TankWrapper::isBangMaker() // todo
+{
+  return false;
 }

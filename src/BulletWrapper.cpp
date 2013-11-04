@@ -16,6 +16,11 @@ int BulletWrapper::move()
   return bullet->move();
 }
 
+void BulletWrapper::bang()
+{
+  // todo
+}
+
 Wrapper * BulletWrapper::breed()
 {
   return NULL;
@@ -52,6 +57,11 @@ bool BulletWrapper::isDeath()
 }
 
 bool BulletWrapper::isCollisionable() // todo
+{
+  return true;
+}
+
+bool BulletWrapper::isBangMaker() // todo
 {
   return true;
 }

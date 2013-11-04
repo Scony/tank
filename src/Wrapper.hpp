@@ -22,8 +22,10 @@ public:
   virtual bool isClerable() = 0;
   virtual bool isDeath() = 0;
   virtual bool isCollisionable() = 0;
+  virtual bool isBangMaker() = 0;
 
   virtual int move() = 0;
+  virtual void bang() = 0;
   virtual Wrapper * breed() = 0;
   virtual BITMAP * getBuffer() = 0;
 

@@ -12,6 +12,7 @@ public:
   ~BulletWrapper();
 
   int move();
+  void bang();
   Wrapper * breed();
 
   Bullet * getBullet();
@@ -22,6 +23,7 @@ public:
   bool isClerable();
   bool isDeath();
   bool isCollisionable();
+  bool isBangMaker();
 };
 
 #endif

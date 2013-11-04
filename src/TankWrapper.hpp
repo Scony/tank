@@ -12,6 +12,7 @@ public:
   ~TankWrapper();
 
   int move();
+  void bang();
   Wrapper * breed();
 
   Tank * getTank();
@@ -22,6 +23,7 @@ public:
   bool isClerable();
   bool isDeath();
   bool isCollisionable();
+  bool isBangMaker();
 };
 
 #endif

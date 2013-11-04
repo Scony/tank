@@ -1,5 +1,6 @@
 #include <fstream>
 #include <math.h>
+#include <stdio.h>
 
 #include "TutorialMap.hpp"
 #include "BrickTerrain.hpp"
@@ -89,6 +90,11 @@ TutorialMap::~TutorialMap()
 
 void TutorialMap::move()
 {
+  // debug
+  char title[255];
+  sprintf(title,"%d",objects.size());
+  set_window_title(title);
+
   // clear objects
   for(list<WrapperBox>::iterator it = objects.begin(); it != objects.end(); it++)
     {
@@ -98,20 +104,20 @@ void TutorialMap::move()
 	continue;
 
       rectfill(buffer,
-	       pw->getX(),
-	       pw->getY(),
-	       pw->getX() + pw->getSize() - 1,
-	       pw->getY() + pw->getSize() - 1,
-	       makecol(0,0,0));
+      	       pw->getX(),
+      	       pw->getY(),
+      	       pw->getX() + pw->getSize() - 1,
+      	       pw->getY() + pw->getSize() - 1,
+      	       makecol(0,0,0));
 
       int ix = pw->getX() / 16;
       int iy = pw->getY() / 16;
       int ixx = (pw->getX() + pw->getSize() - 1) / 16;
       int iyy = (pw->getY() + pw->getSize() - 1) / 16;
       for(int i = ix; i <= ixx; i++)
-  	for(int j = iy; j <= iyy; j++)
-  	  if(terrains[i][j] != NULL && terrains[i][j]->getLevel() != 0) // todo not so sure its still ok (level)
-  	    masked_blit(terrains[i][j]->getBuffer(),buffer,0,0,i*16,j*16,16,16);
+      	for(int j = iy; j <= iyy; j++)
+      	  if(terrains[i][j] != NULL && terrains[i][j]->getLevel() != 0) // todo not so sure its still ok (level)
+      	    masked_blit(terrains[i][j]->getBuffer(),buffer,0,0,i*16,j*16,16,16);
     }
 
   // handle dies
@@ -135,7 +141,7 @@ void TutorialMap::move()
       Wrapper * born = pw->breed();
 
       if(born)
-	objects.insert(it,born);
+	objects.push_back(born);
     }
       
 
@@ -179,7 +185,15 @@ void TutorialMap::move()
 	continue;
 
       if(pw->getNewX() < 0 || pw->getNewX() + pw->getSize() > width * 16 || pw->getNewY() < 0 || pw->getNewY() + pw->getSize() > height * 16)
-	pw->resetChanges();
+	{
+	  if(pw->isBangMaker())
+	    {
+	      pw->applyChanges();
+	      pw->bang();
+	    }
+	  else
+	    pw->resetChanges();
+	}
     }
 
   // object vs terrains collisions todo: bangs
@@ -292,9 +306,9 @@ void TutorialMap::move()
       int ixx = (pw->getX() + pw->getSize() - 1) / 16;
       int iyy = (pw->getY() + pw->getSize() - 1) / 16;
       for(int i = ix; i <= ixx; i++)
-  	for(int j = iy; j <= iyy; j++)
-  	  if(terrains[i][j] != NULL && terrains[i][j]->getLevel() == 1)
-  	    masked_blit(terrains[i][j]->getBuffer(),buffer,0,0,i*16,j*16,16,16);
+      	for(int j = iy; j <= iyy; j++)
+      	  if(terrains[i][j] != NULL && terrains[i][j]->getLevel() == 1)
+      	    masked_blit(terrains[i][j]->getBuffer(),buffer,0,0,i*16,j*16,16,16);
     }
 }
 
