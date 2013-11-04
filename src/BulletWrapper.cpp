@@ -8,6 +8,7 @@ BulletWrapper::BulletWrapper(int x, int y, int direction, Bullet * bullet) :
 
 BulletWrapper::~BulletWrapper()
 {
+  delete bullet;
 }
 
 int BulletWrapper::move()
@@ -40,9 +41,9 @@ bool BulletWrapper::isClerable()	// todo
   return true;
 }
 
-bool BulletWrapper::isDeath()	// todo
+bool BulletWrapper::isDeath()
 {
-  return false;
+  return bullet->isDeath();
 }
 
 bool BulletWrapper::isCollisionable() // todo

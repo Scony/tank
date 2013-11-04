@@ -6,11 +6,13 @@
 class LineBullet : public Bullet
 {
   int intent;
+  int lifetime;
 public:
   LineBullet(Spriter * spriter, int intent);
   ~LineBullet();
 
   int move();
+  bool isDeath();
 };
 
 #endif

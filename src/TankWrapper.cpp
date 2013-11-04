@@ -8,6 +8,7 @@ TankWrapper::TankWrapper(int x, int y, int direction, Tank * tank) :
 
 TankWrapper::~TankWrapper()
 {
+  delete tank;
 }
 
 int TankWrapper::move()

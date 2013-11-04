@@ -5,6 +5,7 @@ LineBullet::LineBullet(Spriter * spriter, int intent) :
 {
   buffer = spriter->getBullet(intent-1);
   this->intent = intent;
+  lifetime = 60;
 }
 
 LineBullet::~LineBullet()
@@ -13,5 +14,14 @@ LineBullet::~LineBullet()
 
 int LineBullet::move()
 {
+  lifetime--;
   return intent;
+}
+
+bool LineBullet::isDeath()
+{
+  if(!lifetime)
+    return true;
+
+  return false;
 }

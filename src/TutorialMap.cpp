@@ -76,9 +76,8 @@ TutorialMap::TutorialMap(Spriter * spriter, string fileName)
 
 TutorialMap::~TutorialMap()
 {
-  // for(list<WrapperBox>::iterator it = objects.begin(); it != objects.end(); it++)
-  //   it->getWrapper()->deleteWrappee();
-  // todo TankWrapper cares tank dth
+  for(list<WrapperBox>::iterator it = objects.begin(); it != objects.end(); it++)
+    delete it->getWrapper();
 
   for(int i = 0; i < width; i++)
     for(int j = 0; j < height; j++)
@@ -119,15 +118,29 @@ void TutorialMap::move()
   	    masked_blit(terrains[i][j]->getBuffer(),buffer,0,0,i*16,j*16,16,16);
     }
 
+  // handle dies
+  for(list<WrapperBox>::iterator it = objects.begin(); it != objects.end();)
+    {
+      Wrapper * pw = it->getWrapper();
+
+      if(pw->isDeath())
+	{
+	  delete pw;
+	  it = objects.erase(it);
+	}
+      else
+	it++;
+    }
+      
+
   // handle intents + terrain collisions
   for(list<WrapperBox>::iterator it = objects.begin(); it != objects.end(); it++)
     {
       Wrapper * pw = it->getWrapper();
 
       int intent = pw->move();
-      // todo: handle death ?
-      // if(intent == 0 || pw->getDirection() == intent) // abs(diff)==2 todo
-      if(intent == 0 || pw->getDirection() == intent || abs(pw->getDirection() - intent) == 2) // abs(diff)==2
+      // if(intent == 0 || pw->getDirection() == intent)
+      if(intent == 0 || pw->getDirection() == intent || abs(pw->getDirection() - intent) == 2)
   	switch(intent)
   	  {
   	  case 1:
@@ -176,7 +189,7 @@ void TutorialMap::move()
   	}
     }
 
-  // object vs object collisions
+  // object vs object collisions todo: bangs
   for(list<WrapperBox>::iterator it = objects.begin(); it != objects.end(); it++)
     for(list<WrapperBox>::iterator itt = objects.begin(); itt != objects.end(); itt++)
       {
@@ -187,8 +200,6 @@ void TutorialMap::move()
 
 	    if(!pw1->isCollisionable() || !pw2->isCollisionable())
 	      continue;
-
-	    // handle complex collisions todo
 
   	    int x11 = pw1->getNewX();
   	    int y11 = pw1->getNewY();
@@ -202,9 +213,43 @@ void TutorialMap::move()
 
   	    if(detectRectsCollision(x11,y11,x12,y12,x21,y21,x22,y22))
   	      {
-		// todo handle bangs
-  		pw1->resetChanges();
-  		pw2->resetChanges();
+		int ox11 = pw1->getX();
+		int oy11 = pw1->getY();
+		int ox12 = pw1->getX() + pw1->getSize() - 1;
+		int oy12 = pw1->getY() + pw1->getSize() - 1;
+
+		int ox21 = pw2->getX();
+		int oy21 = pw2->getY();
+		int ox22 = pw2->getX() + pw2->getSize() - 1;
+		int oy22 = pw2->getY() + pw2->getSize() - 1;
+
+		bool n1o2 = detectRectsCollision(x11,y11,x12,y12,ox21,oy21,ox22,oy22);
+		bool o1n2 = detectRectsCollision(ox11,oy11,ox12,oy12,x21,y21,x22,y22);
+
+		if(n1o2)
+		  {
+		    if(o1n2)
+		      {
+			pw1->resetChanges();
+			pw2->resetChanges();
+		      }
+		    else
+		      {
+			pw1->resetChanges();
+		      }
+		  }
+		else
+		  {
+		    if(o1n2)
+		      {
+			pw2->resetChanges();
+		      }
+		    else
+		      {
+			pw1->resetChanges();
+			pw2->resetChanges();
+		      }
+		  }
   	      }
   	  }
       }
