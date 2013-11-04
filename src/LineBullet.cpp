@@ -3,7 +3,7 @@
 LineBullet::LineBullet(Spriter * spriter, int intent) :
   Bullet(spriter)
 {
-  buffer = spriter->getBullet(intent);
+  buffer = spriter->getBullet(intent-1);
   this->intent = intent;
 }
 

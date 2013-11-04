@@ -79,6 +79,13 @@ BITMAP * Spriter::getTank(int index)
   return tank[index];
 }
 
+BITMAP * Spriter::getBullet(int index)
+{
+  if(index >= 4 || index < 0)
+    throw new Exception("Bullet index out of bounds");
+  return bullet[index];
+}
+
 int Spriter::getTankSize()
 {
   return 32;

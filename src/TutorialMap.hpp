@@ -13,6 +13,9 @@ class TutorialMap : public Map
 {
   Terrain *** terrains;
   std::list<WrapperBox> objects;
+
+  bool detectRectsCollision(int x11, int y11, int x12, int y12,
+			    int x21, int y21, int x22, int y22);
 public:
   TutorialMap(Spriter * spriter, std::string fileName);
   ~TutorialMap();

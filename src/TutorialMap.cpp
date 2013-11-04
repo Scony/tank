@@ -8,6 +8,8 @@
 #include "BushTerrain.hpp"
 #include "WaterTerrain.hpp"
 #include "TankWrapper.hpp"
+#include "BulletWrapper.hpp"
+#include "LineBullet.hpp"
 
 using namespace std;
 
@@ -60,6 +62,8 @@ TutorialMap::TutorialMap(Spriter * spriter, string fileName)
 
   in.close();
 
+  objects.push_back(WrapperBox(new BulletWrapper(0,0,2,new LineBullet(spriter,2)))); // tmp todo: rm
+
   // initial draw
   clear_to_color(buffer,makecol(0,0,0));
   for(int i = 0; i < width; i++)
@@ -72,9 +76,9 @@ TutorialMap::TutorialMap(Spriter * spriter, string fileName)
 
 TutorialMap::~TutorialMap()
 {
-  // for(list<TankBox>::iterator it = tanks.begin(); it != tanks.end(); it++)
-  //   delete it->getTank();
-  // TankWrapper cares tank dth
+  // for(list<WrapperBox>::iterator it = objects.begin(); it != objects.end(); it++)
+  //   it->getWrapper()->deleteWrappee();
+  // todo TankWrapper cares tank dth
 
   for(int i = 0; i < width; i++)
     for(int j = 0; j < height; j++)
@@ -90,123 +94,144 @@ TutorialMap::~TutorialMap()
 
 void TutorialMap::move()
 {
-  // // clear tanks
-  // for(list<TankBox>::iterator it = tanks.begin(); it != tanks.end(); it++)
-  //   {
-  //     rectfill(buffer,it->getX(),it->getY(),it->getX()+31,it->getY()+31,makecol(0,0,0));
+  // clear objects
+  for(list<WrapperBox>::iterator it = objects.begin(); it != objects.end(); it++)
+    {
+      Wrapper * pw = it->getWrapper();
 
-  //     int ix = it->getX() / 16;
-  //     int iy = it->getY() / 16;
-  //     int ixx = (it->getX() + 31) / 16;
-  //     int iyy = (it->getY() + 31) / 16;
-  //     for(int i = ix; i <= ixx; i++)
-  // 	for(int j = iy; j <= iyy; j++)
-  // 	  if(terrains[i][j] != NULL && terrains[i][j]->getLevel() != 0)
-  // 	    masked_blit(terrains[i][j]->getBuffer(),buffer,0,0,i*16,j*16,16,16);
-  //   }
+      if(!pw->isClerable())
+	continue;
 
-  // // handle tank intents + terrain collisions
-  // for(list<TankBox>::iterator it = tanks.begin(); it != tanks.end(); it++)
-  //   {
-  //     int intent = it->getTank()->move();
-  //     if(intent == 0 || it->getDirection() == intent)
-  // 	switch(intent)
-  // 	  {
-  // 	  case 1:
-  // 	    it->setNewY(it->getY()-1);
-  // 	    break;
-  // 	  case 2:
-  // 	    it->setNewX(it->getX()+1);
-  // 	    break;
-  // 	  case 3:
-  // 	    it->setNewY(it->getY()+1);
-  // 	    break;
-  // 	  case 4:
-  // 	    it->setNewX(it->getX()-1);
-  // 	  }
-  //     else
-  // 	{
-  // 	  it->setNewX(round((double)it->getX() / 16) * 16);
-  // 	  it->setNewY(round((double)it->getY() / 16) * 16);
-  // 	}
+      rectfill(buffer,
+	       pw->getX(),
+	       pw->getY(),
+	       pw->getX() + pw->getSize() - 1,
+	       pw->getY() + pw->getSize() - 1,
+	       makecol(0,0,0));
 
-  //     if(intent)
-  // 	it->setNewDirection(intent);
+      int ix = pw->getX() / 16;
+      int iy = pw->getY() / 16;
+      int ixx = (pw->getX() + pw->getSize() - 1) / 16;
+      int iyy = (pw->getY() + pw->getSize() - 1) / 16;
+      for(int i = ix; i <= ixx; i++)
+  	for(int j = iy; j <= iyy; j++)
+  	  if(terrains[i][j] != NULL && terrains[i][j]->getLevel() != 0) // todo not so sure its still ok (level)
+  	    masked_blit(terrains[i][j]->getBuffer(),buffer,0,0,i*16,j*16,16,16);
+    }
+
+  // handle intents + terrain collisions
+  for(list<WrapperBox>::iterator it = objects.begin(); it != objects.end(); it++)
+    {
+      Wrapper * pw = it->getWrapper();
+
+      int intent = pw->move();
+      // todo: handle death ?
+      // if(intent == 0 || pw->getDirection() == intent) // abs(diff)==2 todo
+      if(intent == 0 || pw->getDirection() == intent || abs(pw->getDirection() - intent) == 2) // abs(diff)==2
+  	switch(intent)
+  	  {
+  	  case 1:
+  	    pw->setNewY(pw->getY()-1);
+  	    break;
+  	  case 2:
+  	    pw->setNewX(pw->getX()+1);
+  	    break;
+  	  case 3:
+  	    pw->setNewY(pw->getY()+1);
+  	    break;
+  	  case 4:
+  	    pw->setNewX(pw->getX()-1);
+  	  }
+      else
+  	{
+  	  pw->setNewX(round((double)pw->getX() / 16) * 16);
+  	  pw->setNewY(round((double)pw->getY() / 16) * 16);
+  	}
+
+      if(intent)
+  	pw->setNewDirection(intent);
       
-  //     // map bounds
-  //     if(it->getNewX() < 0 || it->getNewX() + 32 > width * 16 || it->getNewY() < 0 || it->getNewY() + 32 > height * 16)
-  // 	{
-  // 	  it->resetChanges();
-  // 	  continue;
-  // 	}
+      // map bounds
+      if(pw->getNewX() < 0 || pw->getNewX() + pw->getSize() > width * 16 || pw->getNewY() < 0 || pw->getNewY() + pw->getSize() > height * 16)
+  	{
+  	  pw->resetChanges();
+  	  continue;
+  	}
 
-  //     // terrain collisions
-  //     int ix = it->getNewX() / 16;
-  //     int iy = it->getNewY() / 16;
-  //     int ixx = (it->getNewX() + 31) / 16;
-  //     int iyy = (it->getNewY() + 31) / 16;
-  //     bool collision = false;
-  //     for(int i = ix; i <= ixx && !collision; i++)
-  // 	for(int j = iy; j <= iyy && !collision; j++)
-  // 	  if(terrains[i][j] != NULL && terrains[i][j]->isCollisionable())
-  // 	    collision = true;
-  //     if(collision)
-  // 	{
-  // 	  it->resetChanges();
-  // 	  continue;
-  // 	}
-  //   }
+      // terrain collisions
+      // todo handle bangs
+      int ix = pw->getNewX() / 16;
+      int iy = pw->getNewY() / 16;
+      int ixx = (pw->getNewX() + pw->getSize() - 1) / 16;
+      int iyy = (pw->getNewY() + pw->getSize() - 1) / 16;
+      bool collision = false;
+      for(int i = ix; i <= ixx && !collision; i++)
+  	for(int j = iy; j <= iyy && !collision; j++)
+  	  if(terrains[i][j] != NULL && terrains[i][j]->isCollisionable())
+  	    collision = true;
+      if(collision)
+  	{
+  	  pw->resetChanges();
+  	  continue;
+  	}
+    }
 
-  // // handle tank vs tank collisions
-  // for(list<TankBox>::iterator it = tanks.begin(); it != tanks.end(); it++)
-  //   for(list<TankBox>::iterator itt = tanks.begin(); itt != tanks.end(); itt++)
-  //     {
-  // 	if(it != itt)
-  // 	  {
-  // 	    int x11 = it->getNewX();
-  // 	    int y11 = it->getNewY();
-  // 	    int x12 = it->getNewX() + 31;
-  // 	    int y12 = it->getNewY() + 31;
+  // object vs object collisions
+  for(list<WrapperBox>::iterator it = objects.begin(); it != objects.end(); it++)
+    for(list<WrapperBox>::iterator itt = objects.begin(); itt != objects.end(); itt++)
+      {
+  	if(it != itt)
+  	  {
+	    Wrapper * pw1 = it->getWrapper();
+	    Wrapper * pw2 = itt->getWrapper();
 
-  // 	    int x21 = itt->getNewX();
-  // 	    int y21 = itt->getNewY();
-  // 	    int x22 = itt->getNewX() + 31;
-  // 	    int y22 = itt->getNewY() + 31;
+	    if(!pw1->isCollisionable() || !pw2->isCollisionable())
+	      continue;
 
-  // 	    if((x11 <= x21 && x21 <= x12 && y11 <= y21 && y21 <= y12) ||
-  // 	       (x11 <= x21 && x21 <= x12 && y11 <= y22 && y22 <= y12) ||
-  // 	       (x11 <= x22 && x22 <= x12 && y11 <= y22 && y22 <= y12) ||
-  // 	       (x11 <= x22 && x22 <= x12 && y11 <= y21 && y21 <= y12))
-  // 	      {
-  // 		it->resetChanges();
-  // 		itt->resetChanges();
-  // 	      }
-  // 	  }
-  //     }
+  	    int x11 = pw1->getNewX();
+  	    int y11 = pw1->getNewY();
+  	    int x12 = pw1->getNewX() + pw1->getSize() - 1;
+  	    int y12 = pw1->getNewY() + pw1->getSize() - 1;
 
-  // // redraw
-  // for(list<TankBox>::iterator it = tanks.begin(); it != tanks.end(); it++)
-  //   {
-  //     it->applyChanges();
+  	    int x21 = pw2->getNewX();
+  	    int y21 = pw2->getNewY();
+  	    int x22 = pw2->getNewX() + pw2->getSize() - 1;
+  	    int y22 = pw2->getNewY() + pw2->getSize() - 1;
 
-  //     masked_blit(it->getTank()->getBuffer(),buffer,0,0,it->getX(),it->getY(),32,32);
+  	    if(detectRectsCollision(x11,y11,x12,y12,x21,y21,x22,y22))
+  	      {
+		// todo handle bangs
+  		pw1->resetChanges();
+  		pw2->resetChanges();
+  	      }
+  	  }
+      }
 
-  //     int ix = it->getX() / 16;
-  //     int iy = it->getY() / 16;
-  //     int ixx = (it->getX() + 31) / 16;
-  //     int iyy = (it->getY() + 31) / 16;
-  //     for(int i = ix; i <= ixx; i++)
-  // 	for(int j = iy; j <= iyy; j++)
-  // 	  if(terrains[i][j] != NULL && terrains[i][j]->getLevel() == 1)
-  // 	    masked_blit(terrains[i][j]->getBuffer(),buffer,0,0,i*16,j*16,16,16);
-  //   }
+  // redraw
+  for(list<WrapperBox>::iterator it = objects.begin(); it != objects.end(); it++)
+    {
+      Wrapper * pw = it->getWrapper();
+
+      pw->applyChanges();
+
+      masked_blit(pw->getBuffer(),buffer,0,0,pw->getX(),pw->getY(),pw->getSize(),pw->getSize());
+
+      int ix = pw->getX() / 16;
+      int iy = pw->getY() / 16;
+      int ixx = (pw->getX() + pw->getSize() - 1) / 16;
+      int iyy = (pw->getY() + pw->getSize() - 1) / 16;
+      for(int i = ix; i <= ixx; i++)
+  	for(int j = iy; j <= iyy; j++)
+  	  if(terrains[i][j] != NULL && terrains[i][j]->getLevel() == 1)
+  	    masked_blit(terrains[i][j]->getBuffer(),buffer,0,0,i*16,j*16,16,16);
+    }
 }
 
 Point TutorialMap::getFocus()
 {
   list<WrapperBox>::iterator it = objects.begin();
-  Wrapper * w = it->getWrapper();
-  return Point(w->getX() + 16, w->getY() + 16);
+  Wrapper * pw = it->getWrapper();
+  return Point(pw->getX() + 16, pw->getY() + 16);
 }
 
 void TutorialMap::addTank(Tank * tank)
@@ -256,4 +281,16 @@ void TutorialMap::addTank(Tank * tank)
     it++;
 
   objects.push_back(WrapperBox(new TankWrapper(it->getX(),it->getY(),1,tank))); // get this 1 from tank
+}
+
+bool TutorialMap::detectRectsCollision(int x11, int y11, int x12, int y12,
+				       int x21, int y21, int x22, int y22)
+{
+  if((x11 <= x21 && x21 <= x12 && y11 <= y21 && y21 <= y12) ||
+     (x11 <= x21 && x21 <= x12 && y11 <= y22 && y22 <= y12) ||
+     (x11 <= x22 && x22 <= x12 && y11 <= y22 && y22 <= y12) ||
+     (x11 <= x22 && x22 <= x12 && y11 <= y21 && y21 <= y12))
+    return true;
+
+  return false;
 }

@@ -18,6 +18,7 @@ public:
   BITMAP * getSprite();
   virtual BITMAP * getTerrain(int index);
   virtual BITMAP * getTank(int index);
+  virtual BITMAP * getBullet(int index);
   virtual int getTankSize();
   virtual int getTerrainSize();
 };
