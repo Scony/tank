@@ -10,6 +10,11 @@ Tank::~Tank()
 {
 }
 
+Bullet * Tank::breed()
+{
+  return NULL;
+}
+
 BITMAP * Tank::getBuffer()
 {
   return buffer;

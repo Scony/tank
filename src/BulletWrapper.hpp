@@ -12,6 +12,7 @@ public:
   ~BulletWrapper();
 
   int move();
+  Wrapper * breed();
 
   Bullet * getBullet();
   BITMAP * getBuffer();

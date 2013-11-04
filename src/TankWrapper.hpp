@@ -12,6 +12,7 @@ public:
   ~TankWrapper();
 
   int move();
+  Wrapper * breed();
 
   Tank * getTank();
   BITMAP * getBuffer();

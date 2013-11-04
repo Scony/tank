@@ -6,11 +6,13 @@
 class Player2Tank : public Tank
 {
   int offset;
+  int rotation;
 public:
   Player2Tank(Spriter * spriter);
   ~Player2Tank();
 
   int move();
+  int getRotation();
 };
 
 #endif

@@ -16,6 +16,11 @@ int BulletWrapper::move()
   return bullet->move();
 }
 
+Wrapper * BulletWrapper::breed()
+{
+  return NULL;
+}
+
 Bullet * BulletWrapper::getBullet()
 {
   return bullet;

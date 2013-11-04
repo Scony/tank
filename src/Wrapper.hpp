@@ -24,6 +24,7 @@ public:
   virtual bool isCollisionable() = 0;
 
   virtual int move() = 0;
+  virtual Wrapper * breed() = 0;
   virtual BITMAP * getBuffer() = 0;
 
   void resetChanges();

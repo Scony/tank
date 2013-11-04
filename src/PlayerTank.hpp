@@ -6,11 +6,16 @@
 class PlayerTank : public Tank
 {
   int offset;
+  int rotation;
+  int reload;
+  Bullet * born;
 public:
   PlayerTank(Spriter * spriter);
   ~PlayerTank();
 
   int move();
+  Bullet * breed();
+  int getRotation();
 };
 
 #endif

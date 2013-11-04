@@ -8,8 +8,6 @@
 #include "BushTerrain.hpp"
 #include "WaterTerrain.hpp"
 #include "TankWrapper.hpp"
-#include "BulletWrapper.hpp"
-#include "LineBullet.hpp"
 
 using namespace std;
 
@@ -61,8 +59,6 @@ TutorialMap::TutorialMap(Spriter * spriter, string fileName)
       }
 
   in.close();
-
-  objects.push_back(WrapperBox(new BulletWrapper(0,0,2,new LineBullet(spriter,2)))); // tmp todo: rm
 
   // initial draw
   clear_to_color(buffer,makecol(0,0,0));
@@ -130,6 +126,16 @@ void TutorialMap::move()
 	}
       else
 	it++;
+    }
+
+  // handle breeds
+  for(list<WrapperBox>::iterator it = objects.begin(); it != objects.end(); it++)
+    {
+      Wrapper * pw = it->getWrapper();
+      Wrapper * born = pw->breed();
+
+      if(born)
+	objects.insert(it,born);
     }
       
 
