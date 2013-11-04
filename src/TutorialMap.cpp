@@ -175,6 +175,9 @@ void TutorialMap::move()
     {
       Wrapper * pw = it->getWrapper();
 
+      if(!pw->isCollisionable())
+	continue;
+
       if(pw->getNewX() < 0 || pw->getNewX() + pw->getSize() > width * 16 || pw->getNewY() < 0 || pw->getNewY() + pw->getSize() > height * 16)
 	pw->resetChanges();
     }
@@ -183,6 +186,9 @@ void TutorialMap::move()
   for(list<WrapperBox>::iterator it = objects.begin(); it != objects.end(); it++)
     {
       Wrapper * pw = it->getWrapper();
+
+      if(!pw->isCollisionable())
+	continue;
 
       int ix = pw->getNewX() / 16;
       int iy = pw->getNewY() / 16;
