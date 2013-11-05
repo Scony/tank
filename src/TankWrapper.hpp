@@ -20,7 +20,7 @@ public:
   int getSize();
   int getSpeed();
 
-  bool isClerable();
+  bool isVisible();
   bool isDeath();
   bool isCollisionable();
   bool isBangMaker();

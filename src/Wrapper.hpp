@@ -19,7 +19,7 @@ public:
   Wrapper(int x, int y, int direction);
   virtual ~Wrapper();
 
-  virtual bool isClerable() = 0;
+  virtual bool isVisible() = 0;
   virtual bool isDeath() = 0;
   virtual bool isCollisionable() = 0;
   virtual bool isBangMaker() = 0;

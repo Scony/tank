@@ -100,7 +100,7 @@ void TutorialMap::move()
     {
       Wrapper * pw = it->getWrapper();
 
-      if(!pw->isClerable())
+      if(!pw->isVisible())
 	continue;
 
       rectfill(buffer,
@@ -116,7 +116,7 @@ void TutorialMap::move()
       int iyy = (pw->getY() + pw->getSize() - 1) / 16;
       for(int i = ix; i <= ixx; i++)
       	for(int j = iy; j <= iyy; j++)
-      	  if(terrains[i][j] != NULL && terrains[i][j]->getLevel() != 0) // todo not so sure its still ok (level)
+      	  if(0 <= i && i < width && 0 <= j && j < height && terrains[i][j] != NULL)
       	    masked_blit(terrains[i][j]->getBuffer(),buffer,0,0,i*16,j*16,16,16);
     }
 
@@ -155,16 +155,16 @@ void TutorialMap::move()
   	switch(intent)
   	  {
   	  case 1:
-  	    pw->setNewY(pw->getY()-pw->getSpeed());
+  	    pw->setNewY(pw->getY() - pw->getSpeed());
   	    break;
   	  case 2:
-  	    pw->setNewX(pw->getX()+pw->getSpeed());
+  	    pw->setNewX(pw->getX() + pw->getSpeed());
   	    break;
   	  case 3:
-  	    pw->setNewY(pw->getY()+pw->getSpeed());
+  	    pw->setNewY(pw->getY() + pw->getSpeed());
   	    break;
   	  case 4:
-  	    pw->setNewX(pw->getX()-pw->getSpeed());
+  	    pw->setNewX(pw->getX() - pw->getSpeed());
   	  }
       else
   	{
@@ -176,7 +176,7 @@ void TutorialMap::move()
   	pw->setNewDirection(intent);
     }
 
-  // object vs map bounds collisions todo: bangs
+  // object vs map bounds collisions
   for(list<WrapperBox>::iterator it = objects.begin(); it != objects.end(); it++)
     {
       Wrapper * pw = it->getWrapper();
@@ -187,16 +187,13 @@ void TutorialMap::move()
       if(pw->getNewX() < 0 || pw->getNewX() + pw->getSize() > width * 16 || pw->getNewY() < 0 || pw->getNewY() + pw->getSize() > height * 16)
 	{
 	  if(pw->isBangMaker())
-	    {
-	      pw->applyChanges();
-	      pw->bang();
-	    }
+	    pw->bang();
 	  else
 	    pw->resetChanges();
 	}
     }
 
-  // object vs terrains collisions todo: bangs
+  // object vs terrains collisions
   for(list<WrapperBox>::iterator it = objects.begin(); it != objects.end(); it++)
     {
       Wrapper * pw = it->getWrapper();
@@ -211,16 +208,32 @@ void TutorialMap::move()
 
       bool collision = false;
 
-      for(int i = ix; i <= ixx && !collision; i++)
-  	for(int j = iy; j <= iyy && !collision; j++)
-  	  if(terrains[i][j] != NULL && terrains[i][j]->isCollisionable())
-  	    collision = true;
+      for(int i = ix; i <= ixx; i++)
+  	for(int j = iy; j <= iyy; j++)
+  	  if(0 <= i && i < width && 0 <= j && j < height &&
+	     terrains[i][j] != NULL && terrains[i][j]->isCollisionable())
+	    {
+	      if(pw->isBangMaker()/* && terrains[][]->isBangable */)
+		{		  // todo /\ + \/ to function
+		  pw->bang();
+		  delete terrains[i][j];
+		  terrains[i][j] = NULL;
+		  rectfill(buffer,
+			   i*16,
+			   j*16,
+			   i*16 + 16 - 1,
+			   j*16 + 16 - 1,
+			   makecol(0,0,0));
+		}
+
+	      collision = true;
+	    }
 
       if(collision)
 	pw->resetChanges();
     }
 
-  // object vs object collisions todo: bangs
+  // object vs object collisions
   for(list<WrapperBox>::iterator it = objects.begin(); it != objects.end(); it++)
     for(list<WrapperBox>::iterator itt = objects.begin(); itt != objects.end(); itt++)
       {
@@ -244,6 +257,13 @@ void TutorialMap::move()
 
   	    if(detectRectsCollision(x11,y11,x12,y12,x21,y21,x22,y22))
   	      {
+		if(pw1->isBangMaker() || pw2->isBangMaker())
+		  {
+		    pw1->bang();
+		    pw2->bang();
+		    continue;
+		  }
+
 		int ox11 = pw1->getX();
 		int oy11 = pw1->getY();
 		int ox12 = pw1->getX() + pw1->getSize() - 1;
@@ -294,10 +314,13 @@ void TutorialMap::move()
       pw->applyChanges();
     }
 
-  // redraw
+  // redraw todo: clear -> draw under -> draw -> draw over
   for(list<WrapperBox>::iterator it = objects.begin(); it != objects.end(); it++)
     {
       Wrapper * pw = it->getWrapper();
+
+      if(!pw->isVisible())
+	continue;
 
       masked_blit(pw->getBuffer(),buffer,0,0,pw->getX(),pw->getY(),pw->getSize(),pw->getSize());
 
@@ -307,7 +330,8 @@ void TutorialMap::move()
       int iyy = (pw->getY() + pw->getSize() - 1) / 16;
       for(int i = ix; i <= ixx; i++)
       	for(int j = iy; j <= iyy; j++)
-      	  if(terrains[i][j] != NULL && terrains[i][j]->getLevel() == 1)
+      	  if(0 <= i && i < width && 0 <= j && j < height &&
+	     terrains[i][j] != NULL && terrains[i][j]->getLevel() == 1)
       	    masked_blit(terrains[i][j]->getBuffer(),buffer,0,0,i*16,j*16,16,16);
     }
 }

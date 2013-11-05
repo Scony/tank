@@ -76,7 +76,7 @@ int TankWrapper::getSpeed()	// todo
   return 1;
 }
 
-bool TankWrapper::isClerable()	// todo
+bool TankWrapper::isVisible()	// todo
 {
   return true;
 }

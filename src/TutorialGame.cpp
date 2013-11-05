@@ -8,7 +8,7 @@
 TutorialGame::TutorialGame(BITMAP * screen) : Game(screen)
 {
   spriter = new Spriter("/home/scony/Allegro/tank/src/sprite.bmp");
-  TutorialMap * tmap = new TutorialMap(spriter,"/home/scony/Allegro/tank/src/tiny_blank.map");
+  TutorialMap * tmap = new TutorialMap(spriter,"/home/scony/Allegro/tank/src/tiny.map");
   tmap->addTank(new PlayerTank(spriter));
   tmap->addTank(new Player2Tank(spriter));
   // tmap->addTank(new AITank(spriter));

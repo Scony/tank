@@ -50,7 +50,7 @@ int PlayerTank::move()
   if(key[KEY_SPACE] && !reload)
     {
       born = new LineBullet(spriter,rotation);
-      reload = 100;
+      reload = 10;
     }
 
   return intent;

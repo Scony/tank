@@ -7,6 +7,8 @@
 class BulletWrapper : public Wrapper
 {
   Bullet * bullet;
+  bool visible;
+  bool death;
 public:
   BulletWrapper(int x, int y, int direction, Bullet * bullet);
   ~BulletWrapper();
@@ -20,7 +22,7 @@ public:
   int getSize();
   int getSpeed();
 
-  bool isClerable();
+  bool isVisible();
   bool isDeath();
   bool isCollisionable();
   bool isBangMaker();

@@ -4,6 +4,8 @@ BulletWrapper::BulletWrapper(int x, int y, int direction, Bullet * bullet) :
   Wrapper(x,y,direction)
 {
   this->bullet = bullet;
+  visible = true;
+  death = false;
 }
 
 BulletWrapper::~BulletWrapper()
@@ -18,7 +20,8 @@ int BulletWrapper::move()
 
 void BulletWrapper::bang()
 {
-  // todo
+  visible = false;
+  death = true;
 }
 
 Wrapper * BulletWrapper::breed()
@@ -46,13 +49,16 @@ int BulletWrapper::getSpeed()	// todo
   return 2;
 }
 
-bool BulletWrapper::isClerable()	// todo
+bool BulletWrapper::isVisible()	// todo
 {
-  return true;
+  return visible;
 }
 
 bool BulletWrapper::isDeath()
 {
+  if(death)
+    return true;
+
   return bullet->isDeath();
 }
 
