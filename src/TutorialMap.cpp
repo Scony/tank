@@ -329,7 +329,8 @@ void TutorialMap::move()
       pw->applyChanges();
     }
 
-  // redraw todo: clear -> draw under -> draw -> draw over
+  // redraw
+  // if needed then todo: complex overlay algorithm
   for(list<WrapperBox>::iterator it = objects.begin(); it != objects.end(); it++)
     {
       Wrapper * pw = it->getWrapper();

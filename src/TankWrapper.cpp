@@ -110,11 +110,6 @@ bool TankWrapper::isDeath()	// todo
   return false;
 }
 
-bool TankWrapper::isCollisionable() // todo
-{
-  return true;
-}
-
 bool TankWrapper::isBangMaker() // todo
 {
   return false;

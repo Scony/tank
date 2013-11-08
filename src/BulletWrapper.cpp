@@ -82,11 +82,6 @@ bool BulletWrapper::isDeath()
   return bullet->isDeath();
 }
 
-bool BulletWrapper::isCollisionable() // todo
-{
-  return true;
-}
-
 bool BulletWrapper::isBangMaker() // todo
 {
   return true;

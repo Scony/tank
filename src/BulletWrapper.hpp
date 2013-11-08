@@ -27,7 +27,6 @@ public:
 
   bool isVisible();
   bool isDeath();
-  bool isCollisionable();
   bool isBangMaker();
 };
 
