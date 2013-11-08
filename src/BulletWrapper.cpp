@@ -1,4 +1,6 @@
 #include "BulletWrapper.hpp"
+#include "BangWrapper.hpp"
+#include "LittleBang.hpp"
 
 BulletWrapper::BulletWrapper(int x, int y, int direction, Bullet * bullet) :
   Wrapper(x,y,direction)
@@ -26,6 +28,9 @@ void BulletWrapper::bang()
 
 Wrapper * BulletWrapper::breed()
 {
+  if(death)
+    return new BangWrapper(x-12,y-12,1,new LittleBang(bullet->getSpriter()));
+
   return NULL;
 }
 
