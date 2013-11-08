@@ -23,6 +23,11 @@ int LineBullet::getId()
   return 10;
 }
 
+int LineBullet::getPower()
+{
+  return 1;
+}
+
 bool LineBullet::isDeath()
 {
   if(!lifetime)

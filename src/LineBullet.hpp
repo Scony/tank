@@ -13,6 +13,7 @@ public:
 
   int move();
   int getId();
+  int getPower();
   bool isDeath();
 };
 

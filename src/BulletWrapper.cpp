@@ -54,6 +54,16 @@ int BulletWrapper::getId()
   return bullet->getId();
 }
 
+int BulletWrapper::getResistance()
+{
+  return 0;
+}
+
+int BulletWrapper::getPower()
+{
+  return bullet->getPower();
+}
+
 bool BulletWrapper::isVisible()	// todo
 {
   return visible;

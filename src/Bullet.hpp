@@ -18,6 +18,7 @@ public:
   virtual int move() = 0;
   BITMAP * getBuffer();
   virtual int getId();
+  virtual int getPower() = 0;
 
   virtual bool isDeath() = 0;
 };

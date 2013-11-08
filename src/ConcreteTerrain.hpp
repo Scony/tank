@@ -10,6 +10,7 @@ public:
   ~ConcreteTerrain();
 
   int getId();
+  int getResistance();
 };
 
 #endif

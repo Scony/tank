@@ -23,3 +23,8 @@ int Terrain::getId()
 {
   return 1;
 }
+
+int Terrain::getResistance()
+{
+  return 0;
+}

@@ -118,6 +118,16 @@ void TutorialMap::move()
       	    masked_blit(terrains[i][j]->getBuffer(),buffer,0,0,i*16,j*16,16,16);
     }
 
+  // handle breeds
+  for(list<WrapperBox>::iterator it = objects.begin(); it != objects.end(); it++)
+    {
+      Wrapper * pw = it->getWrapper();
+      Wrapper * born = pw->breed();
+
+      if(born)
+	objects.push_back(born);
+    }
+
   // handle dies
   for(list<WrapperBox>::iterator it = objects.begin(); it != objects.end();)
     {
@@ -130,18 +140,7 @@ void TutorialMap::move()
 	}
       else
 	it++;
-    }
-
-  // handle breeds
-  for(list<WrapperBox>::iterator it = objects.begin(); it != objects.end(); it++)
-    {
-      Wrapper * pw = it->getWrapper();
-      Wrapper * born = pw->breed();
-
-      if(born)
-	objects.push_back(born);
-    }
-      
+    }      
 
   // handle moves (intents)
   for(list<WrapperBox>::iterator it = objects.begin(); it != objects.end(); it++)
@@ -208,17 +207,21 @@ void TutorialMap::move()
   	  if(0 <= i && i < width && 0 <= j && j < height &&
 	     terrains[i][j] != NULL && policy->checkCollisionability(terrains[i][j]->getId(),pw->getId()))
 	    {
-	      if(pw->isBangMaker()/* && terrains[][]->isBangable */)
-		{		  // todo /\ + \/ to function
+	      if(pw->isBangMaker())
+		{
 		  pw->bang();
-		  delete terrains[i][j];
-		  terrains[i][j] = NULL;
-		  rectfill(buffer,
-			   i*16,
-			   j*16,
-			   i*16 + 16 - 1,
-			   j*16 + 16 - 1,
-			   makecol(0,0,0));
+		  if(terrains[i][j]->getResistance() < pw->getPower())
+		    {
+		      // todo: put into function
+		      delete terrains[i][j];
+		      terrains[i][j] = NULL;
+		      rectfill(buffer,
+			       i*16,
+			       j*16,
+			       i*16 + 16 - 1,
+			       j*16 + 16 - 1,
+			       makecol(0,0,0));
+		    }
 		}
 
 	      collision = true;
@@ -252,10 +255,26 @@ void TutorialMap::move()
 
   	    if(detectRectsCollision(x11,y11,x12,y12,x21,y21,x22,y22))
   	      {
-		if(pw1->isBangMaker() || pw2->isBangMaker())
+		if(pw1->isBangMaker() && pw2->isBangMaker())
 		  {
 		    pw1->bang();
 		    pw2->bang();
+		    continue;
+		  }
+
+		if(pw1->isBangMaker())
+		  {
+		    pw1->bang();
+		    if(pw1->getPower() > pw2->getResistance())
+		      pw2->bang();
+		    continue;
+		  }
+
+		if(pw2->isBangMaker())
+		  {
+		    pw2->bang();
+		    if(pw2->getPower() > pw1->getResistance())
+		      pw1->bang();
 		    continue;
 		  }
 

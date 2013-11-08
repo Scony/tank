@@ -17,6 +17,7 @@ public:
   BITMAP * getBuffer();
   int getSize();
   virtual int getId();
+  virtual int getResistance();
 };
 
 #endif

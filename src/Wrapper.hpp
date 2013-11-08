@@ -27,8 +27,6 @@ public:
   virtual int move() = 0;
   virtual void bang() = 0;
   virtual Wrapper * breed() = 0;
-  virtual BITMAP * getBuffer() = 0;
-  virtual int getId() = 0;
 
   void resetChanges();
   void applyChanges();
@@ -38,6 +36,10 @@ public:
   int getDirection();
   virtual int getSize() = 0;
   virtual int getSpeed() = 0;
+  virtual BITMAP * getBuffer() = 0;
+  virtual int getId() = 0;
+  virtual int getResistance() = 0;
+  virtual int getPower() = 0;
 
   int getNewX();
   void setNewX(int x);

@@ -14,3 +14,8 @@ int ConcreteTerrain::getId()
 {
   return 3;
 }
+
+int ConcreteTerrain::getResistance()
+{
+  return 1;
+}
