@@ -1,22 +1,21 @@
-#ifndef TANK_WRAPPER_HPP
-#define TANK_WRAPPER_HPP
+#ifndef BANG_WRAPPER_HPP
+#define BANG_WRAPPER_HPP
 
 #include "Wrapper.hpp"
-#include "Tank.hpp"
+#include "Bang.hpp"
 
-class TankWrapper : public Wrapper
+class BangWrapper : public Wrapper
 {
-  Tank * tank;
-  bool forceDeath;
+  Bang * bng;
 public:
-  TankWrapper(int x, int y, int direction, Tank * tank);
-  ~TankWrapper();
+  BangWrapper(int x, int y, int direction, Bang * bng);
+  ~BangWrapper();
 
   int move();
   void bang();
   Wrapper * breed();
 
-  Tank * getTank();
+  Bang * getBang();
   BITMAP * getBuffer();
   int getSize();
   int getSpeed();
@@ -26,7 +25,6 @@ public:
 
   bool isVisible();
   bool isDeath();
-  bool isCollisionable();
   bool isBangMaker();
 };
 

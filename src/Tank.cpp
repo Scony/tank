@@ -29,3 +29,8 @@ int Tank::getId()
 {
   return 7;
 }
+
+Spriter * Tank::getSpriter()
+{
+  return spriter;
+}

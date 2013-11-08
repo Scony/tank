@@ -21,7 +21,6 @@ public:
 
   virtual bool isVisible() = 0;
   virtual bool isDeath() = 0;
-  virtual bool isCollisionable() = 0;
   virtual bool isBangMaker() = 0;
 
   virtual int move() = 0;

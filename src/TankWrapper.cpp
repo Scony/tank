@@ -1,10 +1,13 @@
 #include "TankWrapper.hpp"
 #include "BulletWrapper.hpp"
+#include "BangWrapper.hpp"
+#include "SimpleBang.hpp"
 
 TankWrapper::TankWrapper(int x, int y, int direction, Tank * tank) :
   Wrapper(x,y,direction)
 {
   this->tank = tank;
+  forceDeath = false;
 }
 
 TankWrapper::~TankWrapper()
@@ -19,11 +22,17 @@ int TankWrapper::move()
 
 void TankWrapper::bang()
 {
-  // todo
+  forceDeath = true;
 }
 
 Wrapper * TankWrapper::breed()
 {
+  if(forceDeath)
+    {
+      forceDeath = false;
+      return new BangWrapper(x,y,1,new SimpleBang(tank->getSpriter()));
+    }
+
   Bullet * bullet = tank->breed();
   if(bullet)
     {

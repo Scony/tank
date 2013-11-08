@@ -1,28 +1,26 @@
-#ifndef TANK_HPP
-#define TANK_HPP
+#ifndef BANG_HPP
+#define BANG_HPP
 
 #include <allegro.h>
 
 #include "Spriter.hpp"
-#include "Bullet.hpp"
 
-class Tank
+class Bang
 {
 protected:
   Spriter * spriter;
 
   BITMAP * buffer;
 public:
-  Tank(Spriter * spriter);
-  virtual ~Tank();
+  Bang(Spriter * spriter);
+  virtual ~Bang();
 
   virtual int move() = 0;
-  virtual Bullet * breed();
-  virtual int getRotation() = 0;
   virtual int getId();
   BITMAP * getBuffer();
   int getSize();
-  Spriter * getSpriter();
+
+  virtual bool isDeath() = 0;
 };
 
 #endif

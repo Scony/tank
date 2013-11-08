@@ -86,6 +86,13 @@ BITMAP * Spriter::getBullet(int index)
   return bullet[index];
 }
 
+BITMAP * Spriter::getBang(int index)
+{
+  if(index >= 3 || index < 0)
+    throw new Exception("Bang index out of bounds");
+  return bang[index];
+}
+
 int Spriter::getTankSize()
 {
   return 32;
@@ -94,4 +101,9 @@ int Spriter::getTankSize()
 int Spriter::getTerrainSize()
 {
   return 16;
+}
+
+int Spriter::getBangSize()
+{
+  return 32;
 }
