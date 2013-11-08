@@ -10,17 +10,7 @@ PavementTerrain::~PavementTerrain()
 {
 }
 
-bool PavementTerrain::isCollisionable()
+int PavementTerrain::getId()
 {
-  return false;
-}
-
-int PavementTerrain::getLevel()
-{
-  return -1;
-}
-
-bool PavementTerrain::isSpawnable()
-{
-  return true;
+  return 4;
 }

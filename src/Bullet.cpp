@@ -14,3 +14,8 @@ BITMAP * Bullet::getBuffer()
 {
   return buffer;
 }
+
+int Bullet::getId()
+{
+  return 9;
+}

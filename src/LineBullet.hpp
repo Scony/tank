@@ -12,6 +12,7 @@ public:
   ~LineBullet();
 
   int move();
+  int getId();
   bool isDeath();
 };
 

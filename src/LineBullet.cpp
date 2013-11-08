@@ -18,6 +18,11 @@ int LineBullet::move()
   return intent;
 }
 
+int LineBullet::getId()
+{
+  return 10;
+}
+
 bool LineBullet::isDeath()
 {
   if(!lifetime)

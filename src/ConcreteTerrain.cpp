@@ -10,12 +10,7 @@ ConcreteTerrain::~ConcreteTerrain()
 {
 }
 
-bool ConcreteTerrain::isCollisionable()
+int ConcreteTerrain::getId()
 {
-  return true;
-}
-
-int ConcreteTerrain::getLevel()
-{
-  return 0;
+  return 3;
 }

@@ -49,6 +49,11 @@ int BulletWrapper::getSpeed()	// todo
   return 2;
 }
 
+int BulletWrapper::getId()
+{
+  return bullet->getId();
+}
+
 bool BulletWrapper::isVisible()	// todo
 {
   return visible;

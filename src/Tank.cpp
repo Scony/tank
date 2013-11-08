@@ -24,3 +24,8 @@ int Tank::getSize()
 {
   return spriter->getTankSize();
 }
+
+int Tank::getId()
+{
+  return 7;
+}

@@ -19,6 +19,7 @@ public:
   virtual int move() = 0;
   virtual Bullet * breed();
   virtual int getRotation() = 0;
+  virtual int getId();
   BITMAP * getBuffer();
   int getSize();
 };

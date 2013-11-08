@@ -10,12 +10,7 @@ WaterTerrain::~WaterTerrain()
 {
 }
 
-bool WaterTerrain::isCollisionable()
+int WaterTerrain::getId()
 {
-  return true;
-}
-
-int WaterTerrain::getLevel()
-{
-  return -1;
+  return 6;
 }

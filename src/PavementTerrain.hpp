@@ -9,9 +9,7 @@ public:
   PavementTerrain(Spriter * spriter);
   ~PavementTerrain();
 
-  bool isCollisionable();
-  int getLevel();
-  bool isSpawnable();
+  int getId();
 };
 
 #endif

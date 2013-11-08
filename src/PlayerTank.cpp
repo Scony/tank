@@ -72,3 +72,8 @@ int PlayerTank::getRotation()
 {
   return rotation;
 }
+
+int PlayerTank::getId()
+{
+  return 8;
+}

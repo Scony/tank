@@ -12,9 +12,10 @@
 
 using namespace std;
 
-TutorialMap::TutorialMap(Spriter * spriter, string fileName)
+TutorialMap::TutorialMap(Spriter * spriter, PolicyManager * policy, string fileName)
 {
   this->spriter = spriter;
+  this->policy = policy;
 
   ifstream in(fileName.c_str());
   if(!in)
@@ -80,12 +81,9 @@ TutorialMap::~TutorialMap()
     for(int j = 0; j < height; j++)
       if(terrains[i][j])
 	delete terrains[i][j];
-  
   for(int i = 0; i < width; i++)
     delete [] terrains[i];
-
   delete [] terrains;
-
 }
 
 void TutorialMap::move()
@@ -181,7 +179,7 @@ void TutorialMap::move()
     {
       Wrapper * pw = it->getWrapper();
 
-      if(!pw->isCollisionable())
+      if(!policy->checkCollisionability(0,pw->getId()))
 	continue;
 
       if(pw->getNewX() < 0 || pw->getNewX() + pw->getSize() > width * 16 || pw->getNewY() < 0 || pw->getNewY() + pw->getSize() > height * 16)
@@ -198,9 +196,6 @@ void TutorialMap::move()
     {
       Wrapper * pw = it->getWrapper();
 
-      if(!pw->isCollisionable())
-	continue;
-
       int ix = pw->getNewX() / 16;
       int iy = pw->getNewY() / 16;
       int ixx = (pw->getNewX() + pw->getSize() - 1) / 16;
@@ -211,7 +206,7 @@ void TutorialMap::move()
       for(int i = ix; i <= ixx; i++)
   	for(int j = iy; j <= iyy; j++)
   	  if(0 <= i && i < width && 0 <= j && j < height &&
-	     terrains[i][j] != NULL && terrains[i][j]->isCollisionable())
+	     terrains[i][j] != NULL && policy->checkCollisionability(terrains[i][j]->getId(),pw->getId()))
 	    {
 	      if(pw->isBangMaker()/* && terrains[][]->isBangable */)
 		{		  // todo /\ + \/ to function
@@ -242,7 +237,7 @@ void TutorialMap::move()
 	    Wrapper * pw1 = it->getWrapper();
 	    Wrapper * pw2 = itt->getWrapper();
 
-	    if(!pw1->isCollisionable() || !pw2->isCollisionable())
+	    if(!policy->checkCollisionability(pw1->getId(),pw2->getId()))
 	      continue;
 
   	    int x11 = pw1->getNewX();
@@ -324,15 +319,15 @@ void TutorialMap::move()
 
       masked_blit(pw->getBuffer(),buffer,0,0,pw->getX(),pw->getY(),pw->getSize(),pw->getSize());
 
-      int ix = pw->getX() / 16;
-      int iy = pw->getY() / 16;
-      int ixx = (pw->getX() + pw->getSize() - 1) / 16;
-      int iyy = (pw->getY() + pw->getSize() - 1) / 16;
-      for(int i = ix; i <= ixx; i++)
-      	for(int j = iy; j <= iyy; j++)
-      	  if(0 <= i && i < width && 0 <= j && j < height &&
-	     terrains[i][j] != NULL && terrains[i][j]->getLevel() == 1)
-      	    masked_blit(terrains[i][j]->getBuffer(),buffer,0,0,i*16,j*16,16,16);
+      // int ix = pw->getX() / 16;
+      // int iy = pw->getY() / 16;
+      // int ixx = (pw->getX() + pw->getSize() - 1) / 16;
+      // int iyy = (pw->getY() + pw->getSize() - 1) / 16;
+      // for(int i = ix; i <= ixx; i++)
+      // 	for(int j = iy; j <= iyy; j++)
+      // 	  if(0 <= i && i < width && 0 <= j && j < height &&
+      // 	     terrains[i][j] != NULL && terrains[i][j]->getLevel() == 1)
+      // 	    masked_blit(terrains[i][j]->getBuffer(),buffer,0,0,i*16,j*16,16,16);
     }
 }
 
@@ -355,7 +350,7 @@ void TutorialMap::addTank(Tank * tank)
 
   for(int i = 0; i < width; i++)
     for(int j = 0; j < height; j++)
-      if(terrains[i][j] == NULL || terrains[i][j]->isSpawnable())
+      if(terrains[i][j] == NULL || !policy->checkCollisionability(terrains[i][j]->getId(),tank->getId()))
 	spotMap[i][j] = true;
 
   list<Point> spots;

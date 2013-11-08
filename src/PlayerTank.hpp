@@ -16,6 +16,7 @@ public:
   int move();
   Bullet * breed();
   int getRotation();
+  int getId();
 };
 
 #endif

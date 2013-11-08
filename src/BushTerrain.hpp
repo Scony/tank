@@ -9,9 +9,7 @@ public:
   BushTerrain(Spriter * spriter);
   ~BushTerrain();
 
-  bool isCollisionable();
-  int getLevel();
-  bool isSpawnable();
+  int getId();
 };
 
 #endif

@@ -76,6 +76,11 @@ int TankWrapper::getSpeed()	// todo
   return 1;
 }
 
+int TankWrapper::getId()
+{
+  return tank->getId();
+}
+
 bool TankWrapper::isVisible()	// todo
 {
   return true;

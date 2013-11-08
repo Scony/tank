@@ -10,8 +10,7 @@ public:
   ~BrickTerrain();
 
   BITMAP * getBuffer();
-  bool isCollisionable();
-  int getLevel();
+  int getId();
 };
 
 #endif

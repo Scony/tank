@@ -28,6 +28,7 @@ public:
   virtual void bang() = 0;
   virtual Wrapper * breed() = 0;
   virtual BITMAP * getBuffer() = 0;
+  virtual int getId() = 0;
 
   void resetChanges();
   void applyChanges();

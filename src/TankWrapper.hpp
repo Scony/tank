@@ -19,6 +19,7 @@ public:
   BITMAP * getBuffer();
   int getSize();
   int getSpeed();
+  int getId();
 
   bool isVisible();
   bool isDeath();

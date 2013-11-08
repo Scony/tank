@@ -9,8 +9,7 @@ public:
   WaterTerrain(Spriter * spriter);
   ~WaterTerrain();
 
-  bool isCollisionable();
-  int getLevel();
+  int getId();
 };
 
 #endif

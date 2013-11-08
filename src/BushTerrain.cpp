@@ -10,17 +10,7 @@ BushTerrain::~BushTerrain()
 {
 }
 
-bool BushTerrain::isCollisionable()
+int BushTerrain::getId()
 {
-  return false;
-}
-
-int BushTerrain::getLevel()
-{
-  return 1;
-}
-
-bool BushTerrain::isSpawnable()
-{
-  return true;
+  return 5;
 }

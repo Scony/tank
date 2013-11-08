@@ -9,8 +9,7 @@ public:
   ConcreteTerrain(Spriter * spriter);
   ~ConcreteTerrain();
 
-  bool isCollisionable();
-  int getLevel();
+  int getId();
 };
 
 #endif

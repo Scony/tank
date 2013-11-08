@@ -19,7 +19,7 @@ BITMAP * Terrain::getBuffer()
   return buffer;
 }
 
-bool Terrain::isSpawnable()
+int Terrain::getId()
 {
-  return false;
+  return 1;
 }

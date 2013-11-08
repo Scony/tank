@@ -10,12 +10,7 @@ BrickTerrain::~BrickTerrain()
 {
 }
 
-bool BrickTerrain::isCollisionable()
+int BrickTerrain::getId()
 {
-  return true;
-}
-
-int BrickTerrain::getLevel()
-{
-  return 0;
+  return 2;
 }
