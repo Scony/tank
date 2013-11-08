@@ -319,15 +319,15 @@ void TutorialMap::move()
 
       masked_blit(pw->getBuffer(),buffer,0,0,pw->getX(),pw->getY(),pw->getSize(),pw->getSize());
 
-      // int ix = pw->getX() / 16;
-      // int iy = pw->getY() / 16;
-      // int ixx = (pw->getX() + pw->getSize() - 1) / 16;
-      // int iyy = (pw->getY() + pw->getSize() - 1) / 16;
-      // for(int i = ix; i <= ixx; i++)
-      // 	for(int j = iy; j <= iyy; j++)
-      // 	  if(0 <= i && i < width && 0 <= j && j < height &&
-      // 	     terrains[i][j] != NULL && terrains[i][j]->getLevel() == 1)
-      // 	    masked_blit(terrains[i][j]->getBuffer(),buffer,0,0,i*16,j*16,16,16);
+      int ix = pw->getX() / 16;
+      int iy = pw->getY() / 16;
+      int ixx = (pw->getX() + pw->getSize() - 1) / 16;
+      int iyy = (pw->getY() + pw->getSize() - 1) / 16;
+      for(int i = ix; i <= ixx; i++)
+      	for(int j = iy; j <= iyy; j++)
+      	  if(0 <= i && i < width && 0 <= j && j < height &&
+      	     terrains[i][j] != NULL && policy->checkOverlapability(terrains[i][j]->getId(),pw->getId()))
+      	    masked_blit(terrains[i][j]->getBuffer(),buffer,0,0,i*16,j*16,16,16);
     }
 }
 
