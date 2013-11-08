@@ -7,6 +7,7 @@ class SimpleBang : public Bang
 {
   bool death;
   int stance;
+  int latency;
 public:
   SimpleBang(Spriter * spriter);
   ~SimpleBang();

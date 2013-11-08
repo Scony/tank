@@ -88,6 +88,7 @@ TutorialMap::~TutorialMap()
 
 void TutorialMap::move()
 {
+  // rest(500);
   // debug
   char title[255];
   sprintf(title,"%d",objects.size());

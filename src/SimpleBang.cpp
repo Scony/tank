@@ -6,6 +6,7 @@ SimpleBang::SimpleBang(Spriter * spriter) :
   buffer = spriter->getBang(0);
   death = false;
   stance = 0;
+  latency = 10;
 }
 
 SimpleBang::~SimpleBang()
@@ -14,10 +15,14 @@ SimpleBang::~SimpleBang()
 
 int SimpleBang::move()
 {
-  if(++stance >= 300)
-    death = true;
-  else
-    buffer = spriter->getBang(stance/100);
+  if(!--latency)
+    {
+      latency = 10;
+      if(++stance >= 2)
+	death = true;
+      else
+	buffer = spriter->getBang(stance);
+    }
 
   return 0;
 }
