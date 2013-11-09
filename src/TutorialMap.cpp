@@ -352,7 +352,11 @@ void TutorialMap::move()
 Point TutorialMap::getFocus()
 {
   list<WrapperBox>::iterator it = objects.begin();
+  if(it == objects.end())
+    return Point(0,0);
+
   Wrapper * pw = it->getWrapper();
+
   return Point(pw->getX() + 16, pw->getY() + 16);
 }
 

@@ -5,14 +5,16 @@
 
 class Player2Tank : public Tank
 {
-  int offset;
-  int rotation;
 public:
   Player2Tank(Spriter * spriter);
+  Player2Tank(Spriter * spriter, int rotation,
+	      int hp, int hpMax,
+	      int ammo, int ammoMax,
+	      int fuel, int fuelMax,
+	      int reload, int reloadMax);
   ~Player2Tank();
 
   int move();
-  int getRotation();
 };
 
 #endif

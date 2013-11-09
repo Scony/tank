@@ -2,7 +2,7 @@
 #include "TutorialMap.hpp"
 // #include "DummyTank.hpp"
 #include "PlayerTank.hpp"
-// #include "Player2Tank.hpp"
+#include "Player2Tank.hpp"
 // #include "AITank.hpp"
 
 TutorialGame::TutorialGame(BITMAP * screen) : Game(screen)
@@ -12,7 +12,7 @@ TutorialGame::TutorialGame(BITMAP * screen) : Game(screen)
   TutorialMap * tmap = new TutorialMap(spriter,policy,"/home/scony/Allegro/tank/src/tiny.map");
   player1 = new PlayerTank(spriter,1,1,1,100,100,1000,1000,0,10);
   tmap->addTank(player1);
-  // tmap->addTank(new Player2Tank(spriter));
+  tmap->addTank(new Player2Tank(spriter,1,1,1,100,100,1000,1000,0,10));
   // tmap->addTank(new AITank(spriter));
   map = tmap;
 }
@@ -31,8 +31,10 @@ void TutorialGame::move()
 
 void TutorialGame::draw()
 {
-  // debug
-  if(rand() % 10 > 8)
+  // debug todo
+  if(player1 && player1->isDeath())
+    player1 = NULL;
+  if(player1 && rand() % 10 > 8)
     set_window_title(player1->toString().c_str());
 
   BITMAP * buff = map->getBuffer();
