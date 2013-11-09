@@ -34,33 +34,40 @@ int AITank::move()
 {
   update();
 
-  if(!length--)
+  if(!isLocked() && !length--)
     {
       intent = rand() % 5;
       length = rand() % 70;
     }
 
-  switch(intent)
+
+  if(!isLocked())
     {
-    case 1:
-      buffer = spriter->getTank(0+offset);
-      rotation = 1;
-      break;
-    case 2:
-      buffer = spriter->getTank(2+offset);
-      rotation = 2;
-      break;
-    case 3:
-      buffer = spriter->getTank(4+offset);
-      rotation = 3;
-      break;
-    case 4:
-      buffer = spriter->getTank(6+offset);
-      rotation = 4;
+      switch(intent)
+	{
+	case 1:
+	  buffer = spriter->getTank(0+offset);
+	  rotation = 1;
+	  break;
+	case 2:
+	  buffer = spriter->getTank(2+offset);
+	  rotation = 2;
+	  break;
+	case 3:
+	  buffer = spriter->getTank(4+offset);
+	  rotation = 3;
+	  break;
+	case 4:
+	  buffer = spriter->getTank(6+offset);
+	  rotation = 4;
+	}
     }
 
   if(rand() % 100 > 97)
     shoot();
+
+  if(isLocked())
+    return 0;
 
   return intent;
 }

@@ -41,23 +41,24 @@ Wrapper * TankWrapper::breed()
       // correction to avoid seppuku
       int cx = round((double)x / 16) * 16;
       int cy = round((double)y / 16) * 16;
+      int magicOffset = 2;
 
       switch(bdirection)	// todo: hardcodes
 	{
 	case 1:
 	  bx = x + ((getSize() - 8) / 2);
-	  by = (cy < y ? cy : y) - 8;
+	  by = (cy < y ? cy : y) - 8 - magicOffset;
 	  break;
 	case 2:
-	  bx = (cx > x ? cx : x) + getSize();
+	  bx = (cx > x ? cx : x) + getSize() + magicOffset;
 	  by = y + ((getSize() - 8) / 2);
 	  break;
 	case 3:
 	  bx = x + ((getSize() - 8) / 2);
-	  by = (cy > y ? cy : y) + getSize();
+	  by = (cy > y ? cy : y) + getSize() + magicOffset;
 	  break;
 	case 4:
-	  bx = (cx < x ? cx : x) - 8;
+	  bx = (cx < x ? cx : x) - 8 - magicOffset;
 	  by = y + ((getSize() - 8) / 2);
 	}
 

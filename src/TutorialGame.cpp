@@ -9,10 +9,13 @@ TutorialGame::TutorialGame(BITMAP * screen) : Game(screen)
 {
   spriter = new Spriter("/home/scony/Allegro/tank/src/sprite.bmp");
   policy = new PolicyManager("/home/scony/Allegro/tank/src/policy.dat");
-  TutorialMap * tmap = new TutorialMap(spriter,policy,"/home/scony/Allegro/tank/src/tiny.map");
-  player1 = new PlayerTank(spriter,1,1,1,100,100,1000,1000,0,10);
+  TutorialMap * tmap = new TutorialMap(spriter,policy,"/home/scony/Allegro/tank/src/medium.map");
+  // player1 = new PlayerTank(spriter,1,1,1,100,100,1000,1000,0,10);
+  player1 = new AITank(spriter,1,1,1,100,100,1000,1000,0,10);
   tmap->addTank(player1);
   tmap->addTank(new Player2Tank(spriter,1,1,1,100,100,1000,1000,0,10));
+  tmap->addTank(new AITank(spriter,1,1,1,100,100,1000,1000,0,10));
+  tmap->addTank(new AITank(spriter,1,1,1,100,100,1000,1000,0,10));
   tmap->addTank(new AITank(spriter,1,1,1,100,100,1000,1000,0,10));
   map = tmap;
 }
