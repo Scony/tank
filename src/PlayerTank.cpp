@@ -1,14 +1,23 @@
 #include "PlayerTank.hpp"
-#include "LineBullet.hpp"
 
 PlayerTank::PlayerTank(Spriter * spriter) :
   Tank(spriter)
 {
   buffer = spriter->getTank(0);
-  offset = 0;
-  rotation = 1;
-  reload = 0;
-  born = NULL;
+}
+
+PlayerTank::PlayerTank(Spriter * spriter, int rotation,
+		       int hp, int hpMax,
+		       int ammo, int ammoMax,
+		       int fuel, int fuelMax,
+		       int reload, int reloadMax) :
+  Tank(spriter,rotation,
+       hp,hpMax,
+       ammo,ammoMax,
+       fuel,fuelMax,
+       reload,reloadMax)
+{
+  buffer = spriter->getTank(0);
 }
 
 PlayerTank::~PlayerTank()
@@ -17,60 +26,42 @@ PlayerTank::~PlayerTank()
 
 int PlayerTank::move()
 {
-  offset = (offset + 1) % 2;
-  reload = reload > 0 ? reload - 1 : 0;
+  update();
 
   int intent = 0;
 
-  if(key[KEY_UP])
+  if(!isLocked())
     {
-      buffer = spriter->getTank(0+offset);
-      rotation = 1;
-      intent = 1;
-    }
-  if(key[KEY_RIGHT])
-    {
-      buffer = spriter->getTank(2+offset);
-      rotation = 2;
-      intent = 2;
-    }
-  if(key[KEY_DOWN])
-    {
-      buffer = spriter->getTank(4+offset);
-      rotation = 3;
-      intent = 3;
-    }
-  if(key[KEY_LEFT])
-    {
-      buffer = spriter->getTank(6+offset);
-      rotation = 4;
-      intent = 4;
+      if(key[KEY_UP])
+	{
+	  buffer = spriter->getTank(0+offset);
+	  rotation = 1;
+	  intent = 1;
+	}
+      if(key[KEY_RIGHT])
+	{
+	  buffer = spriter->getTank(2+offset);
+	  rotation = 2;
+	  intent = 2;
+	}
+      if(key[KEY_DOWN])
+	{
+	  buffer = spriter->getTank(4+offset);
+	  rotation = 3;
+	  intent = 3;
+	}
+      if(key[KEY_LEFT])
+	{
+	  buffer = spriter->getTank(6+offset);
+	  rotation = 4;
+	  intent = 4;
+	}
     }
 
-  if(key[KEY_SPACE] && !reload)
-    {
-      born = new LineBullet(spriter,rotation);
-      reload = 10;
-    }
+  if(key[KEY_SPACE])
+    shoot();
 
   return intent;
-}
-
-Bullet * PlayerTank::breed()
-{
-  if(born)
-    {
-      Bullet * tmp = born;
-      born = NULL;
-      return tmp;
-    }
-
-  return NULL;
-}
-
-int PlayerTank::getRotation()
-{
-  return rotation;
 }
 
 int PlayerTank::getId()

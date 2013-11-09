@@ -28,7 +28,7 @@ public:
   virtual Wrapper * breed() = 0;
 
   void resetChanges();
-  void applyChanges();
+  virtual void applyChanges();
 
   int getX();
   int getY();

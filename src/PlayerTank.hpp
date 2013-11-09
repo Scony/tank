@@ -5,17 +5,16 @@
 
 class PlayerTank : public Tank
 {
-  int offset;
-  int rotation;
-  int reload;
-  Bullet * born;
 public:
   PlayerTank(Spriter * spriter);
+  PlayerTank(Spriter * spriter, int rotation,
+	     int hp, int hpMax,
+	     int ammo, int ammoMax,
+	     int fuel, int fuelMax,
+	     int reload, int reloadMax);
   ~PlayerTank();
 
   int move();
-  Bullet * breed();
-  int getRotation();
   int getId();
 };
 

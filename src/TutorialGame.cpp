@@ -1,17 +1,18 @@
 #include "TutorialGame.hpp"
 #include "TutorialMap.hpp"
-#include "DummyTank.hpp"
+// #include "DummyTank.hpp"
 #include "PlayerTank.hpp"
-#include "Player2Tank.hpp"
-#include "AITank.hpp"
+// #include "Player2Tank.hpp"
+// #include "AITank.hpp"
 
 TutorialGame::TutorialGame(BITMAP * screen) : Game(screen)
 {
   spriter = new Spriter("/home/scony/Allegro/tank/src/sprite.bmp");
   policy = new PolicyManager("/home/scony/Allegro/tank/src/policy.dat");
   TutorialMap * tmap = new TutorialMap(spriter,policy,"/home/scony/Allegro/tank/src/tiny.map");
-  tmap->addTank(new PlayerTank(spriter));
-  tmap->addTank(new Player2Tank(spriter));
+  player1 = new PlayerTank(spriter,1,1,1,100,100,1000,1000,0,10);
+  tmap->addTank(player1);
+  // tmap->addTank(new Player2Tank(spriter));
   // tmap->addTank(new AITank(spriter));
   map = tmap;
 }
@@ -30,6 +31,10 @@ void TutorialGame::move()
 
 void TutorialGame::draw()
 {
+  // debug
+  if(rand() % 10 > 8)
+    set_window_title(player1->toString().c_str());
+
   BITMAP * buff = map->getBuffer();
   Point focus = map->getFocus();
 

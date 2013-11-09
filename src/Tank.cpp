@@ -1,18 +1,80 @@
+#include <sstream>
+
 #include "Tank.hpp"
+#include "LineBullet.hpp"
+
+using namespace std;
 
 Tank::Tank(Spriter * spriter)
 {
   this->spriter = spriter;
   buffer = NULL;
+
+  bullet = NULL;
+  rotation = 1;
+  offset = 0;
+
+  hp = 1;
+  hpMax = 1;
+  ammo = 10;
+  ammoMax = 10;
+  fuel = 100;
+  fuelMax = 100;
+  reload = 0;
+  reloadMax = 10;
+}
+
+Tank::Tank(Spriter * spriter, int rotation,
+	   int hp, int hpMax,
+	   int ammo, int ammoMax,
+	   int fuel, int fuelMax,
+	   int reload, int reloadMax)
+{
+  this->spriter = spriter;
+  buffer = NULL;
+
+  bullet = NULL;
+  this->rotation = rotation;
+  offset = 0;
+
+  this->hp = hp;
+  this->hpMax = hpMax;
+  this->ammo = ammo;
+  this->ammoMax = ammoMax;
+  this->fuel = fuel;
+  this->fuelMax = fuelMax;
+  this->reload = reload;
+  this->reloadMax = reloadMax;
 }
 
 Tank::~Tank()
 {
 }
 
-Bullet * Tank::breed()
+void Tank::update()
 {
-  return NULL;
+  reload = reload > 0 ? reload - 1 : 0;
+  offset = (offset + 1) % 2;
+}
+
+void Tank::shoot()
+{
+  if(!reload && ammo > 0)
+    {
+      bullet = new LineBullet(spriter,getRotation());
+      ammo--;
+      reload = reloadMax;
+    }
+}
+
+bool Tank::isLocked()
+{
+  return fuel ? false : true;
+}
+
+Spriter * Tank::getSpriter()
+{
+  return spriter;
 }
 
 BITMAP * Tank::getBuffer()
@@ -20,9 +82,31 @@ BITMAP * Tank::getBuffer()
   return buffer;
 }
 
-int Tank::getSize()
+Bullet * Tank::breed()
 {
-  return spriter->getTankSize();
+  if(bullet)
+    {
+      Bullet * tmp = bullet;
+      bullet = NULL;
+      return tmp;
+    }
+
+  return NULL;
+}
+
+void Tank::hurt(int power)
+{
+  hp = hp - power < 0 ? 0 : hp - power;
+}
+
+void Tank::burnFuel(int amount)
+{
+  fuel = fuel - amount < 0 ? 0 : fuel - amount;
+}
+
+int Tank::getRotation()
+{
+  return rotation;
 }
 
 int Tank::getId()
@@ -30,7 +114,20 @@ int Tank::getId()
   return 7;
 }
 
-Spriter * Tank::getSpriter()
+
+bool Tank::isDeath()
 {
-  return spriter;
+  return hp ? false : true;
+}
+
+string Tank::toString()
+{
+  ostringstream oss;
+
+  oss << "HP: " << hp << "/" << hpMax;
+  oss << " AMMO: " << ammo << "/" << ammoMax;
+  oss << " FUEL: " << fuel << "/" << fuelMax;
+  oss << " RELOAD: " << reload << "/" << reloadMax;
+
+  return oss.str();
 }

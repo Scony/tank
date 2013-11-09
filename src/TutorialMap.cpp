@@ -88,11 +88,8 @@ TutorialMap::~TutorialMap()
 
 void TutorialMap::move()
 {
-  // rest(500);
   // debug
-  char title[255];
-  sprintf(title,"%d",objects.size());
-  set_window_title(title);
+  // rest(500);
 
   // clear objects
   for(list<WrapperBox>::iterator it = objects.begin(); it != objects.end(); it++)

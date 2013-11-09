@@ -7,7 +7,6 @@ TankWrapper::TankWrapper(int x, int y, int direction, Tank * tank) :
   Wrapper(x,y,direction)
 {
   this->tank = tank;
-  forceDeath = false;
 }
 
 TankWrapper::~TankWrapper()
@@ -22,16 +21,13 @@ int TankWrapper::move()
 
 void TankWrapper::bang()
 {
-  forceDeath = true;
+  tank->hurt(1);
 }
 
 Wrapper * TankWrapper::breed()
 {
-  if(forceDeath)
-    {
-      forceDeath = false;
-      return new BangWrapper(x,y,1,new SimpleBang(tank->getSpriter()));
-    }
+  if(tank->isDeath())
+    return new BangWrapper(x,y,1,new SimpleBang(tank->getSpriter()));
 
   Bullet * bullet = tank->breed();
   if(bullet)
@@ -65,6 +61,16 @@ Wrapper * TankWrapper::breed()
   return NULL;
 }
 
+void TankWrapper::applyChanges()
+{
+  int ox = getX();
+  int oy = getY();
+
+  Wrapper::applyChanges();
+
+  tank->burnFuel(abs(ox-getX())+abs(oy-getY()));
+}
+
 Tank * TankWrapper::getTank()
 {
   return tank;
@@ -75,12 +81,12 @@ BITMAP * TankWrapper::getBuffer()
   return tank->getBuffer();
 }
 
-int TankWrapper::getSize()	// todo
+int TankWrapper::getSize()
 {
   return 32;
 }
 
-int TankWrapper::getSpeed()	// todo
+int TankWrapper::getSpeed()
 {
   return 1;
 }
@@ -100,17 +106,17 @@ int TankWrapper::getPower()
   return 0;
 }
 
-bool TankWrapper::isVisible()	// todo
+bool TankWrapper::isVisible()
 {
   return true;
 }
 
-bool TankWrapper::isDeath()	// todo
+bool TankWrapper::isDeath()
 {
-  return false;
+  return tank->isDeath();
 }
 
-bool TankWrapper::isBangMaker() // todo
+bool TankWrapper::isBangMaker()
 {
   return false;
 }

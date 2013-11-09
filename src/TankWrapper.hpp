@@ -7,7 +7,6 @@
 class TankWrapper : public Wrapper
 {
   Tank * tank;
-  bool forceDeath;
 public:
   TankWrapper(int x, int y, int direction, Tank * tank);
   ~TankWrapper();
@@ -15,6 +14,8 @@ public:
   int move();
   void bang();
   Wrapper * breed();
+
+  void applyChanges();
 
   Tank * getTank();
   BITMAP * getBuffer();
