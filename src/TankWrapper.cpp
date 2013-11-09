@@ -1,3 +1,5 @@
+#include <math.h>
+
 #include "TankWrapper.hpp"
 #include "BulletWrapper.hpp"
 #include "BangWrapper.hpp"
@@ -36,22 +38,26 @@ Wrapper * TankWrapper::breed()
       int by;
       int bdirection = tank->getRotation();
 
+      // correction to avoid seppuku
+      int cx = round((double)x / 16) * 16;
+      int cy = round((double)y / 16) * 16;
+
       switch(bdirection)	// todo: hardcodes
 	{
 	case 1:
 	  bx = x + ((getSize() - 8) / 2);
-	  by = y - 8;
+	  by = (cy < y ? cy : y) - 8;
 	  break;
 	case 2:
-	  bx = x + getSize();
+	  bx = (cx > x ? cx : x) + getSize();
 	  by = y + ((getSize() - 8) / 2);
 	  break;
 	case 3:
 	  bx = x + ((getSize() - 8) / 2);
-	  by = y + getSize();
+	  by = (cy > y ? cy : y) + getSize();
 	  break;
 	case 4:
-	  bx = x - 8;
+	  bx = (cx < x ? cx : x) - 8;
 	  by = y + ((getSize() - 8) / 2);
 	}
 
