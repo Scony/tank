@@ -4,7 +4,24 @@ AITank::AITank(Spriter * spriter) :
   Tank(spriter)
 {
   buffer = spriter->getTank(0);
-  offset = 0;
+
+  intent = 0;
+  length = 0;
+}
+
+AITank::AITank(Spriter * spriter, int rotation,
+	       int hp, int hpMax,
+	       int ammo, int ammoMax,
+	       int fuel, int fuelMax,
+	       int reload, int reloadMax) :
+  Tank(spriter,rotation,
+       hp,hpMax,
+       ammo,ammoMax,
+       fuel,fuelMax,
+       reload,reloadMax)
+{
+  buffer = spriter->getTank(0);
+
   intent = 0;
   length = 0;
 }
@@ -15,28 +32,40 @@ AITank::~AITank()
 
 int AITank::move()
 {
-  offset = (offset + 1) % 2;
-  if(length-- == 0)
+  update();
+
+  if(!length--)
     {
       intent = rand() % 5;
-      length = rand() % 50;
+      length = rand() % 70;
     }
 
   switch(intent)
     {
     case 1:
       buffer = spriter->getTank(0+offset);
-      return 1;
+      rotation = 1;
+      break;
     case 2:
       buffer = spriter->getTank(2+offset);
-      return 2;
+      rotation = 2;
+      break;
     case 3:
       buffer = spriter->getTank(4+offset);
-      return 3;
+      rotation = 3;
+      break;
     case 4:
       buffer = spriter->getTank(6+offset);
-      return 4;
+      rotation = 4;
     }
 
-  return 0;
+  if(rand() % 100 > 97)
+    shoot();
+
+  return intent;
+}
+
+int AITank::getId()
+{
+  return 14;
 }
