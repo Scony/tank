@@ -13,9 +13,8 @@ TutorialGame::TutorialGame(BITMAP * screen) : Game(screen)
   player1 = new PlayerTank(spriter,1,1,1,100,100,1000,1000,0,10);
   tmap->addTank(player1);
   tmap->addTank(new Player2Tank(spriter,1,1,1,100,100,1000,1000,0,10));
-  tmap->addTank(new AITank(spriter,1,1,1,100,100,1000,1000,0,10));
-  tmap->addTank(new AITank(spriter,1,1,1,100,100,1000,1000,0,10));
-  tmap->addTank(new AITank(spriter,1,1,1,100,100,1000,1000,0,10));
+  for(int i = 0; i < 40; i++)
+    tmap->addTank(new AITank(spriter,1,1,1,100,100,1000,1000,0,10));
   map = tmap;
 }
 

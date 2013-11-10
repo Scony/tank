@@ -13,6 +13,7 @@ Tank::Tank(Spriter * spriter)
   bullet = NULL;
   rotation = 1;
   offset = 0;
+  burn = false;
 
   hp = 1;
   hpMax = 1;
@@ -36,6 +37,7 @@ Tank::Tank(Spriter * spriter, int rotation,
   bullet = NULL;
   this->rotation = rotation;
   offset = 0;
+  burn = false;
 
   this->hp = hp;
   this->hpMax = hpMax;
@@ -118,6 +120,11 @@ int Tank::getId()
 bool Tank::isDeath()
 {
   return hp ? false : true;
+}
+
+bool Tank::isBurning()
+{
+  return burn;
 }
 
 string Tank::toString()

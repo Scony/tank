@@ -25,6 +25,7 @@ protected:
   Bullet * bullet;
   int rotation;
   int offset;
+  bool burn;
 
   void update();
   void shoot();
@@ -51,6 +52,7 @@ public:
   virtual int getId();
 
   bool isDeath();
+  bool isBurning();
 
   std::string toString();
 };

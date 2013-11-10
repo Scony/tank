@@ -5,6 +5,7 @@
 
 class WreckTank : public Tank
 {
+  bool consumed;
 public:
   WreckTank(Spriter * spriter);
   ~WreckTank();
