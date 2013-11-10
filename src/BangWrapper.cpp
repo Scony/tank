@@ -1,22 +1,22 @@
 #include "BangWrapper.hpp"
 
-BangWrapper::BangWrapper(int x, int y, int direction, Bang * bng) :
+BangWrapper::BangWrapper(int x, int y, int direction, Bang * bang) :
   Wrapper(x,y,direction)
 {
-  this->bng = bng;
+  this->bang = bang;
 }
 
 BangWrapper::~BangWrapper()
 {
-  delete bng;
+  delete bang;
 }
 
 int BangWrapper::move()
 {
-  return bng->move();
+  return bang->move();
 }
 
-void BangWrapper::bang()
+void BangWrapper::perform(int key, int value)
 {
 }
 
@@ -27,12 +27,12 @@ Wrapper * BangWrapper::breed()
 
 Bang * BangWrapper::getBang()
 {
-  return bng;
+  return bang;
 }
 
 BITMAP * BangWrapper::getBuffer()
 {
-  return bng->getBuffer();
+  return bang->getBuffer();
 }
 
 int BangWrapper::getSize()	// todo
@@ -47,7 +47,7 @@ int BangWrapper::getSpeed()
 
 int BangWrapper::getId()
 {
-  return bng->getId();
+  return bang->getId();
 }
 
 int BangWrapper::getResistance()
@@ -67,7 +67,7 @@ bool BangWrapper::isVisible()
 
 bool BangWrapper::isDeath()
 {
-  return bng->isDeath();
+  return bang->isDeath();
 }
 
 bool BangWrapper::isBangMaker()

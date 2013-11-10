@@ -182,7 +182,7 @@ void TutorialMap::move()
       if(pw->getNewX() < 0 || pw->getNewX() + pw->getSize() > width * 16 || pw->getNewY() < 0 || pw->getNewY() + pw->getSize() > height * 16)
 	{
 	  if(pw->isBangMaker())
-	    pw->bang();
+	    pw->perform(0,0);
 	  else
 	    pw->resetChanges();
 	}
@@ -207,7 +207,7 @@ void TutorialMap::move()
 	    {
 	      if(pw->isBangMaker())
 		{
-		  pw->bang();
+		  pw->perform(0,0);
 		  if(terrains[i][j]->getResistance() < pw->getPower())
 		    {
 		      // todo: put into function
@@ -255,24 +255,24 @@ void TutorialMap::move()
   	      {
 		if(pw1->isBangMaker() && pw2->isBangMaker())
 		  {
-		    pw1->bang();
-		    pw2->bang();
+		    pw1->perform(0,0);
+		    pw2->perform(0,0);
 		    continue;
 		  }
 
 		if(pw1->isBangMaker())
 		  {
-		    pw1->bang();
+		    pw1->perform(0,0);
 		    if(pw1->getPower() > pw2->getResistance())
-		      pw2->bang();
+		      pw2->perform(0,0);
 		    continue;
 		  }
 
 		if(pw2->isBangMaker())
 		  {
-		    pw2->bang();
+		    pw2->perform(0,0);
 		    if(pw2->getPower() > pw1->getResistance())
-		      pw1->bang();
+		      pw1->perform(0,0);
 		    continue;
 		  }
 

@@ -14,7 +14,7 @@ public:
   ~BulletWrapper();
 
   int move();
-  void bang();
+  void perform(int key, int value);
   Wrapper * breed();
 
   Bullet * getBullet();

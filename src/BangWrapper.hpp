@@ -6,13 +6,13 @@
 
 class BangWrapper : public Wrapper
 {
-  Bang * bng;
+  Bang * bang;
 public:
-  BangWrapper(int x, int y, int direction, Bang * bng);
+  BangWrapper(int x, int y, int direction, Bang * bang);
   ~BangWrapper();
 
   int move();
-  void bang();
+  void perform(int key, int value);
   Wrapper * breed();
 
   Bang * getBang();

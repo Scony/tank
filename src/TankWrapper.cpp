@@ -22,9 +22,10 @@ int TankWrapper::move()
   return tank->move();
 }
 
-void TankWrapper::bang()
+void TankWrapper::perform(int key, int value)
 {
   tank->hurt(1);
+  // todo consume
 }
 
 Wrapper * TankWrapper::breed()

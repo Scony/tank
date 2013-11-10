@@ -20,7 +20,7 @@ int BulletWrapper::move()
   return bullet->move();
 }
 
-void BulletWrapper::bang()
+void BulletWrapper::perform(int key, int value)
 {
   visible = false;
   death = true;

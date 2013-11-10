@@ -24,7 +24,7 @@ public:
   virtual bool isBangMaker() = 0;
 
   virtual int move() = 0;
-  virtual void bang() = 0;
+  virtual void perform(int key, int value) = 0;
   virtual Wrapper * breed() = 0;
 
   void resetChanges();

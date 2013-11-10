@@ -12,7 +12,7 @@ public:
   ~TankWrapper();
 
   int move();
-  void bang();
+  void perform(int key, int value);
   Wrapper * breed();
 
   void applyChanges();
