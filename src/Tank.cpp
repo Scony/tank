@@ -106,6 +106,16 @@ void Tank::burnFuel(int amount)
   fuel = fuel - amount < 0 ? 0 : fuel - amount;
 }
 
+void Tank::addAmmo(int amount)
+{
+  ammo = ammo + amount > ammoMax ? ammoMax : ammo + amount;
+}
+
+void Tank::addFuel(int amount)
+{
+  fuel = fuel + amount > fuelMax ? fuelMax : fuel + amount;
+}
+
 int Tank::getRotation()
 {
   return rotation;

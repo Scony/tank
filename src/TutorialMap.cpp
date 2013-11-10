@@ -9,6 +9,9 @@
 #include "BushTerrain.hpp"
 #include "WaterTerrain.hpp"
 #include "TankWrapper.hpp"
+#include "ConsumableWrapper.hpp"
+#include "Ammo.hpp"
+#include "Fuel.hpp"
 
 using namespace std;
 
@@ -61,6 +64,10 @@ TutorialMap::TutorialMap(Spriter * spriter, PolicyManager * policy, string fileN
       }
 
   in.close();
+
+  // tmp
+  objects.push_back(WrapperBox(new ConsumableWrapper(0,0,1,new Ammo(spriter,50))));
+  objects.push_back(WrapperBox(new ConsumableWrapper(32,0,1,new Fuel(spriter,500))));
 
   // initial draw
   clear_to_color(buffer,makecol(0,0,0));
@@ -253,26 +260,10 @@ void TutorialMap::move()
 
   	    if(detectRectsCollision(x11,y11,x12,y12,x21,y21,x22,y22))
   	      {
-		if(pw1->isBangMaker() && pw2->isBangMaker())
+		if(pw1->isBangMaker() || pw2->isBangMaker())
 		  {
-		    pw1->perform(0,0);
-		    pw2->perform(0,0);
-		    continue;
-		  }
-
-		if(pw1->isBangMaker())
-		  {
-		    pw1->perform(0,0);
-		    if(pw1->getPower() > pw2->getResistance())
-		      pw2->perform(0,0);
-		    continue;
-		  }
-
-		if(pw2->isBangMaker())
-		  {
-		    pw2->perform(0,0);
-		    if(pw2->getPower() > pw1->getResistance())
-		      pw1->perform(0,0);
+		    pw1->perform(pw2->getId(),pw2->getPower());
+		    pw2->perform(pw1->getId(),pw1->getPower());
 		    continue;
 		  }
 

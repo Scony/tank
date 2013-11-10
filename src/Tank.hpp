@@ -48,6 +48,9 @@ public:
   void hurt(int power);
   void burnFuel(int amount);
 
+  void addAmmo(int amount);
+  void addFuel(int amount);
+
   int getRotation();
   virtual int getId();
 

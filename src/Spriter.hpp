@@ -14,6 +14,7 @@ protected:
   BITMAP * bullet[4];
   BITMAP * consumable[2];
   BITMAP * wreck;
+  BITMAP * blank;
 public:
   Spriter(std::string path);
   virtual ~Spriter();
@@ -22,7 +23,9 @@ public:
   virtual BITMAP * getTank(int kind, int index);
   virtual BITMAP * getBullet(int index);
   virtual BITMAP * getBang(int index);
+  virtual BITMAP * getConsumable(int index);
   virtual BITMAP * getWreck();
+  virtual BITMAP * getBlank();
   virtual int getTankSize();
   virtual int getTerrainSize();
   virtual int getBangSize();

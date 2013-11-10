@@ -9,7 +9,6 @@ class Bang
 {
 protected:
   Spriter * spriter;
-
   BITMAP * buffer;
 public:
   Bang(Spriter * spriter);

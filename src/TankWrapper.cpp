@@ -24,8 +24,17 @@ int TankWrapper::move()
 
 void TankWrapper::perform(int key, int value)
 {
-  tank->hurt(1);
-  // todo consume
+  switch(key)
+    {
+    case 17:
+      tank->addAmmo(value);
+      break;
+    case 18:
+      tank->addFuel(value);
+      break;
+    default:
+      tank->hurt(value);
+    }
 }
 
 Wrapper * TankWrapper::breed()

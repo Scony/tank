@@ -61,9 +61,20 @@ Spriter::Spriter(std::string path)
       blit(sprite,bullet[i],i*8,352,0,0,8,8);
     }
 
+  // consumable
+  for(int i = 0; i < 2; i++)
+    {
+      consumable[i] = create_bitmap(32,32);
+      blit(sprite,consumable[i],128,360+i*32,0,0,32,32);
+    }
+
   // wreck
   wreck = create_bitmap(32,32);
   blit(sprite,wreck,64,304,0,0,32,32);
+
+  // blank
+  blank = create_bitmap(32,32);
+  clear_to_color(blank,makecol(0,0,0));
 }
 
 Spriter::~Spriter()
@@ -116,9 +127,21 @@ BITMAP * Spriter::getBang(int index)
   return bang[index];
 }
 
+BITMAP * Spriter::getConsumable(int index)
+{
+  if(index >= 2 || index < 0)
+    throw new Exception("Consumable index out of bounds");
+  return consumable[index];
+}
+
 BITMAP * Spriter::getWreck()
 {
   return wreck;
+}
+
+BITMAP * Spriter::getBlank()
+{
+  return blank;
 }
 
 int Spriter::getTankSize()
