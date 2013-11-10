@@ -362,8 +362,6 @@ Point TutorialMap::getFocus()
 
 void TutorialMap::addTank(Tank * tank)
 {
-  // todo: check if randed spot is not in collision with tank/bullet in move
-
   bool spotMap[width][height];
 
   for(int i = 0; i < width; i++)
@@ -388,6 +386,31 @@ void TutorialMap::addTank(Tank * tank)
 
 	if(spot)
 	  {
+	    // check for object collisions
+	    bool collision = false;
+	    for(list<WrapperBox>::iterator it = objects.begin(); it != objects.end(); it++)
+	      {
+		Wrapper * pw = it->getWrapper();
+
+		int x11 = pw->getX();
+		int y11 = pw->getY();
+		int x12 = pw->getX() + pw->getSize() - 1;
+		int y12 = pw->getY() + pw->getSize() - 1;
+
+		int x21 = i * 16;
+		int y21 = j * 16;
+		int x22 = i * 16 + 32 - 1;
+		int y22 = j * 16 + 32 - 1;
+
+		if(detectRectsCollision(x11,y11,x12,y12,x21,y21,x22,y22))
+		  {
+		    collision = true;
+		    break;
+		  }
+	      }
+	    if(collision)
+	      continue;
+
 	    spots.push_back(Point(i*16,j*16));
 	    for(int ii = 0; ii < 2; ii++)
 	      for(int jj = 0; jj < 2; jj++)
@@ -398,7 +421,7 @@ void TutorialMap::addTank(Tank * tank)
   if(!spots.size())
     throw new Exception("Can not find spawn spot");
 
-  // before rand, delete spots that colliding with MapObjects
+  // before rand, delete spots that colliding with MapObjects todo?
 
   int rnd = rand() % spots.size();
   list<Point>::iterator it = spots.begin();

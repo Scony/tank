@@ -3,7 +3,7 @@
 Player2Tank::Player2Tank(Spriter * spriter) :
   Tank(spriter)
 {
-  buffer = spriter->getTank(0);
+  buffer = spriter->getTank(1,0);
 }
 
 Player2Tank::Player2Tank(Spriter * spriter, int rotation,
@@ -17,7 +17,7 @@ Tank(spriter,rotation,
      fuel,fuelMax,
      reload,reloadMax)
 {
-  buffer = spriter->getTank(0);
+  buffer = spriter->getTank(1,0);
 }
 
 Player2Tank::~Player2Tank()
@@ -34,25 +34,25 @@ int Player2Tank::move()
     {
       if(key[KEY_W])
 	{
-	  buffer = spriter->getTank(0+offset);
+	  buffer = spriter->getTank(1,0+offset);
 	  rotation = 1;
 	  intent = 1;
 	}
       if(key[KEY_D])
 	{
-	  buffer = spriter->getTank(2+offset);
+	  buffer = spriter->getTank(1,2+offset);
 	  rotation = 2;
 	  intent = 2;
 	}
       if(key[KEY_S])
 	{
-	  buffer = spriter->getTank(4+offset);
+	  buffer = spriter->getTank(1,4+offset);
 	  rotation = 3;
 	  intent = 3;
 	}
       if(key[KEY_A])
 	{
-	  buffer = spriter->getTank(6+offset);
+	  buffer = spriter->getTank(1,6+offset);
 	  rotation = 4;
 	  intent = 4;
 	}

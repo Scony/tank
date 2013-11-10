@@ -21,14 +21,30 @@ Spriter::Spriter(std::string path)
       blit(sprite,terrain[i],0,256+i*16,0,0,16,16);
     }
 
-  // tank
+  // tanks
   for(int i = 0; i < 8; i++)
     {
-      tank[i] = create_bitmap(32,32);
+      tank[0][i] = create_bitmap(32,32);
       if(i % 2)
-	blit(sprite,tank[i],32,i/2*32,0,0,32,32);
+	blit(sprite,tank[0][i],32,i/2*32,0,0,32,32);
       else
-	blit(sprite,tank[i],0,i/2*32,0,0,32,32);
+	blit(sprite,tank[0][i],0,i/2*32,0,0,32,32);
+    }
+  for(int i = 0; i < 8; i++)
+    {
+      tank[1][i] = create_bitmap(32,32);
+      if(i % 2)
+	blit(sprite,tank[1][i],32,i/2*32+128,0,0,32,32);
+      else
+	blit(sprite,tank[1][i],0,i/2*32+128,0,0,32,32);
+    }
+  for(int i = 0; i < 8; i++)
+    {
+      tank[2][i] = create_bitmap(32,32);
+      if(i % 2)
+	blit(sprite,tank[2][i],32,i/2*32+424,0,0,32,32);
+      else
+	blit(sprite,tank[2][i],0,i/2*32+424,0,0,32,32);
     }
 
   // bang
@@ -44,6 +60,10 @@ Spriter::Spriter(std::string path)
       bullet[i] = create_bitmap(8,8);
       blit(sprite,bullet[i],i*8,352,0,0,8,8);
     }
+
+  // wreck
+  wreck = create_bitmap(32,32);
+  blit(sprite,wreck,64,304,0,0,32,32);
 }
 
 Spriter::~Spriter()
@@ -54,8 +74,9 @@ Spriter::~Spriter()
       destroy_bitmap(terrain[i]);
       destroy_bitmap(bullet[i]);
     }
-  for(int i = 0; i < 8; i++)
-    destroy_bitmap(tank[i]);
+  for(int j = 0; j < 3; j++)
+    for(int i = 0; i < 8; i++)
+      destroy_bitmap(tank[j][i]);
   for(int i = 0; i < 3; i++)
     destroy_bitmap(bang[i]);
 }
@@ -72,11 +93,13 @@ BITMAP * Spriter::getTerrain(int index)
   return terrain[index];
 }
 
-BITMAP * Spriter::getTank(int index)
+BITMAP * Spriter::getTank(int kind, int index)
 {
   if(index >= 8 || index < 0)
     throw new Exception("Tank index out of bounds");
-  return tank[index];
+  if(kind < 0 || kind > 2)
+    throw new Exception("Tank kind out of bounds");
+  return tank[kind][index];
 }
 
 BITMAP * Spriter::getBullet(int index)
@@ -91,6 +114,11 @@ BITMAP * Spriter::getBang(int index)
   if(index >= 3 || index < 0)
     throw new Exception("Bang index out of bounds");
   return bang[index];
+}
+
+BITMAP * Spriter::getWreck()
+{
+  return wreck;
 }
 
 int Spriter::getTankSize()

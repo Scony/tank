@@ -2,8 +2,9 @@
 
 #include "TankWrapper.hpp"
 #include "BulletWrapper.hpp"
-#include "BangWrapper.hpp"
-#include "SimpleBang.hpp"
+// #include "BangWrapper.hpp"
+// #include "SimpleBang.hpp"
+#include "WreckTank.hpp"
 
 TankWrapper::TankWrapper(int x, int y, int direction, Tank * tank) :
   Wrapper(x,y,direction)
@@ -29,7 +30,8 @@ void TankWrapper::bang()
 Wrapper * TankWrapper::breed()
 {
   if(tank->isDeath())
-    return new BangWrapper(x,y,1,new SimpleBang(tank->getSpriter()));
+    return new TankWrapper(x,y,1,new WreckTank(tank->getSpriter()));
+    // return new BangWrapper(x,y,1,new SimpleBang(tank->getSpriter()));
 
   Bullet * bullet = tank->breed();
   if(bullet)
