@@ -1,8 +1,8 @@
 #include <iostream>
 
 #include "Exception.hpp"
-#include "Game.hpp"
-#include "TutorialGame.hpp"
+#include "Mode.hpp"
+#include "TutorialMode.hpp"
 
 #define WINDOW_WIDTH 800
 #define WINDOW_HEIGHT 608
@@ -41,7 +41,7 @@ int main()
 
   try
     {
-      Game * game = new TutorialGame(screen);
+      Mode * game = new TutorialMode(screen);
 
       while(!key[KEY_ESC] && !close_button)
 	{

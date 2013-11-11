@@ -49,11 +49,6 @@ int ConsumableWrapper::getId()
   return consumable->getId();
 }
 
-int ConsumableWrapper::getResistance()
-{
-  return 0;
-}
-
 int ConsumableWrapper::getPower()
 {
   return consumable->consume();

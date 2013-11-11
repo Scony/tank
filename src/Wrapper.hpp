@@ -37,7 +37,6 @@ public:
   virtual int getSpeed() = 0;
   virtual BITMAP * getBuffer() = 0;
   virtual int getId() = 0;
-  virtual int getResistance() = 0;
   virtual int getPower() = 0;
 
   int getNewX();

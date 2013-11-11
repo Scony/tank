@@ -117,11 +117,6 @@ int TankWrapper::getId()
   return tank->getId();
 }
 
-int TankWrapper::getResistance()
-{
-  return 0;
-}
-
 int TankWrapper::getPower()
 {
   return 0;

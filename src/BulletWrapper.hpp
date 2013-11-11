@@ -22,7 +22,6 @@ public:
   int getSize();
   int getSpeed();
   int getId();
-  int getResistance();
   int getPower();
 
   bool isVisible();

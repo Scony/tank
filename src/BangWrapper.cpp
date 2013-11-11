@@ -50,11 +50,6 @@ int BangWrapper::getId()
   return bang->getId();
 }
 
-int BangWrapper::getResistance()
-{
-  return 0;
-}
-
 int BangWrapper::getPower()
 {
   return 0;

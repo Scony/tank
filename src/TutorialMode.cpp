@@ -1,10 +1,10 @@
-#include "TutorialGame.hpp"
+#include "TutorialMode.hpp"
 #include "TutorialMap.hpp"
 #include "PlayerTank.hpp"
 #include "Player2Tank.hpp"
 #include "AITank.hpp"
 
-TutorialGame::TutorialGame(BITMAP * screen) : Game(screen)
+TutorialMode::TutorialMode(BITMAP * screen) : Mode(screen)
 {
   spriter = new Spriter("/home/scony/Allegro/tank/src/sprite.bmp");
   policy = new PolicyManager("/home/scony/Allegro/tank/src/policy.dat");
@@ -19,19 +19,19 @@ TutorialGame::TutorialGame(BITMAP * screen) : Game(screen)
   map = tmap;
 }
 
-TutorialGame::~TutorialGame()
+TutorialMode::~TutorialMode()
 {
   delete map;
   delete policy;
   delete spriter;
 }
 
-void TutorialGame::move()
+void TutorialMode::move()
 {
   map->move();
 }
 
-void TutorialGame::draw()
+void TutorialMode::draw()
 {
   // debug todo
   if(player1 && player1->isDeath())

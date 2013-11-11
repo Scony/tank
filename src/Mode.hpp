@@ -1,15 +1,15 @@
-#ifndef GAME_HPP
-#define GAME_HPP
+#ifndef MODE_HPP
+#define MODE_HPP
 
 #include <allegro.h>
 
-class Game
+class Mode
 {
 protected:
   BITMAP * screen;
 public:
-  Game(BITMAP * screen);
-  virtual ~Game();
+  Mode(BITMAP * screen);
+  virtual ~Mode();
 
   virtual void move() = 0;
   virtual void draw() = 0;
