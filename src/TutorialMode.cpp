@@ -11,10 +11,10 @@ TutorialMode::TutorialMode(BITMAP * screen) : Mode(screen)
   TutorialMap * tmap = new TutorialMap(spriter,policy,"/home/scony/Allegro/tank/src/medium.map");
 
   player1 = new PlayerTank(spriter,1,1,1,100,100,1000,1000,0,10);
-  tmap->addTank(player1);
-  tmap->addTank(new Player2Tank(spriter,1,1,1,100,100,1000,1000,0,10));
+  tmap->addTankS(player1);
+  tmap->addTankS(new Player2Tank(spriter,1,1,1,100,100,1000,1000,0,10));
   for(int i = 0; i < 2; i++)
-    tmap->addTank(new AITank(spriter,1,1,1,100,100,1000,1000,0,10));
+    tmap->addTankS(new AITank(spriter,1,1,1,100,100,1000,1000,0,10));
 
   map = tmap;
 }

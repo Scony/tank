@@ -68,22 +68,33 @@ TutorialMap::TutorialMap(Spriter * spriter, PolicyManager * policy, string fileN
 
   for(int i = 0; i < consumables; i++)
     {
-      int x;
-      int y;
+      int a;
+      int b;
       int kind;
       int amount;
-      in >> x >> y >> kind >> amount;
+      in >> a >> b >> kind >> amount;
       switch(kind)
 	{
 	case 1:
-	  objects.push_back(WrapperBox(new ConsumableWrapper(x*16,y*16,1,new Ammo(spriter,amount))));
+	  objects.push_back(WrapperBox(new ConsumableWrapper(a*16,b*16,1,new Ammo(spriter,amount))));
 	  break;
 	case 2:
-	  objects.push_back(WrapperBox(new ConsumableWrapper(x*16,y*16,1,new Fuel(spriter,amount))));
+	  objects.push_back(WrapperBox(new ConsumableWrapper(a*16,b*16,1,new Fuel(spriter,amount))));
 	  break;
 	default:
 	  ;
 	}
+    }
+
+  int spots;
+  in >> spots;
+
+  for(int i = 0; i < spots; i++)
+    {
+      int a;
+      int b;
+      in >> a >> b;
+      this->spots.push_back(Point(a*16,b*16));
     }
 
   in.close();
@@ -370,6 +381,17 @@ Point TutorialMap::getFocus()
   return Point(pw->getX() + 16, pw->getY() + 16);
 }
 
+void TutorialMap::addTankS(Tank * tank)
+{
+  if(!spots.size())
+    throw new Exception("All spots expired");
+
+  Point p = spots.front();
+  spots.pop_front();
+
+  objects.push_back(WrapperBox(new TankWrapper(p.getX(),p.getY(),tank->getRotation(),tank)));
+}
+
 void TutorialMap::addTank(Tank * tank)
 {
   bool spotMap[width][height];
@@ -439,7 +461,7 @@ void TutorialMap::addTank(Tank * tank)
   for(int i = 0; i < rnd; i++)
     it++;
 
-  objects.push_back(WrapperBox(new TankWrapper(it->getX(),it->getY(),1,tank))); // get this 1 from tank
+  objects.push_back(WrapperBox(new TankWrapper(it->getX(),it->getY(),tank->getRotation(),tank)));
 }
 
 bool TutorialMap::detectRectsCollision(int x11, int y11, int x12, int y12,

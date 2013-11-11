@@ -49,7 +49,6 @@ int main()
 	    {
 	      game->move();
 	      game->draw();
-	      // std::cout << getpixel(screen,16,16) << std::endl;
 	    }
 	}
 

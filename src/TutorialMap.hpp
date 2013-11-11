@@ -14,6 +14,7 @@ class TutorialMap : public Map
 {
   PolicyManager * policy;
   Terrain *** terrains;
+  std::list<Point> spots;
   std::list<WrapperBox> objects;
 
   bool detectRectsCollision(int x11, int y11, int x12, int y12,
@@ -24,6 +25,7 @@ public:
 
   void move();
   Point getFocus();
+  void addTankS(Tank * tank);
   void addTank(Tank * tank);
 };
 
