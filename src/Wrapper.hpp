@@ -21,7 +21,7 @@ public:
 
   virtual bool isVisible() = 0;
   virtual bool isDeath() = 0;
-  virtual bool isBangMaker() = 0;
+  virtual bool isPerformer() = 0;
 
   virtual int move() = 0;
   virtual void perform(int key, int value) = 0;

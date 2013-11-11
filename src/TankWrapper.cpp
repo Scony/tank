@@ -137,7 +137,7 @@ bool TankWrapper::isDeath()
   return tank->isDeath();
 }
 
-bool TankWrapper::isBangMaker()
+bool TankWrapper::isPerformer()
 {
   return false;
 }

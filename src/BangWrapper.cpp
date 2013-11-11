@@ -70,7 +70,7 @@ bool BangWrapper::isDeath()
   return bang->isDeath();
 }
 
-bool BangWrapper::isBangMaker()
+bool BangWrapper::isPerformer()
 {
   return false;
 }

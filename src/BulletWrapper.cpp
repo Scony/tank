@@ -82,7 +82,7 @@ bool BulletWrapper::isDeath()
   return bullet->isDeath();
 }
 
-bool BulletWrapper::isBangMaker() // todo
+bool BulletWrapper::isPerformer() // todo
 {
   return true;
 }

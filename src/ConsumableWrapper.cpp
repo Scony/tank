@@ -69,7 +69,7 @@ bool ConsumableWrapper::isDeath()
   return consumable->isDeath();
 }
 
-bool ConsumableWrapper::isBangMaker()
+bool ConsumableWrapper::isPerformer()
 {
   return true;
 }

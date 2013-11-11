@@ -188,7 +188,7 @@ void TutorialMap::move()
 
       if(pw->getNewX() < 0 || pw->getNewX() + pw->getSize() > width * 16 || pw->getNewY() < 0 || pw->getNewY() + pw->getSize() > height * 16)
 	{
-	  if(pw->isBangMaker())
+	  if(pw->isPerformer())
 	    pw->perform(0,0);
 	  else
 	    pw->resetChanges();
@@ -212,7 +212,7 @@ void TutorialMap::move()
   	  if(0 <= i && i < width && 0 <= j && j < height &&
 	     terrains[i][j] != NULL && policy->checkCollisionability(terrains[i][j]->getId(),pw->getId()))
 	    {
-	      if(pw->isBangMaker())
+	      if(pw->isPerformer())
 		{
 		  pw->perform(0,0);
 		  if(terrains[i][j]->getResistance() < pw->getPower())
@@ -260,7 +260,7 @@ void TutorialMap::move()
 
   	    if(detectRectsCollision(x11,y11,x12,y12,x21,y21,x22,y22))
   	      {
-		if(pw1->isBangMaker() || pw2->isBangMaker())
+		if(pw1->isPerformer() || pw2->isPerformer())
 		  {
 		    pw1->perform(pw2->getId(),pw2->getPower());
 		    pw2->perform(pw1->getId(),pw1->getPower());

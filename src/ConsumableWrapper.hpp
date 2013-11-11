@@ -24,7 +24,7 @@ public:
 
   bool isVisible();
   bool isDeath();
-  bool isBangMaker();
+  bool isPerformer();
 };
 
 #endif
