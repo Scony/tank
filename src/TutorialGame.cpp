@@ -1,6 +1,5 @@
 #include "TutorialGame.hpp"
 #include "TutorialMap.hpp"
-// #include "DummyTank.hpp"
 #include "PlayerTank.hpp"
 #include "Player2Tank.hpp"
 #include "AITank.hpp"
@@ -10,11 +9,13 @@ TutorialGame::TutorialGame(BITMAP * screen) : Game(screen)
   spriter = new Spriter("/home/scony/Allegro/tank/src/sprite.bmp");
   policy = new PolicyManager("/home/scony/Allegro/tank/src/policy.dat");
   TutorialMap * tmap = new TutorialMap(spriter,policy,"/home/scony/Allegro/tank/src/medium.map");
+
   player1 = new PlayerTank(spriter,1,1,1,100,100,1000,1000,0,10);
   tmap->addTank(player1);
   tmap->addTank(new Player2Tank(spriter,1,1,1,100,100,1000,1000,0,10));
-  for(int i = 0; i < 40; i++)
+  for(int i = 0; i < 2; i++)
     tmap->addTank(new AITank(spriter,1,1,1,100,100,1000,1000,0,10));
+
   map = tmap;
 }
 

@@ -63,11 +63,30 @@ TutorialMap::TutorialMap(Spriter * spriter, PolicyManager * policy, string fileN
 	  }
       }
 
-  in.close();
+  int consumables;
+  in >> consumables;
 
-  // tmp
-  objects.push_back(WrapperBox(new ConsumableWrapper(0,0,1,new Ammo(spriter,50))));
-  objects.push_back(WrapperBox(new ConsumableWrapper(32,0,1,new Fuel(spriter,500))));
+  for(int i = 0; i < consumables; i++)
+    {
+      int x;
+      int y;
+      int kind;
+      int amount;
+      in >> x >> y >> kind >> amount;
+      switch(kind)
+	{
+	case 1:
+	  objects.push_back(WrapperBox(new ConsumableWrapper(x*16,y*16,1,new Ammo(spriter,amount))));
+	  break;
+	case 2:
+	  objects.push_back(WrapperBox(new ConsumableWrapper(x*16,y*16,1,new Fuel(spriter,amount))));
+	  break;
+	default:
+	  ;
+	}
+    }
+
+  in.close();
 
   // initial draw
   clear_to_color(buffer,makecol(0,0,0));
