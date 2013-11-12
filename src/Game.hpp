@@ -12,6 +12,7 @@ class Game
   Mode * mode;
   Menu * menu;
 
+  bool done;
   bool escPressed;
 public:
   Game(BITMAP * screen);
@@ -19,6 +20,8 @@ public:
 
   void move();
   void draw();
+
+  bool isDone();
 };
 
 #endif

@@ -7,6 +7,7 @@ Game::Game(BITMAP * screen)
   mode = NULL;
   menu = new Menu(screen);
 
+  done = false;
   if(key[KEY_ESC])
     escPressed = true;
   else
@@ -42,7 +43,7 @@ void Game::move()
 	  menu->toggle();
 	  break;
 	case 1337:
-	  exit(0);		// game->exit() is true since here
+	  done = true;
 	  break;
 	}
 
@@ -69,4 +70,9 @@ void Game::draw()
       mode->draw();
       return;
     }
+}
+
+bool Game::isDone()
+{
+  return done;
 }

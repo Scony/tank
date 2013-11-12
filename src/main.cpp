@@ -45,9 +45,9 @@ int main()
     {
       Game * game = new Game(screen);
 
-      while(!close_button)
+      while(!close_button && !game->isDone())
 	{
-	  for(; speed > 0 && !close_button; speed--)
+	  for(; speed > 0 && !close_button && !game->isDone(); speed--)
 	    {
 	      game->move();
 	      game->draw();
