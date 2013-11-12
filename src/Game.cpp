@@ -4,47 +4,69 @@
 Game::Game(BITMAP * screen)
 {
   this->screen = screen;
-  mode = new TutorialMode(screen);
-  menu = true;
-  if(key[KEY_ESC])
-    flag = true;
-  else
-    flag = false;
+  mode = NULL;
+  menu = new Menu(screen);
 
-  mode->move();
-  mode->draw();
+  if(key[KEY_ESC])
+    escPressed = true;
+  else
+    escPressed = false;
 }
 
 Game::~Game()
 {
-  delete mode;
+  delete menu;
+  if(mode != NULL)
+    delete mode;
 }
 
 void Game::move()
 {
-  if(key[KEY_ESC] && !flag)
+  if(key[KEY_ESC] && !escPressed)
     {
-      flag = true;
-      menu = !menu;
+      escPressed = true;
+      menu->toggle();
     }
-  if(!key[KEY_ESC] && flag)
-    flag = false;
 
-  if(!menu)
-    mode->move();
-  else
+  if(!key[KEY_ESC] && escPressed)
+    escPressed = false;
+
+  if(menu->isOn())
     {
-      if(key[KEY_X])
-	exit(0);
-      rectfill( screen, (screen->w-200)/2, (screen->h-200)/2, (screen->w+200)/2, (screen->h+200)/2, makecol( 255, 150, 0 ) );
-      textout_ex( screen, font, "Witaj w Allegro !", (screen->w-200)/2+20, (screen->h-200)/2+20, makecol( 255, 0, 255 ), - 1 );
-      textout_ex( screen, font, "Witaj w Allegro !", (screen->w-200)/2+20, (screen->h-200)/2+50, makecol( 255, 0, 255 ), makecol( 255, 255, 255 ) );
-      textout_ex( screen, font, "Witaj w Allegro !", (screen->w-200)/2+20, (screen->h-200)/2+80, makecol( 255, 0, 255 ), - 1 );
+      menu->move();
+
+      switch(menu->getOption())
+	{
+	case 1:
+	  mode = new TutorialMode(screen);
+	  menu->toggle();
+	  break;
+	case 1337:
+	  exit(0);		// game->exit() is true since here
+	  break;
+	}
+
+      return;
+    }
+
+  if(!menu->isOn() && mode != NULL)
+    {
+      mode->move();
+      return;
     }
 }
 
 void Game::draw()
 {
-  if(!menu)
-    mode->draw();
+  if(menu->isOn())
+    {
+      menu->draw();
+      return;
+    }
+
+  if(!menu->isOn() && mode != NULL)
+    {
+      mode->draw();
+      return;
+    }
 }

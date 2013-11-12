@@ -4,14 +4,15 @@
 #include <allegro.h>
 
 #include "Mode.hpp"
+#include "Menu.hpp"
 
 class Game
 {
   BITMAP * screen;
   Mode * mode;
+  Menu * menu;
 
-  bool menu;
-  bool flag;
+  bool escPressed;
 public:
   Game(BITMAP * screen);
   ~Game();
