@@ -1,11 +1,12 @@
 #include <iostream>
 
 #include "Exception.hpp"
-#include "Mode.hpp"
-#include "TutorialMode.hpp"
+#include "Game.hpp"
 
-#define WINDOW_WIDTH 800
-#define WINDOW_HEIGHT 608
+// #define WINDOW_WIDTH 800
+// #define WINDOW_HEIGHT 608
+#define WINDOW_WIDTH 320
+#define WINDOW_HEIGHT 240
 // more defines to remove hardcoded values
 
 volatile long speed = 0;
@@ -35,17 +36,18 @@ int main()
   install_int_ex(increment_speed,BPS_TO_TIMER(100));
   set_close_button_callback(close_button_handler);
   set_color_depth(32);
-  set_gfx_mode(GFX_AUTODETECT_WINDOWED,WINDOW_WIDTH,WINDOW_HEIGHT,0,0);
+  // set_gfx_mode(GFX_AUTODETECT_WINDOWED,WINDOW_WIDTH,WINDOW_HEIGHT,0,0);
+  set_gfx_mode(GFX_AUTODETECT,WINDOW_WIDTH,WINDOW_HEIGHT,0,0);
 
   clear_to_color(screen,makecol(255,255,255));
 
   try
     {
-      Mode * game = new TutorialMode(screen);
+      Game * game = new Game(screen);
 
-      while(!key[KEY_ESC] && !close_button)
+      while(!close_button)
 	{
-	  for(;speed > 0 && !key[KEY_ESC] && !close_button;speed--)
+	  for(; speed > 0 && !close_button; speed--)
 	    {
 	      game->move();
 	      game->draw();
