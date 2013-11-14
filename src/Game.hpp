@@ -12,6 +12,7 @@ class Game
   Mode * mode;
   Menu * menu;
 
+  bool menuOn;
   bool done;
   bool escPressed;
 public:

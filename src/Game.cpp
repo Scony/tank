@@ -7,6 +7,7 @@ Game::Game(BITMAP * screen)
   mode = NULL;
   menu = new Menu(screen);
 
+  menuOn = true;
   done = false;
   if(key[KEY_ESC])
     escPressed = true;
@@ -26,23 +27,25 @@ void Game::move()
   if(key[KEY_ESC] && !escPressed)
     {
       escPressed = true;
-      menu->toggle();
+      menuOn = !menuOn;
     }
 
   if(!key[KEY_ESC] && escPressed)
     escPressed = false;
 
-  if(menu->isOn())
+  if(menuOn)
     {
       menu->move();
 
       switch(menu->getOption())
 	{
+	case 0:
+	  break;
 	case 1:
 	  mode = new TutorialMode(screen);
-	  menu->toggle();
+	  menuOn = false;
 	  break;
-	case 1337:
+	default:
 	  done = true;
 	  break;
 	}
@@ -50,7 +53,7 @@ void Game::move()
       return;
     }
 
-  if(!menu->isOn() && mode != NULL)
+  if(!menuOn && mode != NULL)
     {
       mode->move();
       return;
@@ -59,13 +62,13 @@ void Game::move()
 
 void Game::draw()
 {
-  if(menu->isOn())
+  if(menuOn)
     {
       menu->draw();
       return;
     }
 
-  if(!menu->isOn() && mode != NULL)
+  if(!menuOn &&  mode != NULL)
     {
       mode->draw();
       return;

@@ -1,15 +1,21 @@
 #include "Menu.hpp"
+#include "Exception.hpp"
 
 using namespace std;
 
 Menu::Menu(BITMAP * screen)
 {
   this->screen = screen;
+  buffer = create_bitmap(200,200);
 
-  on = true;
   selected = 1;
-  option = 0;
+  approved = false;
+  upPressed = key[KEY_UP] ? true : false;
+  downPressed = key[KEY_DOWN] ? true : false;
+
   options.push_back("Test");
+  options.push_back("Nix");
+  options.push_back("Nix2");
   options.push_back("Exit");
 }
 
@@ -21,52 +27,56 @@ void Menu::move()
 {
   if(key[KEY_ENTER])
     {
-      if(selected == (int)options.size())
-	option = 1337;
-      else
-	option = selected;
+      approved = true;
     }
 
   if(key[KEY_UP])
     {
-      selected = selected - 1 < 1 ? 1 : selected - 1;
+      if(!upPressed)
+	{
+	  selected = selected - 1 < 1 ? 1 : selected - 1;
+	  upPressed = true;
+	}
     }
+  else
+    upPressed = false;
 
   if(key[KEY_DOWN])
     {
-      selected = selected + 1 > (int)options.size() ? (int)options.size() : selected + 1;
+      if(!downPressed)
+	{
+	  selected = selected + 1 > (int)options.size() ? (int)options.size() : selected + 1;
+	  downPressed = true;
+	}
     }
+  else
+    downPressed = false;
 }
 
 void Menu::draw()
 {
-  rectfill( screen, (screen->w-200)/2, (screen->h-200)/2, (screen->w+200)/2, (screen->h+200)/2, makecol( 255, 150, 0 ) );
+  clear_to_color(buffer,makecol(255,150,0));
 
   int i = 1;
   for(list<string>::iterator it = options.begin(); it != options.end(); it++)
     {
       if(i == selected)
-	textout_ex( screen, font, it->c_str(), (screen->w-200)/2+20, (screen->h-200)/2+30*i, makecol( 255, 0, 255 ), makecol( 255, 255, 255 ) );
+	textout_ex(buffer,font,it->c_str(),20,30*i,makecol(255,0,255),makecol(255,255,255));
       else
-	textout_ex( screen, font, it->c_str(), (screen->w-200)/2+20, (screen->h-200)/2+30*i, makecol( 255, 0, 255 ), -1 );
+	textout_ex(buffer,font,it->c_str(),20,30*i,makecol(255,0,255),-1);
       i++;
     }
-}
 
-void Menu::toggle()
-{
-  on = !on;
+  blit(buffer,screen,0,0,screen->w/2-100,screen->h/2-100,buffer->w,buffer->h);
 }
 
 int Menu::getOption()
 {
-  int tmp = option;
-  option = 0;
+  if(approved)
+    {
+      approved = false;
+      return selected;
+    }
 
-  return tmp;
-}
-
-bool Menu::isOn()
-{
-  return on;
+  return 0;
 }

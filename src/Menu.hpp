@@ -9,22 +9,21 @@ class Menu
 {
 protected:
   BITMAP * screen;
+  BITMAP * buffer;
 
-  bool on;
   int selected;
-  int option;
+  bool approved;
   std::list<std::string> options;
+  bool upPressed;
+  bool downPressed;
 public:
   Menu(BITMAP * screen);
   ~Menu();
 
   void move();
   void draw();
-  void toggle();
 
   int getOption();
-
-  bool isOn();
 };
 
 #endif
