@@ -20,7 +20,10 @@ main.out: $(OBJS)
 clean:
 	rm -f *~ *.o $(EXE)
 
-report:
+size:
 	wc -l *.*pp *.dat *.map
+
+todo:
+	ack-grep todo
 
 .PHONY: clean
