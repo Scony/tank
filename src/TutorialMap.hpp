@@ -25,7 +25,6 @@ public:
 
   void move();
   Point getFocus();
-  void addTankS(Tank * tank);
   void addTank(Tank * tank);
 };
 

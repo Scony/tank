@@ -12,6 +12,7 @@
 #include "ConsumableWrapper.hpp"
 #include "Ammo.hpp"
 #include "Fuel.hpp"
+#include "Configuration.hpp"
 
 using namespace std;
 
@@ -27,7 +28,8 @@ TutorialMap::TutorialMap(Spriter * spriter, PolicyManager * policy, string fileN
   in >> width;
   in >> height;
 
-  buffer = create_bitmap(width*16,height*16); // HARDCODE ! todo
+  buffer = create_bitmap(width * Configuration::getInstance()->getMedium(),
+			 height * Configuration::getInstance()->getMedium());
   if(!buffer)
     throw new Exception("Can not create bitmap");
 
@@ -76,13 +78,14 @@ TutorialMap::TutorialMap(Spriter * spriter, PolicyManager * policy, string fileN
       switch(kind)
 	{
 	case 1:
-	  objects.push_back(WrapperBox(new ConsumableWrapper(a*16,b*16,1,new Ammo(spriter,amount))));
+	  objects.push_back(WrapperBox(new ConsumableWrapper(a * Configuration::getInstance()->getMedium(),
+							     b * Configuration::getInstance()->getMedium(),
+							     1,new Ammo(spriter,amount))));
 	  break;
 	case 2:
-	  objects.push_back(WrapperBox(new ConsumableWrapper(a*16,b*16,1,new Fuel(spriter,amount))));
+	  objects.push_back(WrapperBox(new ConsumableWrapper(a * Configuration::getInstance()->getMedium(),
+							     b * Configuration::getInstance()->getMedium(),1,new Fuel(spriter,amount))));
 	  break;
-	default:
-	  ;
 	}
     }
 
@@ -94,7 +97,8 @@ TutorialMap::TutorialMap(Spriter * spriter, PolicyManager * policy, string fileN
       int a;
       int b;
       in >> a >> b;
-      this->spots.push_back(Point(a*16,b*16));
+      this->spots.push_back(Point(a * Configuration::getInstance()->getMedium(),
+				  b * Configuration::getInstance()->getMedium()));
     }
 
   in.close();
@@ -105,7 +109,12 @@ TutorialMap::TutorialMap(Spriter * spriter, PolicyManager * policy, string fileN
     for(int j = 0; j < height; j++)
       {
 	if(terrains[i][j])
-	  masked_blit(terrains[i][j]->getBuffer(),buffer,0,0,i*16,j*16,16,16);
+	  masked_blit(terrains[i][j]->getBuffer(),
+		      buffer,0,0,
+		      i * terrains[i][j]->getSize(),
+		      j * terrains[i][j]->getSize(),
+		      terrains[i][j]->getSize(),
+		      terrains[i][j]->getSize());
       }
 }
 
@@ -140,14 +149,19 @@ void TutorialMap::move()
       	       pw->getY() + pw->getSize() - 1,
       	       makecol(0,0,0));
 
-      int ix = pw->getX() / 16;
-      int iy = pw->getY() / 16;
-      int ixx = (pw->getX() + pw->getSize() - 1) / 16;
-      int iyy = (pw->getY() + pw->getSize() - 1) / 16;
+      int ix = pw->getX() / Configuration::getInstance()->getMedium();
+      int iy = pw->getY() / Configuration::getInstance()->getMedium();
+      int ixx = (pw->getX() + pw->getSize() - 1) / Configuration::getInstance()->getMedium();
+      int iyy = (pw->getY() + pw->getSize() - 1) / Configuration::getInstance()->getMedium();
       for(int i = ix; i <= ixx; i++)
       	for(int j = iy; j <= iyy; j++)
       	  if(0 <= i && i < width && 0 <= j && j < height && terrains[i][j] != NULL)
-      	    masked_blit(terrains[i][j]->getBuffer(),buffer,0,0,i*16,j*16,16,16);
+      	    masked_blit(terrains[i][j]->getBuffer(),
+			buffer,0,0,
+			i * terrains[i][j]->getSize(),
+			j * terrains[i][j]->getSize(),
+			terrains[i][j]->getSize(),
+			terrains[i][j]->getSize());
     }
 
   // handle breeds
@@ -197,8 +211,8 @@ void TutorialMap::move()
   	  }
       else
   	{
-  	  pw->setNewX(round((double)pw->getX() / 16) * 16);
-  	  pw->setNewY(round((double)pw->getY() / 16) * 16);
+  	  pw->setNewX(round((double)pw->getX() / Configuration::getInstance()->getMedium()) * Configuration::getInstance()->getMedium());
+  	  pw->setNewY(round((double)pw->getY() / Configuration::getInstance()->getMedium()) * Configuration::getInstance()->getMedium());
   	}
 
       if(intent)
@@ -213,7 +227,8 @@ void TutorialMap::move()
       if(!policy->checkCollisionability(0,pw->getId()))
 	continue;
 
-      if(pw->getNewX() < 0 || pw->getNewX() + pw->getSize() > width * 16 || pw->getNewY() < 0 || pw->getNewY() + pw->getSize() > height * 16)
+      if(pw->getNewX() < 0 || pw->getNewX() + pw->getSize() > width * Configuration::getInstance()->getMedium()
+	 || pw->getNewY() < 0 || pw->getNewY() + pw->getSize() > height * Configuration::getInstance()->getMedium())
 	{
 	  if(pw->isPerformer())
 	    pw->perform(0,0);
@@ -227,10 +242,10 @@ void TutorialMap::move()
     {
       Wrapper * pw = it->getWrapper();
 
-      int ix = pw->getNewX() / 16;
-      int iy = pw->getNewY() / 16;
-      int ixx = (pw->getNewX() + pw->getSize() - 1) / 16;
-      int iyy = (pw->getNewY() + pw->getSize() - 1) / 16;
+      int ix = pw->getNewX() / Configuration::getInstance()->getMedium();
+      int iy = pw->getNewY() / Configuration::getInstance()->getMedium();
+      int ixx = (pw->getNewX() + pw->getSize() - 1) / Configuration::getInstance()->getMedium();
+      int iyy = (pw->getNewY() + pw->getSize() - 1) / Configuration::getInstance()->getMedium();
 
       bool collision = false;
 
@@ -246,13 +261,13 @@ void TutorialMap::move()
 		    {
 		      // todo: put into function
 		      delete terrains[i][j];
-		      terrains[i][j] = NULL;
 		      rectfill(buffer,
-			       i*16,
-			       j*16,
-			       i*16 + 16 - 1,
-			       j*16 + 16 - 1,
+			       i * terrains[i][j]->getSize(),
+			       j * terrains[i][j]->getSize(),
+			       i * terrains[i][j]->getSize() + terrains[i][j]->getSize() - 1,
+			       j * terrains[i][j]->getSize() + terrains[i][j]->getSize() - 1,
 			       makecol(0,0,0));
+		      terrains[i][j] = NULL;
 		    }
 		}
 
@@ -345,7 +360,7 @@ void TutorialMap::move()
     }
 
   // redraw
-  // if needed then todo: complex overlay algorithm
+  // if needed then make complex overlay algorithm
   for(list<WrapperBox>::iterator it = objects.begin(); it != objects.end(); it++)
     {
       Wrapper * pw = it->getWrapper();
@@ -355,15 +370,20 @@ void TutorialMap::move()
 
       masked_blit(pw->getBuffer(),buffer,0,0,pw->getX(),pw->getY(),pw->getSize(),pw->getSize());
 
-      int ix = pw->getX() / 16;
-      int iy = pw->getY() / 16;
-      int ixx = (pw->getX() + pw->getSize() - 1) / 16;
-      int iyy = (pw->getY() + pw->getSize() - 1) / 16;
+      int ix = pw->getX() / Configuration::getInstance()->getMedium();
+      int iy = pw->getY() / Configuration::getInstance()->getMedium();
+      int ixx = (pw->getX() + pw->getSize() - 1) / Configuration::getInstance()->getMedium();
+      int iyy = (pw->getY() + pw->getSize() - 1) / Configuration::getInstance()->getMedium();
       for(int i = ix; i <= ixx; i++)
       	for(int j = iy; j <= iyy; j++)
       	  if(0 <= i && i < width && 0 <= j && j < height &&
       	     terrains[i][j] != NULL && policy->checkOverlapability(terrains[i][j]->getId(),pw->getId()))
-      	    masked_blit(terrains[i][j]->getBuffer(),buffer,0,0,i*16,j*16,16,16);
+      	    masked_blit(terrains[i][j]->getBuffer(),
+			buffer,0,0,
+			i * terrains[i][j]->getSize(),
+			j * terrains[i][j]->getSize(),
+			terrains[i][j]->getSize(),
+			terrains[i][j]->getSize());
     }
 }
 
@@ -374,13 +394,14 @@ Point TutorialMap::getFocus()
       Wrapper * pw = it->getWrapper();
 
       if(pw->isFocusable())
-	return Point(pw->getX() + 16, pw->getY() + 16);
+	return Point(pw->getX() + pw->getSize() / 2, pw->getY() + pw->getSize() / 2);
     }
 
-  return Point((rand() % width) * 16 + 8, (rand() % height) * 16 + 8);
+  return Point((rand() % width) * Configuration::getInstance()->getMedium() + Configuration::getInstance()->getMedium() / 2,
+	       (rand() % height) * Configuration::getInstance()->getMedium() + Configuration::getInstance()->getMedium() / 2);
 }
 
-void TutorialMap::addTankS(Tank * tank)
+void TutorialMap::addTank(Tank * tank)
 {
   if(!spots.size())
     throw new Exception("All spots expired");
@@ -389,78 +410,6 @@ void TutorialMap::addTankS(Tank * tank)
   spots.pop_front();
 
   objects.push_back(WrapperBox(new TankWrapper(p.getX(),p.getY(),tank->getRotation(),tank)));
-}
-
-void TutorialMap::addTank(Tank * tank)
-{
-  bool spotMap[width][height];
-
-  for(int i = 0; i < width; i++)
-    for(int j = 0; j < height; j++)
-      spotMap[i][j] = false;
-
-  for(int i = 0; i < width; i++)
-    for(int j = 0; j < height; j++)
-      if(terrains[i][j] == NULL || !policy->checkCollisionability(terrains[i][j]->getId(),tank->getId()))
-	spotMap[i][j] = true;
-
-  list<Point> spots;
-
-  for(int i = 0; i < width - 1; i++)
-    for(int j = 0; j < height - 1; j++)
-      {
-	bool spot = true;
-	for(int ii = 0; ii < 2; ii++)
-	  for(int jj = 0; jj < 2; jj++)
-	    if(!spotMap[i+ii][j+jj])
-	      spot = false;
-
-	if(spot)
-	  {
-	    // check for object collisions
-	    bool collision = false;
-	    for(list<WrapperBox>::iterator it = objects.begin(); it != objects.end(); it++)
-	      {
-		Wrapper * pw = it->getWrapper();
-
-		int x11 = pw->getX();
-		int y11 = pw->getY();
-		int x12 = pw->getX() + pw->getSize() - 1;
-		int y12 = pw->getY() + pw->getSize() - 1;
-
-		int x21 = i * 16;
-		int y21 = j * 16;
-		int x22 = i * 16 + 32 - 1;
-		int y22 = j * 16 + 32 - 1;
-
-		if(detectRectsCollision(x11,y11,x12,y12,x21,y21,x22,y22))
-		  {
-		    collision = true;
-		    break;
-		  }
-	      }
-	    if(collision)
-	      continue;
-
-	    spots.push_back(Point(i*16,j*16));
-	    for(int ii = 0; ii < 2; ii++)
-	      for(int jj = 0; jj < 2; jj++)
-		spotMap[i+ii][j+jj] = false;
-	  }
-      }
-
-  if(!spots.size())
-    throw new Exception("Can not find spawn spot");
-
-  // before rand, delete spots that colliding with MapObjects todo?
-
-  int rnd = rand() % spots.size();
-  list<Point>::iterator it = spots.begin();
-
-  for(int i = 0; i < rnd; i++)
-    it++;
-
-  objects.push_back(WrapperBox(new TankWrapper(it->getX(),it->getY(),tank->getRotation(),tank)));
 }
 
 bool TutorialMap::detectRectsCollision(int x11, int y11, int x12, int y12,

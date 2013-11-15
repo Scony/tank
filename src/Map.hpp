@@ -11,15 +11,18 @@ class Map
 {
 protected:
   Spriter * spriter;
+  BITMAP * buffer;
+
   int width;
   int height;
-  BITMAP * buffer;
+
 public:
   Map(Spriter * spriter, int width, int height);
   Map();
   virtual ~Map();
 
   virtual void move() = 0;
+
   BITMAP * getBuffer();
   virtual Point getFocus() = 0;
 };

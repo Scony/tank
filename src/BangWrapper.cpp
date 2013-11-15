@@ -1,4 +1,5 @@
 #include "BangWrapper.hpp"
+#include "Configuration.hpp"
 
 BangWrapper::BangWrapper(int x, int y, int direction, Bang * bang) :
   Wrapper(x,y,direction)
@@ -35,9 +36,9 @@ BITMAP * BangWrapper::getBuffer()
   return bang->getBuffer();
 }
 
-int BangWrapper::getSize()	// todo
+int BangWrapper::getSize()
 {
-  return 32;
+  return Configuration::getInstance()->getBig();
 }
 
 int BangWrapper::getSpeed()

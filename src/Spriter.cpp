@@ -12,7 +12,7 @@ Spriter::Spriter(std::string path)
   for(int i = 0; i < sprite->w; i++)
     for(int j = 0; j < sprite->h; j++)
       if(getpixel(sprite,i,j) == 0)
-	putpixel(sprite,i,j,16711935);
+	putpixel(sprite,i,j,makecol(255,0,255));
 
   // terrain
   for(int i = 0; i < 5; i++)
@@ -80,16 +80,20 @@ Spriter::Spriter(std::string path)
 Spriter::~Spriter()
 {
   destroy_bitmap(sprite);
-  for(int i = 0; i < 4; i++)
-    {
-      destroy_bitmap(terrain[i]);
-      destroy_bitmap(bullet[i]);
-    }
-  for(int j = 0; j < 3; j++)
-    for(int i = 0; i < 8; i++)
-      destroy_bitmap(tank[j][i]);
+  for(int i = 0; i < 5; i++)
+    destroy_bitmap(terrain[i]);
   for(int i = 0; i < 3; i++)
-    destroy_bitmap(bang[i]);
+    {
+      for(int j = 0; j < 8; j++)
+	destroy_bitmap(tank[i][j]);
+      destroy_bitmap(bang[i]);
+    }
+  for(int i = 0; i < 4; i++)
+    destroy_bitmap(bullet[i]);
+  for(int i = 0; i < 2; i++)
+    destroy_bitmap(consumable[i]);
+  destroy_bitmap(wreck);
+  destroy_bitmap(blank);
 }
 
 BITMAP * Spriter::getSprite()

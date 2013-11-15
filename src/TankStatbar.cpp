@@ -12,7 +12,7 @@ TankStatbar::TankStatbar(Tank * tank, int width, int height)
 }
 TankStatbar::~TankStatbar()
 {
-  // todo destroy bitmap
+  destroy_bitmap(buffer);
 }
 
 void TankStatbar::move()

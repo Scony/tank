@@ -1,4 +1,5 @@
 #include "Map.hpp"
+#include "Configuration.hpp"
 
 Map::Map(Spriter * spriter, int width, int height)
 {
@@ -6,7 +7,8 @@ Map::Map(Spriter * spriter, int width, int height)
   this->width = width;
   this->height = height;
 
-  buffer = create_bitmap(width*16,height*16); // HARDCODE ! todo
+  buffer = create_bitmap(width * Configuration::getInstance()->getMedium(),
+			 height * Configuration::getInstance()->getMedium());
   if(!buffer)
     throw new Exception("Can not create bitmap");
 }

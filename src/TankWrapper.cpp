@@ -5,6 +5,7 @@
 #include "BangWrapper.hpp"
 #include "SimpleBang.hpp"
 #include "WreckTank.hpp"
+#include "Configuration.hpp"
 
 TankWrapper::TankWrapper(int x, int y, int direction, Tank * tank) :
   Wrapper(x,y,direction)
@@ -52,28 +53,32 @@ Wrapper * TankWrapper::breed()
       int by;
       int bdirection = tank->getRotation();
 
+      // load magic numbers
+      int medium = Configuration::getInstance()->getMedium();
+      int small = Configuration::getInstance()->getSmall();
+
       // correction to avoid seppuku
-      int cx = round((double)x / 16) * 16;
-      int cy = round((double)y / 16) * 16;
+      int cx = round((double)x / medium) * medium;
+      int cy = round((double)y / medium) * medium;
       int magicOffset = 2;
 
-      switch(bdirection)	// todo: hardcodes
+      switch(bdirection)
 	{
 	case 1:
-	  bx = x + ((getSize() - 8) / 2);
-	  by = (cy < y ? cy : y) - 8 - magicOffset;
+	  bx = x + ((getSize() - small) / 2);
+	  by = (cy < y ? cy : y) - small - magicOffset;
 	  break;
 	case 2:
 	  bx = (cx > x ? cx : x) + getSize() + magicOffset;
-	  by = y + ((getSize() - 8) / 2);
+	  by = y + ((getSize() - small) / 2);
 	  break;
 	case 3:
-	  bx = x + ((getSize() - 8) / 2);
+	  bx = x + ((getSize() - small) / 2);
 	  by = (cy > y ? cy : y) + getSize() + magicOffset;
 	  break;
 	case 4:
-	  bx = (cx < x ? cx : x) - 8 - magicOffset;
-	  by = y + ((getSize() - 8) / 2);
+	  bx = (cx < x ? cx : x) - small - magicOffset;
+	  by = y + ((getSize() - small) / 2);
 	}
 
       return new BulletWrapper(bx,by,bdirection,bullet);
@@ -104,7 +109,7 @@ BITMAP * TankWrapper::getBuffer()
 
 int TankWrapper::getSize()
 {
-  return 32;
+  return Configuration::getInstance()->getBig();
 }
 
 int TankWrapper::getSpeed()

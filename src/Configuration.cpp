@@ -5,6 +5,9 @@ using namespace std;
 Configuration::Configuration()
 {
   path = "./";
+  big = 32;
+  medium = 16;
+  small = 8;
 }
 
 Configuration::Configuration(const Configuration& c)

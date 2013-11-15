@@ -21,6 +21,7 @@ Menu::Menu(BITMAP * screen)
 
 Menu::~Menu()
 {
+  destroy_bitmap(buffer);
 }
 
 void Menu::move()

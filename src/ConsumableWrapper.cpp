@@ -3,6 +3,7 @@
 #include "ConsumableWrapper.hpp"
 #include "BangWrapper.hpp"
 #include "SimpleBang.hpp"
+#include "Configuration.hpp"
 
 ConsumableWrapper::ConsumableWrapper(int x, int y, int direction, Consumable * consumable) :
   Wrapper(x,y,direction)
@@ -36,7 +37,7 @@ BITMAP * ConsumableWrapper::getBuffer()
 
 int ConsumableWrapper::getSize()
 {
-  return 32;
+  return Configuration::getInstance()->getBig();
 }
 
 int ConsumableWrapper::getSpeed()

@@ -1,6 +1,7 @@
 #include "BulletWrapper.hpp"
 #include "BangWrapper.hpp"
 #include "LittleBang.hpp"
+#include "Configuration.hpp"
 
 BulletWrapper::BulletWrapper(int x, int y, int direction, Bullet * bullet) :
   Wrapper(x,y,direction)
@@ -44,12 +45,12 @@ BITMAP * BulletWrapper::getBuffer()
   return bullet->getBuffer();
 }
 
-int BulletWrapper::getSize()	// todo
+int BulletWrapper::getSize()
 {
-  return 8;
+  return Configuration::getInstance()->getSmall();
 }
 
-int BulletWrapper::getSpeed()	// todo
+int BulletWrapper::getSpeed()
 {
   return 2;
 }
@@ -64,7 +65,7 @@ int BulletWrapper::getPower()
   return bullet->getPower();
 }
 
-bool BulletWrapper::isVisible()	// todo
+bool BulletWrapper::isVisible()
 {
   return visible;
 }
@@ -77,7 +78,7 @@ bool BulletWrapper::isDeath()
   return bullet->isDeath();
 }
 
-bool BulletWrapper::isPerformer() // todo
+bool BulletWrapper::isPerformer()
 {
   return true;
 }
