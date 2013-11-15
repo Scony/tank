@@ -136,3 +136,8 @@ bool TankWrapper::isPerformer()
 {
   return false;
 }
+
+bool TankWrapper::isFocusable()
+{
+  return true;
+}

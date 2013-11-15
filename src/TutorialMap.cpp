@@ -372,13 +372,15 @@ void TutorialMap::move()
 
 Point TutorialMap::getFocus()
 {
-  list<WrapperBox>::iterator it = objects.begin();
-  if(it == objects.end())
-    return Point(0,0);
+  for(list<WrapperBox>::iterator it = objects.begin(); it != objects.end(); it++)
+    {
+      Wrapper * pw = it->getWrapper();
 
-  Wrapper * pw = it->getWrapper();
+      if(pw->isFocusable())
+	return Point(pw->getX() + 16, pw->getY() + 16);
+    }
 
-  return Point(pw->getX() + 16, pw->getY() + 16);
+  return Point((rand() % width) * 16 + 8, (rand() % height) * 16 + 8);
 }
 
 void TutorialMap::addTankS(Tank * tank)

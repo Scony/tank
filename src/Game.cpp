@@ -27,7 +27,8 @@ void Game::move()
   if(key[KEY_ESC] && !escPressed)
     {
       escPressed = true;
-      menuOn = !menuOn;
+      if(mode)
+	menuOn = !menuOn;
     }
 
   if(!key[KEY_ESC] && escPressed)
@@ -42,10 +43,14 @@ void Game::move()
 	case 0:
 	  break;
 	case 1:
+	  break;
+	case 2:
 	  if(mode)
 	    delete mode;
 	  mode = new TutorialMode(screen);
 	  menuOn = false;
+	  break;
+	case 3:
 	  break;
 	default:
 	  done = true;

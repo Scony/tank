@@ -69,3 +69,8 @@ bool BangWrapper::isPerformer()
 {
   return false;
 }
+
+bool BangWrapper::isFocusable()
+{
+  return false;
+}

@@ -25,6 +25,7 @@ public:
   bool isVisible();
   bool isDeath();
   bool isPerformer();
+  bool isFocusable();
 };
 
 #endif

@@ -68,3 +68,8 @@ bool ConsumableWrapper::isPerformer()
 {
   return true;
 }
+
+bool ConsumableWrapper::isFocusable()
+{
+  return false;
+}

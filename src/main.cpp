@@ -3,12 +3,6 @@
 #include "Exception.hpp"
 #include "Game.hpp"
 
-#define WINDOW_WIDTH 800
-#define WINDOW_HEIGHT 608
-// #define WINDOW_WIDTH 320
-// #define WINDOW_HEIGHT 240
-// more defines to remove hardcoded values
-
 volatile long speed = 0;
 volatile int close_button = 0;
 
@@ -35,9 +29,11 @@ int main()
   install_timer();
   install_int_ex(increment_speed,BPS_TO_TIMER(100));
   set_close_button_callback(close_button_handler);
-  set_color_depth(32);
-  set_gfx_mode(GFX_AUTODETECT_WINDOWED,WINDOW_WIDTH,WINDOW_HEIGHT,0,0);
-  // set_gfx_mode(GFX_AUTODETECT,WINDOW_WIDTH,WINDOW_HEIGHT,0,0);
+  set_color_depth(desktop_color_depth());
+  int desktopWidth, desktopHeight;
+  get_desktop_resolution(&desktopWidth,&desktopHeight);
+  // set_gfx_mode(GFX_AUTODETECT,desktopWidth,desktopHeight,0,0);
+  set_gfx_mode(GFX_AUTODETECT,320,240,0,0);
 
   clear_to_color(screen,makecol(255,255,255));
 

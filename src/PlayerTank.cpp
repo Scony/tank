@@ -58,7 +58,7 @@ int PlayerTank::move()
 	}
     }
 
-  if(key[KEY_ENTER])
+  if(key[KEY_SPACE])
     shoot();
 
   return intent;

@@ -13,9 +13,9 @@ Menu::Menu(BITMAP * screen)
   upPressed = key[KEY_UP] ? true : false;
   downPressed = key[KEY_DOWN] ? true : false;
 
-  options.push_back("Test");
-  options.push_back("Nix");
-  options.push_back("Nix2");
+  options.push_back("Roulette");
+  options.push_back("Tutorial");
+  options.push_back("Editor");
   options.push_back("Exit");
 }
 
@@ -55,15 +55,15 @@ void Menu::move()
 
 void Menu::draw()
 {
-  clear_to_color(buffer,makecol(255,150,0));
+  clear_to_color(buffer,makecol(25,25,25));
 
   int i = 1;
   for(list<string>::iterator it = options.begin(); it != options.end(); it++)
     {
       if(i == selected)
-	textout_ex(buffer,font,it->c_str(),20,30*i,makecol(255,0,255),makecol(255,255,255));
+	textout_ex(buffer,font,it->c_str(),20,30*i,makecol(255,255,255),makecol(100,100,100));
       else
-	textout_ex(buffer,font,it->c_str(),20,30*i,makecol(255,0,255),-1);
+	textout_ex(buffer,font,it->c_str(),20,30*i,makecol(255,255,255),-1);
       i++;
     }
 

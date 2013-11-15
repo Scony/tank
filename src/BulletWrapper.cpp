@@ -81,3 +81,8 @@ bool BulletWrapper::isPerformer() // todo
 {
   return true;
 }
+
+bool BulletWrapper::isFocusable()
+{
+  return false;
+}
