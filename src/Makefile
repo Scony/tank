@@ -20,4 +20,7 @@ main.out: $(OBJS)
 clean:
 	rm -f *~ *.o $(EXE)
 
+report:
+	wc -l *.*pp *.dat *.map
+
 .PHONY: clean
