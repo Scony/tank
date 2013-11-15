@@ -42,6 +42,8 @@ void Game::move()
 	case 0:
 	  break;
 	case 1:
+	  if(mode)
+	    delete mode;
 	  mode = new TutorialMode(screen);
 	  menuOn = false;
 	  break;

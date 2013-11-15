@@ -116,6 +116,46 @@ void Tank::addFuel(int amount)
   fuel = fuel + amount > fuelMax ? fuelMax : fuel + amount;
 }
 
+int Tank::getHp()
+{
+  return hp;
+}
+
+int Tank::getHpMax()
+{
+  return hpMax;
+}
+
+int Tank::getAmmo()
+{
+  return ammo;
+}
+
+int Tank::getAmmoMax()
+{
+  return ammoMax;
+}
+
+int Tank::getFuel()
+{
+  return fuel;
+}
+
+int Tank::getFuelMax()
+{
+  return fuelMax;
+}
+
+int Tank::getReload()
+{
+  return reload;
+}
+
+int Tank::getReloadMax()
+{
+  return reloadMax;
+}
+
 int Tank::getRotation()
 {
   return rotation;
@@ -125,7 +165,6 @@ int Tank::getId()
 {
   return 7;
 }
-
 
 bool Tank::isDeath()
 {

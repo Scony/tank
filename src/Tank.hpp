@@ -51,6 +51,15 @@ public:
   void addAmmo(int amount);
   void addFuel(int amount);
 
+  int getHp();
+  int getHpMax();
+  int getAmmo();
+  int getAmmoMax();
+  int getFuel();
+  int getFuelMax();
+  int getReload();
+  int getReloadMax();
+
   int getRotation();
   virtual int getId();
 

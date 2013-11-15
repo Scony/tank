@@ -9,8 +9,9 @@ TutorialMode::TutorialMode(BITMAP * screen) : Mode(screen)
   spriter = new Spriter("/home/scony/Allegro/tank/src/sprite.bmp");
   policy = new PolicyManager("/home/scony/Allegro/tank/src/policy.dat");
   TutorialMap * tmap = new TutorialMap(spriter,policy,"/home/scony/Allegro/tank/src/medium.map");
-
   player1 = new PlayerTank(spriter,1,1,1,100,100,5000,5000,0,10);
+  tsb = new TankStatbar(player1,screen->w,30);
+
   tmap->addTankS(player1);
   tmap->addTankS(new Player2Tank(spriter,1,1,1,100,100,5000,5000,0,10));
   for(int i = 0; i < 2; i++)
@@ -21,6 +22,7 @@ TutorialMode::TutorialMode(BITMAP * screen) : Mode(screen)
 
 TutorialMode::~TutorialMode()
 {
+  delete tsb;
   delete map;
   delete policy;
   delete spriter;
@@ -29,6 +31,8 @@ TutorialMode::~TutorialMode()
 void TutorialMode::move()
 {
   map->move();
+  if(player1)
+    tsb->move();
 }
 
 void TutorialMode::draw()
@@ -39,54 +43,63 @@ void TutorialMode::draw()
   if(player1 && rand() % 10 > 8)
     set_window_title(player1->toString().c_str());
 
-  BITMAP * buff = map->getBuffer();
+  BITMAP * tsbBuff = tsb->getBuffer();
+  BITMAP * mBuff = map->getBuffer();
   Point focus = map->getFocus();
 
-  int buffX;
-  int buffY;
+  int mBuffX;
+  int mBuffY;
   int screenX;
   int screenY;
   int wtc;
   int htc;
 
   // X axis calculations
-  if(buff->w <= screen->w)
+  if(mBuff->w <= screen->w)
     {
-      buffX = 0;
-      screenX = (screen->w - buff->w) / 2;
-      wtc = buff->w;
+      mBuffX = 0;
+      screenX = (screen->w - mBuff->w) / 2;
+      wtc = mBuff->w;
     }
   else
     {
-      buffX = focus.getX() - (screen->w / 2);
-      buffX = buffX < 0 ? 0 : buffX;
-      buffX = buffX > buff->w - screen->w ? buff->w - screen->w : buffX;
+      mBuffX = focus.getX() - (screen->w / 2);
+      mBuffX = mBuffX < 0 ? 0 : mBuffX;
+      mBuffX = mBuffX > mBuff->w - screen->w ? mBuff->w - screen->w : mBuffX;
       screenX = 0;
       wtc = screen->w;
     }
 
   // Y axis calculations
-  if(buff->h <= screen->h)
+  if(mBuff->h <= screen->h - tsbBuff->h)
     {
-      buffY = 0;
-      screenY = (screen->h - buff->h) / 2;
-      htc = buff->h;
+      mBuffY = 0;
+      screenY = (screen->h - tsbBuff->h - mBuff->h) / 2;
+      htc = mBuff->h;
     }
   else
     {
-      buffY = focus.getY() - (screen->h / 2);
-      buffY = buffY < 0 ? 0 : buffY;
-      buffY = buffY > buff->h - screen->h ? buff->h - screen->h : buffY;
+      mBuffY = focus.getY() - ((screen->h - tsbBuff->h) / 2);
+      mBuffY = mBuffY < 0 ? 0 : mBuffY;
+      mBuffY = mBuffY > mBuff->h - (screen->h - tsbBuff->h) ? mBuff->h - (screen->h - tsbBuff->h) : mBuffY;
       screenY = 0;
-      htc = screen->h;
+      htc = screen->h - tsbBuff->h;
     }
 
-  blit(buff,			// from
+  blit(tsbBuff,			// from
        screen,			// to
-       buffX,			// start-point-x in buffer
-       buffY,			// start-point-y in buffer
+       0,			// start-point-x in buffer
+       0,			// start-point-y in buffer
+       0,			// start-point-x in screen
+       0,			// start-point-y in screen
+       tsbBuff->w,		// width to copy from buffer
+       tsbBuff->h);		// height to copy from buffer
+  blit(mBuff,			// from
+       screen,			// to
+       mBuffX,			// start-point-x in buffer
+       mBuffY,			// start-point-y in buffer
        screenX,			// start-point-x in screen
-       screenY,			// start-point-y in screen
+       screenY + tsbBuff->h,	// start-point-y in screen
        wtc,			// width to copy from buffer
        htc);			// height to copy from buffer
 }

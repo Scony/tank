@@ -34,7 +34,7 @@ void Menu::move()
     {
       if(!upPressed)
 	{
-	  selected = selected - 1 < 1 ? 1 : selected - 1;
+	  selected = selected - 1 < 1 ? (int)options.size() : selected - 1;
 	  upPressed = true;
 	}
     }
@@ -45,7 +45,7 @@ void Menu::move()
     {
       if(!downPressed)
 	{
-	  selected = selected + 1 > (int)options.size() ? (int)options.size() : selected + 1;
+	  selected = selected + 1 > (int)options.size() ? 1 : selected + 1;
 	  downPressed = true;
 	}
     }
