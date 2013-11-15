@@ -15,11 +15,6 @@ BITMAP * Bang::getBuffer()
   return buffer;
 }
 
-int Bang::getSize()
-{
-  return spriter->getBangSize();
-}
-
 int Bang::getId()
 {
   return 11;

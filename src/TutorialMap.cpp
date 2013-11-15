@@ -125,9 +125,6 @@ TutorialMap::~TutorialMap()
 
 void TutorialMap::move()
 {
-  // debug
-  // rest(500);
-
   // clear objects
   for(list<WrapperBox>::iterator it = objects.begin(); it != objects.end(); it++)
     {

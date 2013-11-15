@@ -1,21 +1,22 @@
 #include "TutorialMode.hpp"
 #include "TutorialMap.hpp"
+#include "Configuration.hpp"
 #include "PlayerTank.hpp"
 #include "Player2Tank.hpp"
 #include "AITank.hpp"
 
 TutorialMode::TutorialMode(BITMAP * screen) : Mode(screen)
 {
-  spriter = new Spriter("/home/scony/Allegro/tank/src/sprite.bmp");
-  policy = new PolicyManager("/home/scony/Allegro/tank/src/policy.dat");
-  TutorialMap * tmap = new TutorialMap(spriter,policy,"/home/scony/Allegro/tank/src/medium.map");
-  player1 = new PlayerTank(spriter,1,1,1,100,100,5000,5000,0,10);
+  spriter = new Spriter(Configuration::getInstance()->getPath() + "sprite.bmp");
+  policy = new PolicyManager(Configuration::getInstance()->getPath() + "policy.dat");
+  TutorialMap * tmap = new TutorialMap(spriter,policy,Configuration::getInstance()->getPath() + "medium.map");
+  player1 = new PlayerTank(spriter,1,1,1,100,100,5000,5000,0,70);
   tsb = new TankStatbar(player1,screen->w,30);
 
   tmap->addTankS(player1);
-  tmap->addTankS(new Player2Tank(spriter,1,1,1,100,100,5000,5000,0,10));
+  tmap->addTankS(new Player2Tank(spriter,1,1,1,100,100,5000,5000,0,70));
   for(int i = 0; i < 2; i++)
-    tmap->addTankS(new AITank(spriter,1,1,1,100,100,10000,10000,0,10));
+    tmap->addTankS(new AITank(spriter,1,1,1,100,100,10000,10000,0,70));
 
   map = tmap;
 }
@@ -31,18 +32,16 @@ TutorialMode::~TutorialMode()
 void TutorialMode::move()
 {
   map->move();
+
+  if(player1 && player1->isDeath())
+    player1 = NULL;
+
   if(player1)
     tsb->move();
 }
 
 void TutorialMode::draw()
 {
-  // debug todo
-  if(player1 && player1->isDeath())
-    player1 = NULL;
-  if(player1 && rand() % 10 > 8)
-    set_window_title(player1->toString().c_str());
-
   BITMAP * tsbBuff = tsb->getBuffer();
   BITMAP * mBuff = map->getBuffer();
   Point focus = map->getFocus();
@@ -94,6 +93,7 @@ void TutorialMode::draw()
        0,			// start-point-y in screen
        tsbBuff->w,		// width to copy from buffer
        tsbBuff->h);		// height to copy from buffer
+
   blit(mBuff,			// from
        screen,			// to
        mBuffX,			// start-point-x in buffer

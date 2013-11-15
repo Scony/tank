@@ -1,7 +1,6 @@
 #ifndef TANK_HPP
 #define TANK_HPP
 
-#include <iostream>
 #include <allegro.h>
 
 #include "Spriter.hpp"
@@ -65,8 +64,6 @@ public:
 
   bool isDeath();
   bool isBurning();
-
-  std::string toString();
 };
 
 #endif

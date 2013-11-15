@@ -1,9 +1,5 @@
-#include <sstream>
-
 #include "Tank.hpp"
 #include "LineBullet.hpp"
-
-using namespace std;
 
 Tank::Tank(Spriter * spriter)
 {
@@ -174,16 +170,4 @@ bool Tank::isDeath()
 bool Tank::isBurning()
 {
   return burn;
-}
-
-string Tank::toString()
-{
-  ostringstream oss;
-
-  oss << "HP: " << hp << "/" << hpMax;
-  oss << " AMMO: " << ammo << "/" << ammoMax;
-  oss << " FUEL: " << fuel << "/" << fuelMax;
-  oss << " RELOAD: " << reload << "/" << reloadMax;
-
-  return oss.str();
 }

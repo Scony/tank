@@ -143,18 +143,3 @@ BITMAP * Spriter::getBlank()
 {
   return blank;
 }
-
-int Spriter::getTankSize()
-{
-  return 32;
-}
-
-int Spriter::getTerrainSize()
-{
-  return 16;
-}
-
-int Spriter::getBangSize()
-{
-  return 32;
-}

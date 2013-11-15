@@ -1,4 +1,5 @@
 #include "Terrain.hpp"
+#include "Configuration.hpp"
 
 Terrain::Terrain(Spriter * spriter)
 {
@@ -11,7 +12,7 @@ Terrain::~Terrain()
 
 int Terrain::getSize()
 {
-  return spriter->getTerrainSize();
+  return Configuration::getInstance()->getMedium();
 }
 
 BITMAP * Terrain::getBuffer()

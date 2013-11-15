@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "Exception.hpp"
+#include "Configuration.hpp"
 #include "Game.hpp"
 
 volatile long speed = 0;
@@ -22,7 +23,7 @@ LOCK_VARIABLE(speed);
 LOCK_FUNCTION(increment_speed);
 LOCK_FUNCTION(close_button_handler);
 
-int main()
+int main(int argc, char ** argv)
 {
   allegro_init();
   install_keyboard();
@@ -32,13 +33,14 @@ int main()
   set_color_depth(desktop_color_depth());
   int desktopWidth, desktopHeight;
   get_desktop_resolution(&desktopWidth,&desktopHeight);
-  // set_gfx_mode(GFX_AUTODETECT,desktopWidth,desktopHeight,0,0);
-  set_gfx_mode(GFX_AUTODETECT,320,240,0,0);
+  // set_gfx_mode(GFX_AUTODETECT/*_WINDOWED*/,desktopWidth,desktopHeight,0,0);
+  set_gfx_mode(GFX_AUTODETECT/*_WINDOWED*/,320,240,0,0);
 
   clear_to_color(screen,makecol(255,255,255));
 
   try
     {
+      Configuration::getInstance()->setPath(argv[0]);
       Game * game = new Game(screen);
 
       while(!close_button && !game->isDone())

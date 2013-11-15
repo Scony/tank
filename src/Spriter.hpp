@@ -26,9 +26,6 @@ public:
   virtual BITMAP * getConsumable(int index);
   virtual BITMAP * getWreck();
   virtual BITMAP * getBlank();
-  virtual int getTankSize();
-  virtual int getTerrainSize();
-  virtual int getBangSize();
 };
 
 #endif
