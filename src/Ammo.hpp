@@ -11,6 +11,7 @@ public:
   ~Ammo();
 
   int move();
+
   int getId();
 };
 

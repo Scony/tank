@@ -23,9 +23,11 @@ public:
   TutorialMap(Spriter * spriter, PolicyManager * policy, std::string fileName);
   ~TutorialMap();
 
-  void move();
-  Point getFocus();
   void addTank(Tank * tank);
+
+  void move();
+
+  Point getFocus();
 };
 
 #endif

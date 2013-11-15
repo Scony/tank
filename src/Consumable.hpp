@@ -20,13 +20,13 @@ public:
   Consumable(Spriter * spriter, int amount);
   virtual ~Consumable();
 
+  bool isDeath();
+
   virtual int move() = 0;
   int consume();
 
   virtual int getId();
   BITMAP * getBuffer();
-
-  bool isDeath();
 };
 
 #endif

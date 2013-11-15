@@ -11,10 +11,12 @@ public:
   LineBullet(Spriter * spriter, int intent);
   ~LineBullet();
 
+  bool isDeath();
+
   int move();
+
   int getId();
   int getPower();
-  bool isDeath();
 };
 
 #endif

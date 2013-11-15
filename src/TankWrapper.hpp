@@ -11,10 +11,14 @@ public:
   TankWrapper(int x, int y, int direction, Tank * tank);
   ~TankWrapper();
 
+  bool isVisible();
+  bool isDeath();
+  bool isPerformer();
+  bool isFocusable();
+
   int move();
   void perform(int key, int value);
   Wrapper * breed();
-
   void applyChanges();
 
   Tank * getTank();
@@ -23,11 +27,6 @@ public:
   int getSpeed();
   int getId();
   int getPower();
-
-  bool isVisible();
-  bool isDeath();
-  bool isPerformer();
-  bool isFocusable();
 };
 
 #endif

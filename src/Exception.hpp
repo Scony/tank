@@ -10,6 +10,7 @@ class Exception
   Exception(std::string message);
   Exception();
   ~Exception();
+
   std::string toString();
 };
 

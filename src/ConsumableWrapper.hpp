@@ -11,6 +11,11 @@ public:
   ConsumableWrapper(int x, int y, int direction, Consumable * consumable);
   ~ConsumableWrapper();
 
+  bool isVisible();
+  bool isDeath();
+  bool isPerformer();
+  bool isFocusable();
+
   int move();
   void perform(int key, int value);
   Wrapper * breed();
@@ -20,11 +25,6 @@ public:
   int getSpeed();
   int getId();
   int getPower();
-
-  bool isVisible();
-  bool isDeath();
-  bool isPerformer();
-  bool isFocusable();
 };
 
 #endif

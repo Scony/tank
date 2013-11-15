@@ -259,14 +259,13 @@ void TutorialMap::move()
 		  pw->perform(0,0);
 		  if(terrains[i][j]->getResistance() < pw->getPower())
 		    {
-		      // todo: put into function
-		      delete terrains[i][j];
 		      rectfill(buffer,
 			       i * terrains[i][j]->getSize(),
 			       j * terrains[i][j]->getSize(),
 			       i * terrains[i][j]->getSize() + terrains[i][j]->getSize() - 1,
 			       j * terrains[i][j]->getSize() + terrains[i][j]->getSize() - 1,
 			       makecol(0,0,0));
+		      delete terrains[i][j];
 		      terrains[i][j] = NULL;
 		    }
 		}

@@ -17,6 +17,7 @@ public:
   ~AITank();
 
   int move();
+
   int getId();
 };
 

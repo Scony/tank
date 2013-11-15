@@ -42,6 +42,9 @@ public:
   Spriter * getSpriter();
   BITMAP * getBuffer();
 
+  bool isDeath();
+  bool isBurning();
+
   virtual int move() = 0;
   Bullet * breed();
   void hurt(int power);
@@ -61,9 +64,6 @@ public:
 
   int getRotation();
   virtual int getId();
-
-  bool isDeath();
-  bool isBurning();
 };
 
 #endif

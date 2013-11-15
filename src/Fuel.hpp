@@ -11,6 +11,7 @@ public:
   ~Fuel();
 
   int move();
+
   int getId();
 };
 

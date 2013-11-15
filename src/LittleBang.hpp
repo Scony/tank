@@ -11,10 +11,11 @@ public:
   LittleBang(Spriter * spriter);
   ~LittleBang();
 
-  int move();
-  int getId();
-
   bool isDeath();
+
+  int move();
+
+  int getId();
 };
 
 #endif

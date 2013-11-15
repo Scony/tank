@@ -13,6 +13,11 @@ public:
   BulletWrapper(int x, int y, int direction, Bullet * bullet);
   ~BulletWrapper();
 
+  bool isVisible();
+  bool isDeath();
+  bool isPerformer();
+  bool isFocusable();
+
   int move();
   void perform(int key, int value);
   Wrapper * breed();
@@ -23,11 +28,6 @@ public:
   int getSpeed();
   int getId();
   int getPower();
-
-  bool isVisible();
-  bool isDeath();
-  bool isPerformer();
-  bool isFocusable();
 };
 
 #endif

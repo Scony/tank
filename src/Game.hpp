@@ -19,10 +19,10 @@ public:
   Game(BITMAP * screen);
   ~Game();
 
+  bool isDone();
+
   void move();
   void draw();
-
-  bool isDone();
 };
 
 #endif
