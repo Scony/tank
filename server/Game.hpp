@@ -1,21 +1,24 @@
 #ifndef GAME_HPP
 #define GAME_HPP
 
-// hold list of tanks + shoot flag for each
-// update when new info arrives
-// update pos + remove tank eventually
-// bring interface toString to get actual info to send
+// shoot flag should be incremental to be sure everybody received shoot info
 
 #include <list>
+
+#include "Tank.hpp"
 
 class Game
 {
 public:
   Game(int gid);
   ~Game();
+  void updateTank(Tank tank);
+  void deleteTank(Tank tank);
+  bool isOver();
+  std::string toString();
 
 private:
   int gid;
-  std::list<?
+  std::list<Tank> tanks;
 
 #endif
