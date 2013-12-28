@@ -4,7 +4,7 @@
 
 using namespace std;
 
-Tank(int id, int x, int y, int rotation, int shoot)
+Tank::Tank(int id, int x, int y, int rotation, int shoot)
 {
   this->id = id;
   this->x = x;
@@ -13,7 +13,10 @@ Tank(int id, int x, int y, int rotation, int shoot)
   this->shoot = shoot;
 }
 
-string toString()
+string Tank::toString()
 {
-  // 
+  stringstream ss;
+  ss << id << " " << x << " " << y << " " << rotation << " " << shoot;
+  
+  return ss.str();
 }

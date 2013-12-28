@@ -13,6 +13,6 @@ private:
   int y;
   int rotation;
   int shoot;
-}
+};
 
 #endif
