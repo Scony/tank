@@ -1,24 +1,30 @@
 #ifndef GAME_HPP
 #define GAME_HPP
 
-// shoot flag should be incremental to be sure everybody received shoot info
-
 #include <list>
 
 #include "Tank.hpp"
 
+#define GAME_SIZE 2
+
 class Game
 {
 public:
-  Game(int gid);
-  ~Game();
-  void updateTank(Tank tank);
-  void deleteTank(Tank tank);
+  Game();
+  void updateTank(int id, int x, int y, int rotation, int shoot);
+  void deleteTank(int id);
   bool isOver();
-  std::string toString();
+  std::string getInitData(int id);
+  std::string getData();
+  int getId();
 
 private:
   int gid;
   std::list<Tank> tanks;
+
+private:
+  static int gidc;
+
+};
 
 #endif

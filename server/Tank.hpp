@@ -5,6 +5,7 @@ class Tank
 {
 public:
   Tank(int id, int x, int y, int rotation, int shoot);
+  int getId();
   std::string toString();
 
 private:

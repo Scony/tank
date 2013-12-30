@@ -1,14 +1,14 @@
 #include <iostream>
+#include <list>
 
 #include "Poco/Net/ServerSocket.h"
 #include "Poco/Net/StreamSocket.h"
 #include "Poco/Net/SocketStream.h"
 
-#include "Tank.hpp"
+#include "Game.hpp"
 
 #define LOBBY_PORT 1337
 #define GAME_PORT 1338
-#define GAME_SIZE 2
 #define SERVER_LIMIT 128
 
 using namespace std;
@@ -26,8 +26,7 @@ int main(int argc, char** argv)
   lobby.setBlocking(false);
   game.setBlocking(false);
 
-  Tank tank(1,100,100,3,1);
-  cout << tank.toString() << endl;
+  list<Game> games;
 
   while(true)
     {
@@ -52,12 +51,13 @@ int main(int argc, char** argv)
 	  if(lssi == GAME_SIZE)
 	    {
 	      lssi = 0;
-	      // broadcast finish & close connections
-	      // TODO: crate Game instance here and broadcast data
+	      // create Game & broadcast its data & close connections
+	      Game game;
+	      games.push_back(game);
 	      for(int i = 0; i < GAME_SIZE; i++)
 		{
 		  Poco::Net::SocketStream str(lss[i]);
-		  str << "have game params, cya\n" << flush;
+		  str << game.getInitData(i) << endl << flush;
 		  lss[i].close();
 		}
 	    }
@@ -93,12 +93,43 @@ int main(int argc, char** argv)
 	      if(str.peek() != -1) // message is valid
 		{
 		  str >> gid;
-		  // TODO: check if game exists
-		  // if so, make update
-		  // if not, return 0\n
-		  cout << "GAME MESSAGE FROM #" << i << " TO GID #" << gid << endl;
-		  if(gid == 1337)
-		    str << "3 bla bla bla" << endl << flush;
+
+		  // ended games cleanout
+		  list<Game>::iterator it = games.begin();
+		  for(; it != games.end(); it++)
+		    if(it->getId() == gid)
+		      {
+			if(!it->isOver())
+			  break;
+			else
+			  it = games.erase(it);
+		      }
+
+		  // target game exists
+		  if(it != games.end())
+		    {
+		      cout << "GAME MESSAGE FROM #" << i << " TO GID #" << gid << endl;
+
+		      int id;
+		      int x;
+		      int y;
+		      int rotation;
+		      int shoot;
+
+		      str >> id >> x >> y >> rotation >> shoot;
+		      it->updateTank(id,x,y,rotation,shoot);
+
+		      int nDeaths;
+
+		      str >> nDeaths;
+		      for(int j = 0; j < nDeaths; j++)
+			{
+			  str >> id;
+			  it->deleteTank(id);
+			}
+
+		      str << it->getData() << endl << flush;
+		    }
 		  else
 		    str << "0" << endl << flush;
 		}
