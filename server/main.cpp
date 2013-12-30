@@ -10,6 +10,7 @@
 #define LOBBY_PORT 1337
 #define GAME_PORT 1338
 #define SERVER_LIMIT 128
+#define CPU_SAVE_US 1
 
 using namespace std;
 
@@ -30,9 +31,8 @@ int main(int argc, char** argv)
 
   while(true)
     {
-      cout << "LOOP\n";
       // cpu save
-      usleep(5000000);
+      usleep(CPU_SAVE_US);
 
       // lobby accepts + grouping
       try
