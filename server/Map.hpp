@@ -1,17 +1,20 @@
 #ifndef MAP_HPP
 #define MAP_HPP
 
-// read file
-// bring interface for randing tanks positions
-// bring interface toString to send map + movables first time
+#include <list>
+#include <iostream>
 
 class Map
 {
 public:
-  Map();
-  ~Map();
+  Map(std::string fileName);
+  std::pair<int,int> getTankPosition();
+  std::string getData();
 
 private:
-  // 
+  std::string data;
+  std::list<std::pair<int,int> > tankPositions;
+
+};
 
 #endif

@@ -1,5 +1,6 @@
 #include <sstream>
 #include <stdlib.h>
+#include <pair>
 
 #include "Game.hpp"
 
@@ -7,13 +8,14 @@ using namespace std;
 
 int Game::gidc = 0;
 
-Game::Game()
+Game::Game() : map("medium.map")
 {
   gid = ++gidc;
-  // load map here
-  // make tanks and place em in tha map
   for(int i = 0; i < GAME_SIZE; i++)
-    tanks.push_back(Tank(i,rand()%500,rand()%500,0,0));
+    {
+      pair<int,int> ab = map.getTankPosition();
+      tanks.push_back(Tank(i,ab.first,ab.second,0,0));
+    }
 }
 
 void Game::updateTank(int id, int x, int y, int rotation, int shoot)
@@ -41,7 +43,7 @@ bool Game::isOver()
 std::string Game::getInitData(int id)
 {
   stringstream ss;
-  ss << "MAP STUFF\n"; // map
+  ss << map.getData() << endl;
   for(list<Tank>::iterator i = tanks.begin(); i != tanks.end(); i++)
     if(i->getId() == id)
       {
@@ -49,7 +51,7 @@ std::string Game::getInitData(int id)
 	return ss.str();
       }
 
-  return "ERROR INIT\n";
+  return "INIT ERROR\n";
 }
 
 std::string Game::getData()

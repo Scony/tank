@@ -1,6 +1,6 @@
 CFLAGS=-Wall
 LDFLAGS=-lPocoNet -lPocoFoundation
-OBJS=main.o Tank.o Game.o
+OBJS=main.o Tank.o Game.o Map.o
 EXE=main.out
 
 all: $(EXE)

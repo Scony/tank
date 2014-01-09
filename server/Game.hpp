@@ -3,6 +3,7 @@
 
 #include <list>
 
+#include "Map.hpp"
 #include "Tank.hpp"
 
 #define GAME_SIZE 2
@@ -20,6 +21,7 @@ public:
 
 private:
   int gid;
+  Map map;
   std::list<Tank> tanks;
 
 private:
