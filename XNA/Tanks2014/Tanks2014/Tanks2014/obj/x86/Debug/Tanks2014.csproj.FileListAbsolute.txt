@@ -5,3 +5,4 @@ D:\git\tank\XNA\Tanks2014\Tanks2014\Tanks2014\bin\x86\Debug\Tanks2014.exe
 D:\git\tank\XNA\Tanks2014\Tanks2014\Tanks2014\bin\x86\Debug\Tanks2014.pdb
 D:\git\tank\XNA\Tanks2014\Tanks2014\Tanks2014\obj\x86\Debug\Tanks2014.exe
 D:\git\tank\XNA\Tanks2014\Tanks2014\Tanks2014\obj\x86\Debug\Tanks2014.pdb
+D:\git\tank\XNA\Tanks2014\Tanks2014\Tanks2014\bin\x86\Debug\Content\SpriteFont1.xnb

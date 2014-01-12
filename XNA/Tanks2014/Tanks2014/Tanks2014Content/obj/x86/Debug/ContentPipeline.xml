@@ -10,6 +10,15 @@
       <Output>D:\git\tank\XNA\Tanks2014\Tanks2014\Tanks2014\bin\x86\Debug\Content\sprite.xnb</Output>
       <Time>2014-01-12T11:33:53.6753708+01:00</Time>
     </Item>
+    <Item>
+      <Source>SpriteFont1.spritefont</Source>
+      <Name>SpriteFont1</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\git\tank\XNA\Tanks2014\Tanks2014\Tanks2014\bin\x86\Debug\Content\SpriteFont1.xnb</Output>
+      <Time>2014-01-12T14:20:25.6088767+01:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>

@@ -17,9 +17,29 @@ namespace Tanks2014
             this.sprite = sprite;
         }
 
-        public void draw(int x, int y, int width, int height, int spriteX, int spriteY, int rotation)
+        public void draw(int x, int y, DrawInfo d, Rotation rotation = Rotation.UP)
         {
-            spriteBatch.Draw(sprite, new Rectangle(x, y, width, height), new Rectangle(spriteX, spriteY, width, height), Color.White, rotation * (float)Math.PI / 180, new Vector2(width / 2, height / 2), SpriteEffects.None, 0);
+            draw(x, y, d.size, d.spriteX, d.spriteY, (int)rotation);
+        }
+
+        public void draw(int x, int y, int size, int spriteX, int spriteY, int rotation)
+        {
+            SpriteEffects effect = SpriteEffects.None;
+            float rotationAngle = 0;
+            if (rotation == 1)
+            {
+                rotationAngle = (float)Math.PI / 2;
+            }
+            if (rotation == 2)
+            {
+                effect = SpriteEffects.FlipVertically;
+            }
+            if (rotation == 3)
+            {
+                effect = SpriteEffects.FlipVertically;
+                rotationAngle = (float)Math.PI / 2;
+            }
+            spriteBatch.Draw(sprite, new Rectangle(x + (int)size / 2, y + (int)size / 2, (int)size, (int)size), new Rectangle(spriteX, spriteY, (int)size, (int)size), Color.White, rotationAngle, new Vector2((int)size / 2, (int)size / 2), effect, 0);
         }
     }
 }

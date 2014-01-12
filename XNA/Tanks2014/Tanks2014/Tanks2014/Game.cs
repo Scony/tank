@@ -16,13 +16,18 @@ namespace Tanks2014
     /// </summary>
     public class TanksGame : Microsoft.Xna.Framework.Game
     {
+        private static int FPS = 30;
+
+        double lFpsTime = 0;
+        int lFpsCounter = 0;
+
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Texture2D sprite;
         Spriter drawer;
         Mode currentMode;
 
-        public void changeMode(Mode newMode)
+        public void setMode(Mode newMode)
         {
             currentMode = newMode;
         }
@@ -41,8 +46,9 @@ namespace Tanks2014
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+            //TargetElapsedTime = TimeSpan.FromMilliseconds(1000.0 / FPS);
             currentMode = new TestMode(this);
+            base.Window.Title = "Tanks 2014";
             base.Initialize();
         }
 
@@ -76,7 +82,9 @@ namespace Tanks2014
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            currentMode.Update(gameTime);
+            System.Console.Out.WriteLine(gameTime.ElapsedGameTime.TotalMilliseconds);
+            currentMode.update(gameTime);
+            base.Window.Title = "Tanks 2014 L:" + (1.0 / gameTime.ElapsedGameTime.TotalSeconds);
             base.Update(gameTime);
         }
 
@@ -88,10 +96,10 @@ namespace Tanks2014
         {
             GraphicsDevice.Clear(Color.Black);
             spriteBatch.Begin();
-            currentMode.Draw(gameTime, drawer);
+            currentMode.draw(gameTime, drawer);
             spriteBatch.End();
             // TODO: Add your drawing code here
-
+            base.Window.Title = "Tanks 2014 D:" + (1.0 / gameTime.ElapsedGameTime.TotalSeconds);
             base.Draw(gameTime);
         }
     }

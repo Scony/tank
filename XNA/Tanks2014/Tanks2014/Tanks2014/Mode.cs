@@ -13,7 +13,7 @@ namespace Tanks2014
         {
             this.host = host;
         }
-        public abstract void Update(GameTime gameTime);
-        public abstract void Draw(GameTime gameTime, Spriter drawer);
+        public abstract void update(GameTime gameTime);
+        public abstract void draw(GameTime gameTime, Spriter drawer);
     }
 }
