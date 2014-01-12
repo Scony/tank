@@ -1,0 +1,24 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tanks2014", "Tanks2014\Tanks2014\Tanks2014.csproj", "{09761F5F-BC7D-4F3C-8B43-6E89A7FD62D2}"
+EndProject
+Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "Tanks2014Content", "Tanks2014\Tanks2014Content\Tanks2014Content.contentproj", "{747421B3-5A23-4D59-89F2-13F9604403B0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{09761F5F-BC7D-4F3C-8B43-6E89A7FD62D2}.Debug|x86.ActiveCfg = Debug|x86
+		{09761F5F-BC7D-4F3C-8B43-6E89A7FD62D2}.Debug|x86.Build.0 = Debug|x86
+		{09761F5F-BC7D-4F3C-8B43-6E89A7FD62D2}.Release|x86.ActiveCfg = Release|x86
+		{09761F5F-BC7D-4F3C-8B43-6E89A7FD62D2}.Release|x86.Build.0 = Release|x86
+		{747421B3-5A23-4D59-89F2-13F9604403B0}.Debug|x86.ActiveCfg = Debug|x86
+		{747421B3-5A23-4D59-89F2-13F9604403B0}.Release|x86.ActiveCfg = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
