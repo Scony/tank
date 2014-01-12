@@ -108,6 +108,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cannon.cs" />
+    <Compile Include="Fog.cs" />
     <Compile Include="MapObject.cs" />
     <Compile Include="DrawInfo.cs" />
     <Compile Include="Map.cs" />

@@ -91,6 +91,8 @@ namespace Tanks2014
             {
                 drawer.draw((int)mo.x-camX, (int)mo.y-camY, mo.getDrawInfo(), mo.rotation);
             }
+
+            Fog.draw(screenW, screenH, (int)center.x - camX, (int)center.y - camY, 12f, drawer);
         }
     }
 }

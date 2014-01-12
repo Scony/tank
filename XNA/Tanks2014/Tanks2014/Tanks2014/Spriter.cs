@@ -36,8 +36,12 @@ namespace Tanks2014
             }
             if (rotation == 3)
             {
-                effect = SpriteEffects.FlipVertically;
                 rotationAngle = (float)Math.PI / 2;
+                effect = SpriteEffects.FlipVertically;
+            }
+            if (rotation == 4)
+            {
+                rotationAngle = (float)Math.PI;
             }
             spriteBatch.Draw(sprite, new Rectangle(x + (int)size / 2, y + (int)size / 2, (int)size, (int)size), new Rectangle(spriteX, spriteY, (int)size, (int)size), Color.White, rotationAngle, new Vector2((int)size / 2, (int)size / 2), effect, 0);
         }
