@@ -8,7 +8,7 @@ namespace Tanks2014
 {
     abstract class Terrain : MapObject
     {
-        public override void update(GameTime gameTime)
+        public override void update(GameTime gameTime, Map map)
         {
             
         }

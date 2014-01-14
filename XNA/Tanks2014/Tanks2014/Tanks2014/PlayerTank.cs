@@ -22,12 +22,20 @@ namespace Tanks2014
             return info;
         }
 
-        public override void update(GameTime gameTime)
+        public override void update(GameTime gameTime, Map map)
         {
+			weapons[activeWeapon].update(gameTime);
+
             int lastX = (int)x;
             int lastY = (int)y;
 
             KeyboardState state = Keyboard.GetState();
+
+			if (state.IsKeyDown(Keys.Space))
+            {
+				weapons[activeWeapon].shoot(x+12,y+12,rotation,map);
+            }
+
             if (state.IsKeyDown(Keys.Down))
             {
                 y += speed * gameTime.ElapsedGameTime.TotalSeconds;

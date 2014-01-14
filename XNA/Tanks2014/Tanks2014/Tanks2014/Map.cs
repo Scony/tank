@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 
 namespace Tanks2014
 {
-    class Map
+    public class Map
     {
         readonly int width;
         readonly int height;
@@ -56,9 +56,9 @@ namespace Tanks2014
 
         public void update(GameTime gameTime)
         {
-            foreach(MapObject mo in objects){
-                mo.update(gameTime);
-            }
+			for(int i=0; i<objects.Count; i++){
+				objects[i].update(gameTime, this);
+			}
         }
         public void draw(GameTime gameTime, Spriter drawer)
         {
@@ -92,7 +92,7 @@ namespace Tanks2014
                 drawer.draw((int)mo.x-camX, (int)mo.y-camY, mo.getDrawInfo(), mo.rotation);
             }
 
-            Fog.draw(screenW, screenH, (int)center.x - camX, (int)center.y - camY, 12f, drawer);
+            Fog.draw(screenW, screenH, (int)center.x - camX, (int)center.y - camY, 15f, drawer);
         }
     }
 }

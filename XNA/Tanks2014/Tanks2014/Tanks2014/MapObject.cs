@@ -21,7 +21,7 @@ namespace Tanks2014
             return this;
         }
 
-        public abstract void update(GameTime gameTime);
+        public abstract void update(GameTime gameTime, Map map);
 
         public int CompareTo(MapObject other)
         {
