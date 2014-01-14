@@ -9,14 +9,21 @@ namespace Tanks2014
 {
     class PlayerTank : Tank
     {
+        private double speed = 100;
+        private DrawInfo info = new DrawInfo(0, 0, Size.LARGE);
+
         public PlayerTank()
         {
             rotation = Rotation.RIGHT;// && wyjebane;
         }
-        double speed = 100;
-        private int counter = 0;
 
-        private DrawInfo info = new DrawInfo(0, 0, Size.LARGE);
+		public PlayerTank (int x, int y, int rotation)
+		{
+			this.x = x;
+			this.y = y;
+			this.rotation = rotation;
+		}
+
         public override DrawInfo getDrawInfo()
         {
             return info;

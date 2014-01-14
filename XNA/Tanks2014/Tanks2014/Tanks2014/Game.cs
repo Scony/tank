@@ -18,8 +18,8 @@ namespace Tanks2014
     {
         private static int FPS = 30;
 
-        double lFpsTime = 0;
-        int lFpsCounter = 0;
+        private double lFps;
+        private double dFps;
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -48,7 +48,6 @@ namespace Tanks2014
         {
             //TargetElapsedTime = TimeSpan.FromMilliseconds(1000.0 / FPS);
             currentMode = new TestMode(this);
-            base.Window.Title = "Tanks 2014";
             base.Initialize();
         }
 
@@ -82,9 +81,9 @@ namespace Tanks2014
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            System.Console.Out.WriteLine(gameTime.ElapsedGameTime.TotalMilliseconds);
+            //System.Console.Out.WriteLine(gameTime.ElapsedGameTime.TotalMilliseconds);
+            lFps = 1.0 / gameTime.ElapsedGameTime.TotalSeconds;
             currentMode.update(gameTime);
-            base.Window.Title = "Tanks 2014 L:" + (1.0 / gameTime.ElapsedGameTime.TotalSeconds);
             base.Update(gameTime);
         }
 
@@ -95,11 +94,13 @@ namespace Tanks2014
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
+
             spriteBatch.Begin();
             currentMode.draw(gameTime, drawer);
             spriteBatch.End();
-            // TODO: Add your drawing code here
-            base.Window.Title = "Tanks 2014 D:" + (1.0 / gameTime.ElapsedGameTime.TotalSeconds);
+
+			dFps = 1.0 / gameTime.ElapsedGameTime.TotalSeconds;
+			base.Window.Title = "Tanks 2014 LFPS:" + lFps + " DFPS:" + dFps;
             base.Draw(gameTime);
         }
     }

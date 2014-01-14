@@ -9,6 +9,7 @@ namespace Tanks2014
     public abstract class Mode
     {
         protected TanksGame host;
+
         public Mode(TanksGame host)
         {
             this.host = host;
