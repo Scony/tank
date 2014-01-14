@@ -11,15 +11,10 @@ namespace Tanks2014
         readonly int width;
         readonly int height;
 
-        int screenW = 800;
-        int screenH = 480;
-
-        int camX = 0, camY = 0;
-
         MapObject[,] terrain;
         List<MapObject> objects;
 		List<MapObject> toRemove;
-        public MapObject center { set; get; }
+        public MapObject focus { set; get; }
 
         public Map(int w, int h)
         {
@@ -72,23 +67,47 @@ namespace Tanks2014
 					objects[i].update(gameTime, this);
 			}
         }
-        public void draw(GameTime gameTime, Spriter drawer)
-        {
-            camX = (int)center.x - screenW / 2;
-            camY = (int)center.y - screenH / 2;
-            
-            if (camX > width * Size.MEDIUM - screenW) camX = width * Size.MEDIUM - screenW;
-            if (camX < 0) camX = 0;
-            if (camY > height * Size.MEDIUM - screenH) camY = height * Size.MEDIUM - screenH;
-            if (camY < 0) camY = 0;
+
+        public void draw (GameTime gameTime, Spriter drawer)
+		{
+			int mapW = width * Size.MEDIUM;
+			int mapH = height * Size.MEDIUM;
+
+			int screenW = drawer.getScreenWidth ();
+			int screenH = drawer.getScreenHeight ();
+
+			int centerX = (int)focus.x + focus.getDrawInfo ().size / 2;
+			int centerY = (int)focus.y + focus.getDrawInfo ().size / 2;
+
+			int offsetX = 0;
+			int offsetY = 0;
+
+			// X axis calculations
+			offsetX = screenW / 2 - centerX;
+			if (mapW <= screenW)
+				offsetX = (screenW - mapW) / 2;
+			else if (screenW / 2 > centerX)
+				offsetX = 0;
+			else if (screenW / 2 > mapW - centerX)
+				offsetX = screenW - mapW;
+
+			// Y axis calculations
+			offsetY = screenH / 2 - centerY;
+			if (mapH <= screenH)
+				offsetY = (screenH - mapH) / 2;
+			else if (screenH / 2 > centerY)
+				offsetY = 0;
+			else if (screenH / 2 > mapH - centerY)
+				offsetY = screenH - mapH;
 
             List<MapObject> toDraw = new List<MapObject>();
-            int offsetX = camX / Size.MEDIUM;
-            int offsetY = camY / Size.MEDIUM;
-            for(int i = offsetX < 0?-offsetX:0; i < screenW/Size.MEDIUM + 1 && offsetX + i < width; i++)
-                for (int j = offsetY < 0 ? -offsetY : 0; j < screenH / Size.MEDIUM + 1 && offsetY + j < height; j++)
+
+			for(int i = (offsetX < 0 ? -offsetX : 0) / Size.MEDIUM; i < (offsetX < 0 ? -offsetX : 0) / Size.MEDIUM + screenW / Size.MEDIUM + 1; i++)
+				for (int j = (offsetY < 0 ? -offsetY : 0) / Size.MEDIUM; j < (offsetY < 0 ? -offsetY : 0) / Size.MEDIUM + screenH / Size.MEDIUM + 1; j++)
                 {
-                    MapObject mo = terrain[i + offsetX, j + offsetY];
+					if(i >= width || j >= height)
+						break;
+                    MapObject mo = terrain[i, j];
                     if (mo != null)
                     {
                         toDraw.Add(mo);
@@ -101,10 +120,10 @@ namespace Tanks2014
             toDraw.Sort();
             foreach (MapObject mo in toDraw)
             {
-                drawer.draw((int)mo.x-camX, (int)mo.y-camY, mo.getDrawInfo(), mo.rotation);
+                drawer.draw((int)mo.x+offsetX, (int)mo.y+offsetY, mo.getDrawInfo(), mo.rotation);
             }
 
-            Fog.draw(screenW, screenH, (int)center.x - camX, (int)center.y - camY, 8.2f, drawer);
+            Fog.draw(screenW, screenH, centerX + offsetX, centerY + offsetY, 8.2f, drawer);
         }
     }
 }

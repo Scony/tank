@@ -35,8 +35,8 @@ namespace Tanks2014
         public TanksGame()
         {
             graphics = new GraphicsDeviceManager(this);
-        	graphics.PreferredBackBufferWidth = 700;
-        	graphics.PreferredBackBufferHeight = 700;
+        	graphics.PreferredBackBufferWidth = 640;
+        	graphics.PreferredBackBufferHeight = 640;
         	graphics.IsFullScreen = false;
 
             Content.RootDirectory = "Content";
@@ -63,7 +63,7 @@ namespace Tanks2014
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             sprite = Content.Load<Texture2D>("sprite");
-            drawer = new Spriter(spriteBatch, sprite);
+            drawer = new Spriter(this, spriteBatch, sprite);
 
             // TODO: use this.Content to load your game content here
         }

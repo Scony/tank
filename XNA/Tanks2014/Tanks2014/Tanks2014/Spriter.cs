@@ -11,8 +11,11 @@ namespace Tanks2014
     {
         private Texture2D sprite;
         private SpriteBatch spriteBatch;
-        public Spriter(SpriteBatch sb, Texture2D sprite)
+		private Game host;
+
+        public Spriter(Game host, SpriteBatch sb, Texture2D sprite)
         {
+			this.host = host;
             spriteBatch = sb;
             this.sprite = sprite;
         }
@@ -45,5 +48,15 @@ namespace Tanks2014
             }
             spriteBatch.Draw(sprite, new Rectangle(x + (int)size / 2, y + (int)size / 2, (int)size, (int)size), new Rectangle(spriteX, spriteY, (int)size, (int)size), Color.White, rotationAngle, new Vector2((int)size / 2, (int)size / 2), effect, 0);
         }
+
+		public int getScreenWidth()
+		{
+			return host.GraphicsDevice.Viewport.Width;
+		}
+
+		public int getScreenHeight()
+		{
+			return host.GraphicsDevice.Viewport.Height;
+		}
     }
 }
