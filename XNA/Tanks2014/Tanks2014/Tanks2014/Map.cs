@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 
 namespace Tanks2014
 {
-    class Map
+    public class Map
     {
         readonly int width;
         readonly int height;
@@ -18,6 +18,7 @@ namespace Tanks2014
 
         MapObject[,] terrain;
         List<MapObject> objects;
+		List<MapObject> toRemove;
         public MapObject center { set; get; }
 
         public Map(int w, int h)
@@ -47,6 +48,7 @@ namespace Tanks2014
                 terrain[w - 1, i] = new Concrete().setXY((w - 1) * Size.MEDIUM, i * Size.MEDIUM);
             }
             objects = new List<MapObject>();
+			toRemove = new List<MapObject>();
         }
 
         public void addObject(MapObject obj)
@@ -54,11 +56,21 @@ namespace Tanks2014
             objects.Add(obj);
         }
 
+		public void removeObject(MapObject obj)
+        {
+            toRemove.Add(obj);
+			obj.deleted = true;
+        }
+
         public void update(GameTime gameTime)
         {
-            foreach(MapObject mo in objects){
-                mo.update(gameTime);
-            }
+			for(int i=0; i<toRemove.Count; i++){
+				objects.Remove(toRemove[i]);
+			}
+			for(int i=0; i<objects.Count; i++){
+				if(!objects[i].deleted)
+					objects[i].update(gameTime, this);
+			}
         }
         public void draw(GameTime gameTime, Spriter drawer)
         {
@@ -92,7 +104,7 @@ namespace Tanks2014
                 drawer.draw((int)mo.x-camX, (int)mo.y-camY, mo.getDrawInfo(), mo.rotation);
             }
 
-            Fog.draw(screenW, screenH, (int)center.x - camX, (int)center.y - camY, 12f, drawer);
+            Fog.draw(screenW, screenH, (int)center.x - camX, (int)center.y - camY, 8.2f, drawer);
         }
     }
 }

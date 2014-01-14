@@ -7,15 +7,17 @@ namespace Tanks2014
 {
     public abstract class Tank : MapObject
     {
-        int hp;
-        int maxHp;
-        int fuel;
-        int maxFuel;
-        Weapon[] weapons = new Weapon[10];
+        protected int hp;
+        protected int maxHp;
+        protected int fuel;
+        protected int maxFuel;
+        protected Weapon[] weapons = new Weapon[10];
+		protected int activeWeapon = 0;
 
         public Tank()
         {
             weapons[0] = new Cannon();
+			weapons[1] = new MachineGun();
         }
         
         public override int getTypeId()

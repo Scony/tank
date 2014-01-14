@@ -17,24 +17,41 @@ namespace Tanks2014
             rotation = Rotation.RIGHT;// && wyjebane;
         }
 
-		public PlayerTank (int x, int y, int rotation)
-		{
-			this.x = x;
-			this.y = y;
-			this.rotation = rotation;
-		}
+	public PlayerTank (int x, int y, int rotation)
+	{
+		this.x = x;
+		this.y = y;
+		this.rotation = rotation;
+	}
 
         public override DrawInfo getDrawInfo()
         {
             return info;
         }
 
-        public override void update(GameTime gameTime)
+        public override void update(GameTime gameTime, Map map)
         {
+			weapons[activeWeapon].update(gameTime);
+
             int lastX = (int)x;
             int lastY = (int)y;
 
             KeyboardState state = Keyboard.GetState();
+
+			if (state.IsKeyDown(Keys.D1))
+            {
+				activeWeapon = 0;
+            }
+			if (state.IsKeyDown(Keys.D2))
+            {
+				activeWeapon = 1;
+            }
+
+			if (state.IsKeyDown(Keys.Space))
+            {
+				weapons[activeWeapon].shoot(x+12,y+12,rotation,map);
+            }
+
             if (state.IsKeyDown(Keys.Down))
             {
                 y += speed * gameTime.ElapsedGameTime.TotalSeconds;
