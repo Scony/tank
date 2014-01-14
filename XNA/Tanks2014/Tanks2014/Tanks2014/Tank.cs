@@ -17,6 +17,7 @@ namespace Tanks2014
         public Tank()
         {
             weapons[0] = new Cannon();
+			weapons[1] = new MachineGun();
         }
         
         public override int getTypeId()

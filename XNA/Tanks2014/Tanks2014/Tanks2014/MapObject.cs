@@ -13,6 +13,7 @@ namespace Tanks2014
         public Rotation rotation = 0;
         public double x = 0;
         public double y = 0;
+		public bool deleted = false;
 
         public MapObject setXY(double x, double y)
         {

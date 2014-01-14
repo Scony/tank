@@ -1,22 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.Xna.Framework;
+using System;
 
 namespace Tanks2014
 {
-    class Cannon : Weapon
+    public class MachineGun : Weapon
     {
 		new class Projectible : Weapon.Projectible
 		{
-			static DrawInfo info = new DrawInfo(16,16,Size.SMALL);
-			public Projectible(double x, double y, Rotation rot) : base(x,y,rot, 200, 500)
+			static DrawInfo info = new DrawInfo(280,16,Size.SMALL);
+			public Projectible(double x, double y, Rotation rot) : base(x,y,rot, 500, 500)
 			{
 			}
 			public override int getTypeId ()
 			{
-				return 200;
+				return 201;
 			}
 			public override DrawInfo getDrawInfo ()
 			{
@@ -27,8 +23,9 @@ namespace Tanks2014
 		{
 			if (reload <= 0) {
 				map.addObject(new Projectible(x,y,rot));
-				reload = 0.5;
+				reload = 0.1;
 			}
 		}
     }
 }
+

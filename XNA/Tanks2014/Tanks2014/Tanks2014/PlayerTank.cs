@@ -14,7 +14,6 @@ namespace Tanks2014
             rotation = Rotation.RIGHT;// && wyjebane;
         }
         double speed = 100;
-        private int counter = 0;
 
         private DrawInfo info = new DrawInfo(0, 0, Size.LARGE);
         public override DrawInfo getDrawInfo()
@@ -30,6 +29,15 @@ namespace Tanks2014
             int lastY = (int)y;
 
             KeyboardState state = Keyboard.GetState();
+
+			if (state.IsKeyDown(Keys.D1))
+            {
+				activeWeapon = 0;
+            }
+			if (state.IsKeyDown(Keys.D2))
+            {
+				activeWeapon = 1;
+            }
 
 			if (state.IsKeyDown(Keys.Space))
             {
