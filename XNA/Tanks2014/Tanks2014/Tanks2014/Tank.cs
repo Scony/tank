@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework;
 
 namespace Tanks2014
 {
@@ -13,12 +14,18 @@ namespace Tanks2014
         protected int maxFuel;
         protected Weapon[] weapons = new Weapon[10];
 		protected int activeWeapon = 0;
+		protected Color color = Color.White;
 
         public Tank()
         {
             weapons[0] = new Cannon();
 			weapons[1] = new MachineGun();
         }
+
+		public override void draw (Spriter drawer, GameTime gameTime, int offsetX, int offsetY)
+		{
+			drawer.draw((int)x+offsetX, (int)y+offsetY, getDrawInfo(), rotation, color);
+		}
         
         public override int getTypeId()
         {

@@ -120,10 +120,11 @@ namespace Tanks2014
             toDraw.Sort();
             foreach (MapObject mo in toDraw)
             {
-                drawer.draw((int)mo.x+offsetX, (int)mo.y+offsetY, mo.getDrawInfo(), mo.rotation);
+				mo.draw(drawer, gameTime, offsetX, offsetY);
+                //drawer.draw((int)mo.x+offsetX, (int)mo.y+offsetY, mo.getDrawInfo(), mo.rotation);
             }
 
-            Fog.draw(screenW, screenH, centerX + offsetX, centerY + offsetY, 8.2f, drawer);
+            Fog.draw(screenW, screenH, centerX - Size.SMALL + offsetX, centerY - Size.SMALL + offsetY, 8.2f, drawer);
         }
     }
 }

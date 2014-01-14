@@ -25,7 +25,17 @@ namespace Tanks2014
             draw(x, y, d.size, d.spriteX, d.spriteY, (int)rotation);
         }
 
-        public void draw(int x, int y, int size, int spriteX, int spriteY, int rotation)
+		public void draw(int x, int y, DrawInfo d, Rotation rotation, Color color)
+        {
+			draw(x, y, d.size, d.spriteX, d.spriteY, (int)rotation, color);
+        }
+
+		public void draw (int x, int y, int size, int spriteX, int spriteY, int rotation)
+		{
+			draw(x,  y,  size, spriteX,  spriteY,  rotation, Color.White);
+		}
+
+        public void draw(int x, int y, int size, int spriteX, int spriteY, int rotation, Color color)
         {
             SpriteEffects effect = SpriteEffects.None;
             float rotationAngle = 0;
@@ -46,7 +56,7 @@ namespace Tanks2014
             {
                 rotationAngle = (float)Math.PI;
             }
-            spriteBatch.Draw(sprite, new Rectangle(x + (int)size / 2, y + (int)size / 2, (int)size, (int)size), new Rectangle(spriteX, spriteY, (int)size, (int)size), Color.White, rotationAngle, new Vector2((int)size / 2, (int)size / 2), effect, 0);
+            spriteBatch.Draw(sprite, new Rectangle(x + (int)size / 2, y + (int)size / 2, (int)size, (int)size), new Rectangle(spriteX, spriteY, (int)size, (int)size), color, rotationAngle, new Vector2((int)size / 2, (int)size / 2), effect, 0);
         }
 
 		public int getScreenWidth()

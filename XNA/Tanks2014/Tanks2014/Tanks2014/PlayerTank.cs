@@ -15,6 +15,7 @@ namespace Tanks2014
         public PlayerTank()
         {
             rotation = Rotation.RIGHT;
+			color = Color.LightGreen;
         }
 
 	public PlayerTank (int x, int y, int rotation)
@@ -45,6 +46,19 @@ namespace Tanks2014
 			if (state.IsKeyDown(Keys.D2))
             {
 				activeWeapon = 1;
+            }
+
+			if (state.IsKeyDown(Keys.I))
+            {
+				color = Color.LightGreen;
+            }
+			if (state.IsKeyDown(Keys.O))
+            {
+				color = Color.LightBlue;
+            }
+			if (state.IsKeyDown(Keys.P))
+            {
+				color = Color.LightCoral;
             }
 
 			if (state.IsKeyDown(Keys.Space))
