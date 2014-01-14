@@ -35,6 +35,10 @@ namespace Tanks2014
         public TanksGame()
         {
             graphics = new GraphicsDeviceManager(this);
+        	graphics.PreferredBackBufferWidth = 700;
+        	graphics.PreferredBackBufferHeight = 700;
+        	graphics.IsFullScreen = false;
+
             Content.RootDirectory = "Content";
         }
 
@@ -57,7 +61,6 @@ namespace Tanks2014
         /// </summary>
         protected override void LoadContent()
         {
-            // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             sprite = Content.Load<Texture2D>("sprite");
             drawer = new Spriter(spriteBatch, sprite);
@@ -81,7 +84,6 @@ namespace Tanks2014
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            //System.Console.Out.WriteLine(gameTime.ElapsedGameTime.TotalMilliseconds);
             lFps = 1.0 / gameTime.ElapsedGameTime.TotalSeconds;
             currentMode.update(gameTime);
             base.Update(gameTime);
@@ -101,6 +103,7 @@ namespace Tanks2014
 
 			dFps = 1.0 / gameTime.ElapsedGameTime.TotalSeconds;
 			base.Window.Title = "Tanks 2014 LFPS:" + lFps + " DFPS:" + dFps;
+			base.Window.Title += " " + base.GraphicsDevice.Viewport.Width + "/" + base.GraphicsDevice.Viewport.Width;
             base.Draw(gameTime);
         }
     }

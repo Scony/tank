@@ -14,14 +14,14 @@ namespace Tanks2014
 
         public PlayerTank()
         {
-            rotation = Rotation.RIGHT;// && wyjebane;
+            rotation = Rotation.RIGHT;
         }
 
 	public PlayerTank (int x, int y, int rotation)
 	{
 		this.x = x;
 		this.y = y;
-		//this.rotation = rotation;
+		this.rotation = (Rotation)rotation;
 	}
 
         public override DrawInfo getDrawInfo()
