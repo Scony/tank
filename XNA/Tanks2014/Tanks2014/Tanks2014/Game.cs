@@ -14,7 +14,7 @@ namespace Tanks2014
     /// <summary>
     /// This is the main type for your game
     /// </summary>
-    public class TanksGame : Microsoft.Xna.Framework.Game
+    public class TanksGame : Game
     {
         private static int FPS = 30;
 

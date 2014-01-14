@@ -21,7 +21,7 @@ namespace Tanks2014
 	{
 		this.x = x;
 		this.y = y;
-		this.rotation = rotation;
+		//this.rotation = rotation;
 	}
 
         public override DrawInfo getDrawInfo()
