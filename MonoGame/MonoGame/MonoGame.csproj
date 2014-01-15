@@ -92,6 +92,9 @@
     <Compile Include="..\..\XNA\Tanks2014\Tanks2014\Tanks2014\Weapon.cs">
       <Link>Weapon.cs</Link>
     </Compile>
+    <Compile Include="..\..\XNA\Tanks2014\Tanks2014\Tanks2014\LobbyMode.cs">
+      <Link>LobbyMode.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Icon.png" />

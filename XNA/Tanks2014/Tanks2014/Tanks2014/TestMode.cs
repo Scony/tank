@@ -13,8 +13,10 @@ namespace Tanks2014
         public TestMode(TanksGame host) : base(host)
         {
             chuj = new PlayerTank();
-            chuj.setXY(80, 80);
-            mapa = new Map(100,100);
+            chuj.setXY(0, 0);
+            //mapa = new Map(100,100);
+			string mapData = System.IO.File.ReadAllText(@"medium.map");
+			mapa = new Map(mapData);
             mapa.addObject(chuj);
             mapa.focus = chuj;
         }

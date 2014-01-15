@@ -16,6 +16,50 @@ namespace Tanks2014
 		List<MapObject> toRemove;
         public MapObject focus { set; get; }
 
+		public Map(string input)
+		{
+			string[] lines = input.Split('\n');
+			width = int.Parse(lines[0].Trim().Split(' ')[0]);
+			height = int.Parse(lines[0].Trim().Split(' ')[1]);
+
+			terrain = new Terrain[width,height];
+            for (int j = 0; j < height; j++)
+            {
+				string[] numbers = lines[j+1].Trim().Split(' ');
+                for (int i = 0; i < width; i++)
+                {
+                    switch (int.Parse(numbers[i]))
+					{
+					case 1:
+						terrain[i,j] = new Brick();
+						break;
+					case 2:
+						terrain[i,j] = new Concrete();
+						break;
+					case 3:
+						terrain[i,j] = new Pavement();
+						break;
+					case 4:
+						terrain[i,j] = new Bush();
+						break;
+					case 5:
+						terrain[i,j] = new Water();
+						break;
+					default:
+						terrain[i,j] = null;
+						break;
+					}
+					if(terrain[i,j] != null)
+					{
+						terrain[i,j].setXY(i * Size.MEDIUM, j * Size.MEDIUM);
+					}
+                }
+            }
+
+            objects = new List<MapObject>();
+			toRemove = new List<MapObject>();
+		}
+
         public Map(int w, int h)
         {
             height = h;

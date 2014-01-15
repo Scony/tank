@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using System.Diagnostics;
 
 namespace Tanks2014
 {
@@ -51,7 +52,8 @@ namespace Tanks2014
         protected override void Initialize()
         {
             //TargetElapsedTime = TimeSpan.FromMilliseconds(1000.0 / FPS);
-            currentMode = new TestMode(this);
+            //currentMode = new TestMode(this);
+			currentMode = new LobbyMode(this);
             base.Initialize();
         }
 
