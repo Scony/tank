@@ -19,6 +19,11 @@ namespace Tanks2014
 
         public LobbyMode(TanksGame host) : base(host)
         {
+            initialize();
+        }
+
+        private void initialize()
+        {
             message = "Initializing network connection";
             try
             {
@@ -28,15 +33,9 @@ namespace Tanks2014
                 //TODO: put below close's somewhere
                 //stream.Close ();
                 //client.Close ();
-            } catch (ArgumentNullException e)
+            } catch (Exception)
             {
-                Console.WriteLine("ArgumentNullException: {0}", e);
-            } catch (SocketException e)
-            {
-                Console.WriteLine("SocketException: {0}", e);
-            } catch (Exception e)
-            {
-                Console.WriteLine("ExceptionA: {0}", e);
+                message = "Initialization failed";
             }
         }
 
@@ -44,22 +43,32 @@ namespace Tanks2014
         {
             try
             {
-                if (sReader.Peek() >= 0)
+                if (stream.DataAvailable)
                 {
-                    string x = sReader.ReadLine();
-                    //TODO: analyze result and check if game is found
-                    message = x;
+                    string line = sReader.ReadLine();
+                    int players = int.Parse(line.Trim().Split(' ')[0]);
+                    int playersTotal = int.Parse(line.Trim().Split(' ')[1]);
+                    if(players != playersTotal)
+                    {
+                        message = "Waiting for players (" + players + "/" + playersTotal + ")";
+                    } else
+                    {
+                        string data = sReader.ReadToEnd();
+                        stream.Close();
+                        client.Close();
+                        host.setMode(new ClientMode(host,data));
+                    }
                 }
             } catch (Exception)
             {
                 message = "Could not connect to server. Reconnecting...";
-                //TODO: try reconnect
+                initialize();
             }
         }
 
         public override void draw(GameTime gameTime, Spriter drawer)
         {
-            Console.WriteLine("Received: " + message);
+            Console.WriteLine(message); //TODO: draw on screen instead
         }
     }
 }

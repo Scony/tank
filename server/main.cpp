@@ -64,12 +64,6 @@ int main(int argc, char** argv)
       	}
       catch(Poco::IOException e)
 	{
-	  // broadcast actual state
-	  for(int i = 0; i < lssi; i++)
-	    {
-	      Poco::Net::SocketStream str(lss[i]);
-	      str << lssi << " " << GAME_SIZE << "\n" << flush;
-	    }
 	}
 
       // game accepts

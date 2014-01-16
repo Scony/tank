@@ -1,6 +1,5 @@
 #include <sstream>
 #include <stdlib.h>
-#include <pair>
 
 #include "Game.hpp"
 
