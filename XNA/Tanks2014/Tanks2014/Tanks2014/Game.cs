@@ -52,8 +52,8 @@ namespace Tanks2014
         protected override void Initialize()
         {
             //TargetElapsedTime = TimeSpan.FromMilliseconds(1000.0 / FPS);
-            //currentMode = new TestMode(this);
-			currentMode = new LobbyMode(this);
+            currentMode = new TestMode(this);
+			//currentMode = new LobbyMode(this);
             base.Initialize();
         }
 
