@@ -10,6 +10,7 @@ namespace Tanks2014
     {
         PlayerTank chuj;
         Map mapa;
+
         public TestMode(TanksGame host) : base(host)
         {
             chuj = new PlayerTank();
@@ -20,10 +21,12 @@ namespace Tanks2014
             mapa.addObject(chuj);
             mapa.focus = chuj;
         }
+
         public override void update(GameTime gameTime)
         {
             mapa.update(gameTime);
         }
+
         public override void draw(GameTime gameTime, Spriter drawer)
         {
             mapa.draw(gameTime, drawer);
