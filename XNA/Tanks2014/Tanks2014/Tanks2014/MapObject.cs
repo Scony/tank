@@ -10,7 +10,7 @@ namespace Tanks2014
     {
         public abstract int getTypeId();
         public abstract DrawInfo getDrawInfo();
-        public Rotation rotation = 0;
+        protected Rotation rotation = 0;
         public double x = 0;
         public double y = 0;
 		public bool deleted = false;
@@ -21,6 +21,10 @@ namespace Tanks2014
             this.y = y;
             return this;
         }
+
+		public virtual void draw(Spriter drawer, GameTime gameTime, int offsetX, int offsetY){
+			drawer.draw((int)x+offsetX, (int)y+offsetY, getDrawInfo(), rotation);
+		}
 
         public abstract void update(GameTime gameTime, Map map);
 
