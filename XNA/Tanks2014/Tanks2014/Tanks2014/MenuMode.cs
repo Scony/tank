@@ -27,6 +27,10 @@ namespace Tanks2014
                 host.setMode(new LobbyMode(host));
                 return;
             }
+            if (state.IsKeyDown(Keys.D3))
+            {
+                host.Exit();
+            }
         }
 
         public override void draw(GameTime gameTime, Spriter drawer)

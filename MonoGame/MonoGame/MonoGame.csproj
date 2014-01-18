@@ -101,6 +101,15 @@
     <Compile Include="..\..\XNA\Tanks2014\Tanks2014\Tanks2014\ClientMode.cs">
       <Link>ClientMode.cs</Link>
     </Compile>
+    <Compile Include="..\..\XNA\Tanks2014\Tanks2014\Tanks2014\Ammo.cs">
+      <Link>Ammo.cs</Link>
+    </Compile>
+    <Compile Include="..\..\XNA\Tanks2014\Tanks2014\Tanks2014\Consumable.cs">
+      <Link>Consumable.cs</Link>
+    </Compile>
+    <Compile Include="..\..\XNA\Tanks2014\Tanks2014\Tanks2014\Fuel.cs">
+      <Link>Fuel.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Icon.png" />

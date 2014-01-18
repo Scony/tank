@@ -1,17 +1,17 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="../XNA/Tanks2014/Tanks2014/Tanks2014/LobbyMode.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="../XNA/Tanks2014/Tanks2014/Tanks2014/Map.cs">
     <Files>
-      <File FileName="MonoGame/Program.cs" Line="6" Column="17" />
-      <File FileName="../XNA/Tanks2014/Tanks2014/Tanks2014/Game.cs" Line="18" Column="19" />
-      <File FileName="../XNA/Tanks2014/Tanks2014/Tanks2014/PlayerTank.cs" Line="8" Column="20" />
-      <File FileName="../XNA/Tanks2014/Tanks2014/Tanks2014/Map.cs" Line="19" Column="27" />
-      <File FileName="../XNA/Tanks2014/Tanks2014/Tanks2014/DrawInfo.cs" Line="1" Column="1" />
-      <File FileName="../XNA/Tanks2014/Tanks2014/Tanks2014/Fog.cs" Line="1" Column="1" />
-      <File FileName="../XNA/Tanks2014/Tanks2014/Tanks2014/Mode.cs" Line="1" Column="1" />
-      <File FileName="../XNA/Tanks2014/Tanks2014/Tanks2014/TestMode.cs" Line="19" Column="28" />
-      <File FileName="../XNA/Tanks2014/Tanks2014/Tanks2014/Spriter.cs" Line="58" Column="4" />
-      <File FileName="../XNA/Tanks2014/Tanks2014/Tanks2014/LobbyMode.cs" Line="18" Column="32" />
+      <File FileName="../XNA/Tanks2014/Tanks2014/Tanks2014/PlayerTank.cs" Line="13" Column="9" />
+      <File FileName="../XNA/Tanks2014/Tanks2014/Tanks2014/MenuMode.cs" Line="14" Column="10" />
+      <File FileName="../XNA/Tanks2014/Tanks2014/Tanks2014/Game.cs" Line="60" Column="31" />
+      <File FileName="../XNA/Tanks2014/Tanks2014/Tanks2014/LobbyMode.cs" Line="53" Column="76" />
+      <File FileName="../XNA/Tanks2014/Tanks2014/Tanks2014/Map.cs" Line="145" Column="18" />
+      <File FileName="../XNA/Tanks2014/Tanks2014/Tanks2014/ClientMode.cs" Line="7" Column="17" />
+      <File FileName="../XNA/Tanks2014/Tanks2014/Tanks2014/Consumable.cs" Line="17" Column="6" />
+      <File FileName="../XNA/Tanks2014/Tanks2014/Tanks2014/Fuel.cs" Line="20" Column="30" />
+      <File FileName="../XNA/Tanks2014/Tanks2014/Tanks2014/Ammo.cs" Line="20" Column="30" />
+      <File FileName="../XNA/Tanks2014/Tanks2014/Tanks2014/Tank.cs" Line="30" Column="9" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
