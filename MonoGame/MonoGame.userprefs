@@ -1,6 +1,6 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="../XNA/Tanks2014/Tanks2014/Tanks2014/Map.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="../XNA/Tanks2014/Tanks2014/Tanks2014/Consumable.cs">
     <Files>
       <File FileName="../XNA/Tanks2014/Tanks2014/Tanks2014/PlayerTank.cs" Line="13" Column="9" />
       <File FileName="../XNA/Tanks2014/Tanks2014/Tanks2014/MenuMode.cs" Line="14" Column="10" />
@@ -8,7 +8,7 @@
       <File FileName="../XNA/Tanks2014/Tanks2014/Tanks2014/LobbyMode.cs" Line="53" Column="76" />
       <File FileName="../XNA/Tanks2014/Tanks2014/Tanks2014/Map.cs" Line="145" Column="18" />
       <File FileName="../XNA/Tanks2014/Tanks2014/Tanks2014/ClientMode.cs" Line="7" Column="17" />
-      <File FileName="../XNA/Tanks2014/Tanks2014/Tanks2014/Consumable.cs" Line="17" Column="6" />
+      <File FileName="../XNA/Tanks2014/Tanks2014/Tanks2014/Consumable.cs" Line="13" Column="15" />
       <File FileName="../XNA/Tanks2014/Tanks2014/Tanks2014/Fuel.cs" Line="20" Column="30" />
       <File FileName="../XNA/Tanks2014/Tanks2014/Tanks2014/Ammo.cs" Line="20" Column="30" />
       <File FileName="../XNA/Tanks2014/Tanks2014/Tanks2014/Tank.cs" Line="30" Column="9" />

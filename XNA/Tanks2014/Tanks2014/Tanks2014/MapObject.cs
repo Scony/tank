@@ -8,12 +8,14 @@ namespace Tanks2014
 {
     public abstract class MapObject : IComparable<MapObject>
     {
-        public abstract int getTypeId();
-        public abstract DrawInfo getDrawInfo();
         protected Rotation rotation = 0;
         public double x = 0;
         public double y = 0;
 		public bool deleted = false;
+
+        public abstract int getTypeId();
+        public abstract DrawInfo getDrawInfo();
+        public abstract void update(GameTime gameTime, Map map);
 
         public MapObject setXY(double x, double y)
         {
@@ -22,11 +24,10 @@ namespace Tanks2014
             return this;
         }
 
-		public virtual void draw(Spriter drawer, GameTime gameTime, int offsetX, int offsetY){
+		public virtual void draw(Spriter drawer, GameTime gameTime, int offsetX, int offsetY)
+        {
 			drawer.draw((int)x+offsetX, (int)y+offsetY, getDrawInfo(), rotation);
 		}
-
-        public abstract void update(GameTime gameTime, Map map);
 
         public int CompareTo(MapObject other)
         {

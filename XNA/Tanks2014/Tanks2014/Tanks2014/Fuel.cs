@@ -8,7 +8,11 @@ namespace Tanks2014
 {
     public class Fuel : Consumable
     {
-        private DrawInfo info = new DrawInfo(0, 0, Size.LARGE);
+        private DrawInfo info = new DrawInfo(128, 360, Size.LARGE);
+
+        public Fuel(int amount) : base(amount)
+        {
+        }
 
         public override void extractTo(Tank tank)
         {
@@ -17,11 +21,16 @@ namespace Tanks2014
 
         public override int getTypeId()
         {
-            return -1; //TODO
+            return -1;//TODO
         }
 
         public override DrawInfo getDrawInfo()
         {
+            if(hidden)
+                info.spriteX = 160;
+            else
+                info.spriteX = 128;
+
             return info;
         }
     }

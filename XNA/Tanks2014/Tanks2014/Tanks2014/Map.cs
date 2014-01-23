@@ -17,47 +17,71 @@ namespace Tanks2014
         public MapObject focus { set; get; }
 
 		public Map(string input)
-		{
-			string[] lines = input.Split('\n');
-			width = int.Parse(lines[0].Trim().Split(' ')[0]);
-			height = int.Parse(lines[0].Trim().Split(' ')[1]);
+        {
+            string[] lines = input.Split('\n');
+            width = int.Parse(lines [0].Trim().Split(' ') [0]);
+            height = int.Parse(lines [0].Trim().Split(' ') [1]);
 
-			terrain = new Terrain[width,height];
+            terrain = new Terrain[width, height];
             for (int j = 0; j < height; j++)
             {
-				string[] numbers = lines[j+1].Trim().Split(' ');
+                string[] numbers = lines [j + 1].Trim().Split(' ');
                 for (int i = 0; i < width; i++)
                 {
-                    switch (int.Parse(numbers[i]))
-					{
-					case 1:
-						terrain[i,j] = new Brick();
-						break;
-					case 2:
-						terrain[i,j] = new Concrete();
-						break;
-					case 3:
-						terrain[i,j] = new Pavement();
-						break;
-					case 4:
-						terrain[i,j] = new Bush();
-						break;
-					case 5:
-						terrain[i,j] = new Water();
-						break;
-					default:
-						terrain[i,j] = null;
-						break;
-					}
-					if(terrain[i,j] != null)
-					{
-						terrain[i,j].setXY(i * Size.MEDIUM, j * Size.MEDIUM);
-					}
+                    switch (int.Parse(numbers [i]))
+                    {
+                        case 1:
+                            terrain [i, j] = new Brick();
+                            break;
+                        case 2:
+                            terrain [i, j] = new Concrete();
+                            break;
+                        case 3:
+                            terrain [i, j] = new Pavement();
+                            break;
+                        case 4:
+                            terrain [i, j] = new Bush();
+                            break;
+                        case 5:
+                            terrain [i, j] = new Water();
+                            break;
+                        default:
+                            terrain [i, j] = null;
+                            break;
+                    }
+                    if (terrain [i, j] != null)
+                    {
+                        terrain [i, j].setXY(i * Size.MEDIUM, j * Size.MEDIUM);
+                    }
                 }
             }
 
             objects = new List<MapObject>();
-			toRemove = new List<MapObject>();
+            toRemove = new List<MapObject>();
+
+            int consumables = int.Parse(lines [height + 1]);
+            for (int i = 0; i < consumables; i++)
+            {
+                string[] numbers = lines [height + 2 + i].Trim().Split(' ');
+                int a = int.Parse(numbers[0]);
+                int b = int.Parse(numbers[1]);
+                int kind = int.Parse(numbers[2]);
+                int amount = int.Parse(numbers[3]);
+
+                switch(kind)
+                {
+                    case 1:
+                        Ammo ammo = new Ammo(amount);
+                        ammo.setXY(a*Size.MEDIUM,b*Size.MEDIUM);
+                        objects.Add(ammo);
+                        break;
+                    case 2:
+                        Fuel fuel = new Fuel(amount);
+                        fuel.setXY(a*Size.MEDIUM,b*Size.MEDIUM);
+                        objects.Add(fuel);
+                        break;
+                }
+            }
 		}
 
         public Map(int w, int h)
