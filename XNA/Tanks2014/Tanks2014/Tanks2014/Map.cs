@@ -51,7 +51,7 @@ namespace Tanks2014
                     }
                     if (terrain [i, j] != null)
                     {
-                        terrain [i, j].setXY(i * Size.MEDIUM, j * Size.MEDIUM);
+                        terrain [i, j].setXY(i * Size.MEDIUM, j * Size.MEDIUM).commit();
                     }
                 }
             }
@@ -72,12 +72,12 @@ namespace Tanks2014
                 {
                     case 1:
                         Ammo ammo = new Ammo(amount);
-                        ammo.setXY(a*Size.MEDIUM,b*Size.MEDIUM);
+                        ammo.setXY(a*Size.MEDIUM,b*Size.MEDIUM).commit();
                         objects.Add(ammo);
                         break;
                     case 2:
                         Fuel fuel = new Fuel(amount);
-                        fuel.setXY(a*Size.MEDIUM,b*Size.MEDIUM);
+                        fuel.setXY(a*Size.MEDIUM,b*Size.MEDIUM).commit();
                         objects.Add(fuel);
                         break;
                 }
@@ -94,21 +94,21 @@ namespace Tanks2014
                 for (int j = 0; j < h; j++)
                 {
                     if((i+j)%10 == 0)
-                        terrain[i, j] = new Bush().setXY(i*Size.MEDIUM, j*Size.MEDIUM);
+                        terrain[i, j] = new Bush().setXY(i*Size.MEDIUM, j*Size.MEDIUM).commit();
                     else
-                        terrain[i, j] = new Pavement().setXY(i * Size.MEDIUM, j * Size.MEDIUM);
+                        terrain[i, j] = new Pavement().setXY(i * Size.MEDIUM, j * Size.MEDIUM).commit();
                 }
             }
 
             for (int i = 0; i < w; i++)
             {
-                terrain[i, 0] = new Concrete().setXY(i * Size.MEDIUM, 0);
-                terrain[i, h - 1] = new Concrete().setXY(i * Size.MEDIUM, (h - 1) * Size.MEDIUM);
+                terrain[i, 0] = new Concrete().setXY(i * Size.MEDIUM, 0).commit();
+                terrain[i, h - 1] = new Concrete().setXY(i * Size.MEDIUM, (h - 1) * Size.MEDIUM).commit();
             }
             for (int i = 0; i < h; i++)
             {
-                terrain[0, i] = new Concrete().setXY(0, i * Size.MEDIUM);
-                terrain[w - 1, i] = new Concrete().setXY((w - 1) * Size.MEDIUM, i * Size.MEDIUM);
+                terrain[0, i] = new Concrete().setXY(0, i * Size.MEDIUM).commit();
+                terrain[w - 1, i] = new Concrete().setXY((w - 1) * Size.MEDIUM, i * Size.MEDIUM).commit();
             }
             objects = new List<MapObject>();
 			toRemove = new List<MapObject>();
@@ -127,13 +127,21 @@ namespace Tanks2014
 
         public void update(GameTime gameTime)
         {
-			for(int i=0; i<toRemove.Count; i++){
-				objects.Remove(toRemove[i]);
-			}
-			for(int i=0; i<objects.Count; i++){
-				if(!objects[i].deleted)
-					objects[i].update(gameTime, this);
-			}
+            for (int i=0; i<toRemove.Count; i++)
+            {
+                objects.Remove(toRemove [i]);
+            }
+
+            for (int i=0; i<objects.Count; i++)
+            {
+                if (!objects [i].deleted)
+                    objects [i].update(gameTime, this);
+            }
+
+            foreach (MapObject mo in objects)
+            {
+                mo.commit();
+            }
         }
 
         public void draw (GameTime gameTime, Spriter drawer)
@@ -144,8 +152,8 @@ namespace Tanks2014
 			int screenW = drawer.getScreenWidth ();
 			int screenH = drawer.getScreenHeight ();
 
-			int centerX = (int)focus.x + focus.getDrawInfo ().size / 2;
-			int centerY = (int)focus.y + focus.getDrawInfo ().size / 2;
+			int centerX = (int)focus.realX + focus.getDrawInfo ().size / 2;
+			int centerY = (int)focus.realY + focus.getDrawInfo ().size / 2;
 
 			int offsetX = 0;
 			int offsetY = 0;

@@ -24,7 +24,7 @@ namespace Tanks2014
 
 		public override void draw (Spriter drawer, GameTime gameTime, int offsetX, int offsetY)
 		{
-			drawer.draw((int)x+offsetX, (int)y+offsetY, getDrawInfo(), rotation, color);
+			drawer.draw((int)realX+offsetX, (int)realY+offsetY, getDrawInfo(), rotation, color);
 		}
         
         public override int getTypeId()
