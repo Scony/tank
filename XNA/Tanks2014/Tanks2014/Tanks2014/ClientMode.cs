@@ -20,8 +20,8 @@ namespace Tanks2014
 
         public ClientMode(TanksGame host, string initData) : base(host)
         {
-            map = new Map(initData);
-            //TODO: do smth with dat focus
+            map = new Map(initData);//TODO: NetworkMap
+            //TODO: do smth with dat focus RE: move that problem into NetworkMap
             MapObject chuj = new PlayerTank();
             chuj.setXY(0, 0);
             map.addObject(chuj);

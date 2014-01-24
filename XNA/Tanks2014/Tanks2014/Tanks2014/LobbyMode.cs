@@ -30,9 +30,6 @@ namespace Tanks2014
                 client = new TcpClient(server, port);
                 stream = client.GetStream();
                 sReader = new StreamReader(stream, Encoding.ASCII);
-                //TODO: put below close's somewhere
-                //stream.Close ();
-                //client.Close ();
             } catch (Exception)
             {
                 message = "Initialization failed";

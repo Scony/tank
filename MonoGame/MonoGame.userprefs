@@ -1,17 +1,11 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="../XNA/Tanks2014/Tanks2014/Tanks2014/Consumable.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="../XNA/Tanks2014/Tanks2014/Tanks2014/Tank.cs">
     <Files>
-      <File FileName="../XNA/Tanks2014/Tanks2014/Tanks2014/PlayerTank.cs" Line="13" Column="9" />
-      <File FileName="../XNA/Tanks2014/Tanks2014/Tanks2014/MenuMode.cs" Line="14" Column="10" />
-      <File FileName="../XNA/Tanks2014/Tanks2014/Tanks2014/Game.cs" Line="60" Column="31" />
-      <File FileName="../XNA/Tanks2014/Tanks2014/Tanks2014/LobbyMode.cs" Line="53" Column="76" />
-      <File FileName="../XNA/Tanks2014/Tanks2014/Tanks2014/Map.cs" Line="145" Column="18" />
-      <File FileName="../XNA/Tanks2014/Tanks2014/Tanks2014/ClientMode.cs" Line="7" Column="17" />
-      <File FileName="../XNA/Tanks2014/Tanks2014/Tanks2014/Consumable.cs" Line="13" Column="15" />
-      <File FileName="../XNA/Tanks2014/Tanks2014/Tanks2014/Fuel.cs" Line="20" Column="30" />
-      <File FileName="../XNA/Tanks2014/Tanks2014/Tanks2014/Ammo.cs" Line="20" Column="30" />
-      <File FileName="../XNA/Tanks2014/Tanks2014/Tanks2014/Tank.cs" Line="30" Column="9" />
+      <File FileName="../XNA/Tanks2014/Tanks2014/Tanks2014/Map.cs" Line="81" Column="43" />
+      <File FileName="../XNA/Tanks2014/Tanks2014/Tanks2014/Tank.cs" Line="7" Column="20" />
+      <File FileName="../XNA/Tanks2014/Tanks2014/Tanks2014/MapObject.cs" Line="18" Column="65" />
+      <File FileName="../XNA/Tanks2014/Tanks2014/Tanks2014/DrawInfo.cs" Line="8" Column="22" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
