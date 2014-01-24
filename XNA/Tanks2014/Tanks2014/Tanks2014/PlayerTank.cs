@@ -15,15 +15,15 @@ namespace Tanks2014
         public PlayerTank()
         {
             rotation = Rotation.RIGHT;
-			color = Color.LightGreen;
+            color = Color.LightGreen;
         }
 
-	public PlayerTank (int x, int y, int rotation)
-	{
-		this.x = x;
-		this.y = y;
-		this.rotation = (Rotation)rotation;
-	}
+        public PlayerTank(int x, int y, int rotation)
+        {
+            this.x = x;
+            this.y = y;
+            this.rotation = (Rotation)rotation;
+        }
 
         public override DrawInfo getDrawInfo()
         {
@@ -32,61 +32,70 @@ namespace Tanks2014
 
         public override void update(GameTime gameTime, Map map)
         {
-			weapons[activeWeapon].update(gameTime);
-
-            int lastX = (int)x;
-            int lastY = (int)y;
+            weapons [activeWeapon].update(gameTime);
 
             KeyboardState state = Keyboard.GetState();
 
-			if (state.IsKeyDown(Keys.D1))
+            //weapon switching
+            if (state.IsKeyDown(Keys.D1))
             {
-				activeWeapon = 0;
+                activeWeapon = 0;
             }
-			if (state.IsKeyDown(Keys.D2))
+            if (state.IsKeyDown(Keys.D2))
             {
-				activeWeapon = 1;
-            }
-
-			if (state.IsKeyDown(Keys.I))
-            {
-				color = Color.LightGreen;
-            }
-			if (state.IsKeyDown(Keys.O))
-            {
-				color = Color.LightBlue;
-            }
-			if (state.IsKeyDown(Keys.P))
-            {
-				color = Color.LightCoral;
+                activeWeapon = 1;
             }
 
-			if (state.IsKeyDown(Keys.Space))
+            //color switching
+            if (state.IsKeyDown(Keys.I))
             {
-				weapons[activeWeapon].shoot(x+12,y+12,rotation,map);
+                color = Color.LightGreen;
+            }
+            if (state.IsKeyDown(Keys.O))
+            {
+                color = Color.LightBlue;
+            }
+            if (state.IsKeyDown(Keys.P))
+            {
+                color = Color.LightCoral;
             }
 
+            //shoot
+            if (state.IsKeyDown(Keys.Space))
+            {
+                weapons [activeWeapon].shoot(x + 12, y + 12, rotation, map);
+            }
+
+            //tank move
+            bool moving = true;
             if (state.IsKeyDown(Keys.Down))
             {
                 y += speed * gameTime.ElapsedGameTime.TotalSeconds;
                 rotation = Rotation.DOWN;
-            }
-            else if (state.IsKeyDown(Keys.Up))
+            } else if (state.IsKeyDown(Keys.Up))
             {
                 y -= speed * gameTime.ElapsedGameTime.TotalSeconds;
                 rotation = Rotation.UP;
-            }
-            else if (state.IsKeyDown(Keys.Left))
+            } else if (state.IsKeyDown(Keys.Left))
             {
                 x -= speed * gameTime.ElapsedGameTime.TotalSeconds;
                 rotation = Rotation.LEFT;
-            }
-            else if (state.IsKeyDown(Keys.Right))
+            } else if (state.IsKeyDown(Keys.Right))
             {
                 x += speed * gameTime.ElapsedGameTime.TotalSeconds;
                 rotation = Rotation.RIGHT;
+            } else
+            {
+                moving = false;
             }
-            if (lastX != (int)x || lastY != (int)y)
+            if (moving && realRotation != rotation && Math.Abs((int)realRotation - (int)rotation) != 2)
+            {
+                x = Math.Round(realX / Size.MEDIUM) * Size.MEDIUM;
+                y = Math.Round(realY / Size.MEDIUM) * Size.MEDIUM;
+            }
+
+            //caterpillar move
+            if ((int)realX != (int)x || (int)realY != (int)y)
             {
                 info.spriteX = 32 - info.spriteX;
             }

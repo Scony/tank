@@ -8,9 +8,10 @@ namespace Tanks2014
 {
     public abstract class MapObject : IComparable<MapObject>
     {
-        protected Rotation rotation = 0;
+        protected Rotation realRotation = 0;
         public double realX = 0; //TODO: zmienić na własności
         public double realY = 0;
+        protected Rotation rotation = 0;
         public double x = 0;
         public double y = 0;
 		public bool deleted = false;
@@ -28,6 +29,7 @@ namespace Tanks2014
 
         public MapObject commit()
         {
+            realRotation = rotation;
             realX = x;
             realY = y;
             return this;
@@ -35,6 +37,7 @@ namespace Tanks2014
 
         public MapObject revert()
         {
+            realRotation = rotation;
             x = realX;
             y = realY;
             return this;
@@ -42,7 +45,7 @@ namespace Tanks2014
 
 		public virtual void draw(Spriter drawer, GameTime gameTime, int offsetX, int offsetY)
         {
-			drawer.draw((int)realX+offsetX, (int)realY+offsetY, getDrawInfo(), rotation);
+			drawer.draw((int)realX+offsetX, (int)realY+offsetY, getDrawInfo(), realRotation);
 		}
 
         public int CompareTo(MapObject other)
