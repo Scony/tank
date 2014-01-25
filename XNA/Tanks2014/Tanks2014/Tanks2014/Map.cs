@@ -8,12 +8,12 @@ namespace Tanks2014
 {
     public class Map
     {
-        readonly int width;
-        readonly int height;
+        protected readonly int width;
+        protected readonly int height;
 
-        MapObject[,] terrain;
-        List<MapObject> objects;
-		List<MapObject> toRemove;
+        protected MapObject[,] terrain;
+        protected List<MapObject> objects;
+		protected List<MapObject> toRemove;
         public MapObject focus { set; get; }
 
 		public Map(string input)
@@ -125,7 +125,7 @@ namespace Tanks2014
 			obj.deleted = true;
         }
 
-        public void update(GameTime gameTime)
+        public virtual void update(GameTime gameTime)
         {
             for (int i=0; i<toRemove.Count; i++)
             {

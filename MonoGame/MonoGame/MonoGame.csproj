@@ -110,6 +110,9 @@
     <Compile Include="..\..\XNA\Tanks2014\Tanks2014\Tanks2014\Fuel.cs">
       <Link>Fuel.cs</Link>
     </Compile>
+    <Compile Include="..\..\XNA\Tanks2014\Tanks2014\Tanks2014\NetworkMap.cs">
+      <Link>NetworkMap.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Icon.png" />
