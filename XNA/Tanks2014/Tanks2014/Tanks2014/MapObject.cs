@@ -16,6 +16,12 @@ namespace Tanks2014
         public double y = 0;
 		public bool deleted = false;
 
+		public int collisionId {
+			get {
+				return getTypeId();//TODO bitmask
+			}
+		}
+
         public abstract int getTypeId();
         public abstract DrawInfo getDrawInfo();
         public abstract void update(GameTime gameTime, Map map);
@@ -42,6 +48,11 @@ namespace Tanks2014
             y = realY;
             return this;
         }
+
+		public void handleCollision (MapObject other)
+		{
+			//TODO: abstract
+		}
 
 		public virtual void draw(Spriter drawer, GameTime gameTime, int offsetX, int offsetY)
         {

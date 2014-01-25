@@ -134,8 +134,16 @@ namespace Tanks2014
 
             for (int i=0; i<objects.Count; i++)
             {
-                if (!objects [i].deleted)
+                if (!objects [i].deleted){
                     objects [i].update(gameTime, this);
+				}
+            }
+
+			for (int i=0; i<objects.Count; i++)
+            {
+                if (!objects [i].deleted){
+                    checkCollision(objects[i], i);
+				}
             }
 
             foreach (MapObject mo in objects)
@@ -143,6 +151,35 @@ namespace Tanks2014
                 mo.commit();
             }
         }
+
+		protected void checkCollision(MapObject obj, int idx)
+		{
+			checkTerrainCollision(obj);
+			checkObjectsCollision(obj, idx);
+		}
+
+		protected void checkTerrainCollision (MapObject obj)
+		{
+
+		}
+		protected void checkObjectsCollision (MapObject obj, int idx)
+		{
+			for (int i = idx+1; i<objects.Count; i++)
+            {
+                if(collides(obj, objects[i])){
+					if(obj.collisionId > objects[i].collisionId){
+						obj.handleCollision(objects[i]);
+					}
+					else{
+						objects[i].handleCollision(obj);
+					}
+				}
+            }
+		}
+		public bool collides (MapObject o1, MapObject o2)
+		{
+			return false;
+		}
 
         public void draw (GameTime gameTime, Spriter drawer)
 		{
