@@ -105,6 +105,27 @@
     <Compile Include="..\..\..\XNA\Tanks2014\Tanks2014\Tanks2014\MachineGun.cs">
       <Link>Tanks2014\MachineGun.cs</Link>
     </Compile>
+    <Compile Include="..\..\..\XNA\Tanks2014\Tanks2014\Tanks2014\Ammo.cs">
+      <Link>Tanks2014\Ammo.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\XNA\Tanks2014\Tanks2014\Tanks2014\ClientMode.cs">
+      <Link>Tanks2014\ClientMode.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\XNA\Tanks2014\Tanks2014\Tanks2014\Consumable.cs">
+      <Link>Tanks2014\Consumable.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\XNA\Tanks2014\Tanks2014\Tanks2014\Fuel.cs">
+      <Link>Tanks2014\Fuel.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\XNA\Tanks2014\Tanks2014\Tanks2014\LobbyMode.cs">
+      <Link>Tanks2014\LobbyMode.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\XNA\Tanks2014\Tanks2014\Tanks2014\MenuMode.cs">
+      <Link>Tanks2014\MenuMode.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\XNA\Tanks2014\Tanks2014\Tanks2014\NetworkMap.cs">
+      <Link>Tanks2014\NetworkMap.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Icon.png" />
