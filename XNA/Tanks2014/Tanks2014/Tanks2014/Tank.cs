@@ -12,6 +12,7 @@ namespace Tanks2014
         protected int maxHp;
         protected int fuel;
         protected int maxFuel;
+        protected double speed = 100;
         protected Weapon[] weapons = new Weapon[10];
 		protected int activeWeapon = 0;
 		protected Color color = Color.White;

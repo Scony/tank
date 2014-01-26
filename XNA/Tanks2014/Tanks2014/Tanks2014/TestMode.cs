@@ -8,28 +8,29 @@ namespace Tanks2014
 {
     class TestMode : Mode
     {
-        PlayerTank chuj;
-        Map mapa;
+        PlayerTank pt;
+        Map map;
 
         public TestMode(TanksGame host) : base(host)
         {
-            chuj = new PlayerTank();
-            chuj.setXY(0, 0);
+            pt = new PlayerTank();
+            pt.setXY(0, 0);
             //mapa = new Map(100,100);
 			string mapData = System.IO.File.ReadAllText(@"medium.map");
-			mapa = new Map(mapData);
-            mapa.addObject(chuj);
-            mapa.focus = chuj;
+			map = new Map(mapData);
+            map.addObject(pt);
+            map.addObject(new AITank(60,60,0));
+            map.focus = pt;
         }
 
         public override void update(GameTime gameTime)
         {
-            mapa.update(gameTime);
+            map.update(gameTime);
         }
 
         public override void draw(GameTime gameTime, Spriter drawer)
         {
-            mapa.draw(gameTime, drawer);
+            map.draw(gameTime, drawer);
         }
     }
 }

@@ -7,26 +7,11 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Tanks2014
 {
-    class PlayerTank : Tank
+    class NetworkPlayerTank : NetworkTank
     {
-        private DrawInfo info = new DrawInfo(0, 0, Size.LARGE);
-
-        public PlayerTank()
+        public NetworkPlayerTank(string initData) : base(initData)
         {
-            rotation = Rotation.RIGHT;
-            color = Color.LightGreen;
-        }
-
-        public PlayerTank(int x, int y, int rotation)
-        {
-            this.x = x;
-            this.y = y;
-            this.rotation = (Rotation)rotation;
-        }
-
-        public override DrawInfo getDrawInfo()
-        {
-            return info;
+            color = Color.DarkGoldenrod;
         }
 
         public override void update(GameTime gameTime, Map map)

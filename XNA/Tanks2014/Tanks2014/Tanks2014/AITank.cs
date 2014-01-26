@@ -7,21 +7,22 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Tanks2014
 {
-    class PlayerTank : Tank
+    class AITank : Tank
     {
         private DrawInfo info = new DrawInfo(0, 0, Size.LARGE);
 
-        public PlayerTank()
+        public AITank()
         {
             rotation = Rotation.RIGHT;
-            color = Color.LightGreen;
+            color = Color.Red;
         }
 
-        public PlayerTank(int x, int y, int rotation)
+        public AITank(int x, int y, int rotation)
         {
-            this.x = x;
-            this.y = y;
+            this.realX = x;
+            this.realY = y;
             this.rotation = (Rotation)rotation;
+            color = Color.Red;
         }
 
         public override DrawInfo getDrawInfo()
@@ -33,53 +34,23 @@ namespace Tanks2014
         {
             weapons [activeWeapon].update(gameTime);
 
-            KeyboardState state = Keyboard.GetState();
-
-            //weapon switching
-            if (state.IsKeyDown(Keys.D1))
-            {
-                activeWeapon = 0;
-            }
-            if (state.IsKeyDown(Keys.D2))
-            {
-                activeWeapon = 1;
-            }
-
-            //color switching
-            if (state.IsKeyDown(Keys.I))
-            {
-                color = Color.LightGreen;
-            }
-            if (state.IsKeyDown(Keys.O))
-            {
-                color = Color.LightBlue;
-            }
-            if (state.IsKeyDown(Keys.P))
-            {
-                color = Color.LightCoral;
-            }
-
-            //shoot
-            if (state.IsKeyDown(Keys.Space))
-            {
-                weapons [activeWeapon].shoot(x + 12, y + 12, rotation, map);
-            }
-
             //tank move
+            Random rnd = new Random();
+            int op = rnd.Next(0,4);
             bool moving = true;
-            if (state.IsKeyDown(Keys.Down))
+            if (op == 1)
             {
                 y += speed * gameTime.ElapsedGameTime.TotalSeconds;
                 rotation = Rotation.DOWN;
-            } else if (state.IsKeyDown(Keys.Up))
+            } else if (op == 2)
             {
                 y -= speed * gameTime.ElapsedGameTime.TotalSeconds;
                 rotation = Rotation.UP;
-            } else if (state.IsKeyDown(Keys.Left))
+            } else if (op == 3)
             {
                 x -= speed * gameTime.ElapsedGameTime.TotalSeconds;
                 rotation = Rotation.LEFT;
-            } else if (state.IsKeyDown(Keys.Right))
+            } else if (op == 4)
             {
                 x += speed * gameTime.ElapsedGameTime.TotalSeconds;
                 rotation = Rotation.RIGHT;

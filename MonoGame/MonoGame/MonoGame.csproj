@@ -110,8 +110,14 @@
     <Compile Include="..\..\XNA\Tanks2014\Tanks2014\Tanks2014\Fuel.cs">
       <Link>Fuel.cs</Link>
     </Compile>
-    <Compile Include="..\..\XNA\Tanks2014\Tanks2014\Tanks2014\NetworkMap.cs">
-      <Link>NetworkMap.cs</Link>
+    <Compile Include="..\..\XNA\Tanks2014\Tanks2014\Tanks2014\AITank.cs">
+      <Link>AITank.cs</Link>
+    </Compile>
+    <Compile Include="..\..\XNA\Tanks2014\Tanks2014\Tanks2014\NetworkTank.cs">
+      <Link>NetworkTank.cs</Link>
+    </Compile>
+    <Compile Include="..\..\XNA\Tanks2014\Tanks2014\Tanks2014\NetworkPlayerTank.cs">
+      <Link>NetworkPlayerTank.cs</Link>
     </Compile>
   </ItemGroup>
   <ItemGroup>

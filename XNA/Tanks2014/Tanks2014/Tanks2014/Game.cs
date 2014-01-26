@@ -35,6 +35,11 @@ namespace Tanks2014
             currentMode = newMode;
         }
 
+        public void turnMenuOn()
+        {
+            currentMode = menuMode;
+        }
+
 
         public TanksGame()
         {
