@@ -18,8 +18,8 @@ namespace Tanks2014
         {
             string[] numbers = initData.Trim().Split(' ');
             id = int.Parse(numbers[0]);
-            x = int.Parse(numbers[1]) * Size.MEDIUM;
-            y = int.Parse(numbers[2]) * Size.MEDIUM;
+            x = int.Parse(numbers[1]);
+            y = int.Parse(numbers[2]);
             rotation = (Rotation)int.Parse(numbers[3]);
             commit();
             shoot = int.Parse(numbers[4]);
@@ -28,7 +28,7 @@ namespace Tanks2014
 
         public override string ToString()
         {
-            return string.Format("{0} {1} {2} {3} {4}",id,realX,realY,(int)realRotation,shoot);
+            return string.Format("{0} {1} {2} {3} {4}",id,(int)Math.Round(realX),(int)Math.Round(realY),(int)realRotation,shoot);
         }
 
         public override DrawInfo getDrawInfo()
@@ -38,7 +38,12 @@ namespace Tanks2014
 
         public void update(string updateData)
         {
-            //TODO:
+            string[] numbers = updateData.Trim().Split(' ');
+            x = int.Parse(numbers[1]);
+            y = int.Parse(numbers[2]);
+            rotation = (Rotation)int.Parse(numbers[3]);
+            commit();
+            shoot = int.Parse(numbers[4]); //TODO:
         }
 
         public override void update(GameTime gameTime, Map map)

@@ -11,7 +11,7 @@ namespace Tanks2014
     class ClientMode : Mode
     {
         private bool established = false;
-        private string message;
+        private string message = "";
 
         private Int32 port = 1338;
         private string server = "127.0.0.1";
@@ -23,7 +23,7 @@ namespace Tanks2014
         private int gameId;
         private Map map;
         private NetworkTank playerTank;
-        private List<NetworkTank> tanks;
+        private List<NetworkTank> tanks; //TODO: map
 
         public ClientMode(TanksGame host, string initData) : base(host)
         {
@@ -74,8 +74,38 @@ namespace Tanks2014
         {
             if (established)
             {
-                //TODO: send player tank info
-                //TODO: receive updates
+                try
+                {
+                    foreach(NetworkTank nt in tanks)
+                    {
+                        nt.deleted = true;
+                    }
+                    sWriter.Write(gameId + " " + playerTank.ToString() + " 0\n"); //TODO: dies
+                    int tankCount = int.Parse(sReader.ReadLine().Trim().Split(' ')[1]);
+                    for(int i = 0; i < tankCount; i++)
+                    {
+                        string line = sReader.ReadLine();
+                        int id = int.Parse(line.Trim().Split(' ')[0]);
+                        if(id == playerTank.id)
+                        {
+                            playerTank.deleted = false;
+                            break;
+                        }
+                        foreach(NetworkTank nt in tanks)
+                        {
+                            if(id == nt.id)
+                            {
+                                nt.deleted = false;
+                                nt.update(line);
+                                break;
+                            }
+                        }
+                    }
+                } catch (Exception)
+                {
+                    established = false;
+                    message = "Connection error";
+                }
                 map.update(gameTime);
             }
         }
