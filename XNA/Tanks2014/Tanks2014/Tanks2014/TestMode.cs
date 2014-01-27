@@ -15,7 +15,7 @@ namespace Tanks2014
         public TestMode(TanksGame host) : base(host)
         {
             pt = new PlayerTank();
-            pt.setXY(0, 0);
+            pt.setXY(64, 64);
             //mapa = new Map(100,100);
 			string mapData = System.IO.File.ReadAllText(@"medium.map");
 			map = new Map(mapData);

@@ -36,8 +36,8 @@ namespace Tanks2014
         public override void draw(GameTime gameTime, Spriter drawer)
         {
 			drawer.drawText(100,100,"1 Test mode");
-			drawer.drawText(100,200,"2 Test mode");
-			drawer.drawText(100,300,"3 Test mode");
+			drawer.drawText(100,200,"2 Network mode");
+			drawer.drawText(100,300,"3 Exit");
         }
     }
 }

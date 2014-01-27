@@ -116,8 +116,8 @@ namespace Tanks2014
             {
                 map.draw(gameTime, drawer);
             } else
-            {
-                System.Console.Out.WriteLine(message); //TODO: draw on screen
+            {                
+                drawer.drawText(0,0,message);
             }
         }
     }

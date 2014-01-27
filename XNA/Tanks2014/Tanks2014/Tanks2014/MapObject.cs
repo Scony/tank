@@ -51,8 +51,8 @@ namespace Tanks2014
 
 		public void handleCollision (MapObject other)
 		{
-            Random rnd = new Random();
-            System.Console.Out.WriteLine(realX + "x" + other.realX + " " + rnd.Next());
+            //Random rnd = new Random();
+            //System.Console.Out.WriteLine(realX + "x" + other.realX + " " + rnd.Next());
 			//TODO: abstract
 		}
 

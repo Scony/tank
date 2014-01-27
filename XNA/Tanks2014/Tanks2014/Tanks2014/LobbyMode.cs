@@ -47,7 +47,7 @@ namespace Tanks2014
                     int playersTotal = int.Parse(line.Trim().Split(' ')[1]);
                     if(players != playersTotal)
                     {
-                        message = "Waiting for players (" + players + "/" + playersTotal + ")";
+                        message = "Waiting for " + (playersTotal - players) + " more players";
                     } else
                     {
                         string data = sReader.ReadToEnd();
@@ -64,8 +64,8 @@ namespace Tanks2014
         }
 
         public override void draw(GameTime gameTime, Spriter drawer)
-        {
-            Console.WriteLine(message); //TODO: draw on screen instead
+        {           
+            drawer.drawText(0,0,message);
         }
     }
 }
