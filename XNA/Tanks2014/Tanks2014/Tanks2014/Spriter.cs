@@ -20,6 +20,29 @@ namespace Tanks2014
             this.sprite = sprite;
         }
 
+		public void drawText (int x, int y, String text)
+		{
+			for (int i=0; i<text.Length; i++) {
+				int spriteX=0, spriteY=976;
+				if(text[i] >= 'a' && text[i] <= 'z'){
+					spriteY = 1024 - Size.LARGE;
+					spriteX = Size.MEDIUM * (text[i] - 'a');
+				}
+				if(text[i] >= 'A' && text[i] <= 'Z'){
+					spriteY = 1024 - Size.LARGE;
+					spriteX = Size.MEDIUM * (text[i] - 'A');
+				}
+				if(text[i] >= '0' && text[i] <= '9'){
+					spriteY = 1024 - Size.MEDIUM;
+					spriteX = Size.MEDIUM * (text[i] - '0');
+				}
+				spriteBatch.Draw(sprite,
+					new Rectangle(x + i*Size.MEDIUM + Size.SMALL, y + Size.SMALL, Size.MEDIUM, Size.MEDIUM),
+				    new Rectangle(spriteX, spriteY, Size.MEDIUM, Size.MEDIUM),
+				    Color.White);
+			}
+		}
+
         public void draw(int x, int y, DrawInfo d, Rotation rotation = Rotation.UP)
         {
             draw(x, y, d.size, d.spriteX, d.spriteY, (int)rotation);
