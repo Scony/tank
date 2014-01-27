@@ -135,6 +135,7 @@
     <Compile Include="..\..\..\XNA\Tanks2014\Tanks2014\Tanks2014\AITank.cs">
       <Link>Tanks2014\AITank.cs</Link>
     </Compile>
+    <Compile Include="Tanks2014\Hud.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Icon.png" />

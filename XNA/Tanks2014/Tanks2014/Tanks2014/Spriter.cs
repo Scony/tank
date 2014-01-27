@@ -82,6 +82,14 @@ namespace Tanks2014
             spriteBatch.Draw(sprite, new Rectangle(x + (int)size / 2, y + (int)size / 2, (int)size, (int)size), new Rectangle(spriteX, spriteY, (int)size, (int)size), color, rotationAngle, new Vector2((int)size / 2, (int)size / 2), effect, 0);
         }
 
+		public void drawRect(int x, int y, int sizeX, int sizeY, Color color)
+		{
+			spriteBatch.Draw(sprite, 
+				new Rectangle(x, y, sizeX, sizeY),
+			    new Rectangle(8, 16, 2, 2),
+			    color);
+		}
+
 		public int getScreenWidth()
 		{
 			return host.GraphicsDevice.Viewport.Width;

@@ -10,6 +10,7 @@ namespace Tanks2014
     {
         PlayerTank pt;
         Map map;
+		Hud hud;
 
         public TestMode(TanksGame host) : base(host)
         {
@@ -18,7 +19,8 @@ namespace Tanks2014
             //mapa = new Map(100,100);
 			string mapData = System.IO.File.ReadAllText(@"medium.map");
 			map = new Map(mapData);
-            map.addObject(pt);
+			hud = new Hud(pt);
+			map.addObject(pt);
             map.addObject(new AITank(60,60,0));
             map.focus = pt;
         }
@@ -31,6 +33,7 @@ namespace Tanks2014
         public override void draw(GameTime gameTime, Spriter drawer)
         {
             map.draw(gameTime, drawer);
+			hud.draw(drawer);
         }
     }
 }

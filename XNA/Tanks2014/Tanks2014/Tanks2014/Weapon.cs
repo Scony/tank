@@ -44,7 +44,15 @@ namespace Tanks2014
 		}
 		public abstract void shoot(double x, double y, Rotation rot, Map map);
 		protected double reload = 0;
-
+		protected int mAmmo = 100;
+			public int ammo {
+			get {
+				return mAmmo;
+			}
+			protected set {
+				mAmmo = value;
+			}
+			}
 		public void update(GameTime gameTime)
 		{
 			if(reload > 0) reload -= gameTime.ElapsedGameTime.TotalSeconds;

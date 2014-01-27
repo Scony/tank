@@ -226,6 +226,7 @@ namespace Tanks2014
                 offsetX = 0;
             else if (screenW / 2 > mapW - centerX)
                 offsetX = screenW - mapW;
+			offsetX += Hud.Width;
 
             // Y axis calculations
             offsetY = screenH / 2 - centerY;
@@ -260,7 +261,7 @@ namespace Tanks2014
                 //drawer.draw((int)mo.x+offsetX, (int)mo.y+offsetY, mo.getDrawInfo(), mo.rotation);
             }
 
-            Fog.draw(screenW, screenH, centerX - Size.SMALL + offsetX, centerY - Size.SMALL + offsetY, 8.2f, drawer);
-        }
+            Fog.draw(screenW, screenH, centerX - Size.SMALL + offsetX, centerY - Size.SMALL + offsetY, 8.2f, drawer);       
+		}
     }
 }
