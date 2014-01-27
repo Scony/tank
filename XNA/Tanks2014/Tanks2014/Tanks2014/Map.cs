@@ -162,6 +162,20 @@ namespace Tanks2014
 
         protected void checkTerrainCollision(MapObject obj)
         {
+            if (obj.getTypeId() == 100)
+            {
+                for(int i = (int)obj.x / Size.MEDIUM; i <= ((int)obj.x + obj.getDrawInfo().size - 1) / Size.MEDIUM; i++)
+                {
+                    for(int j = (int)obj.y / Size.MEDIUM; j <= ((int)obj.y + obj.getDrawInfo().size - 1) / Size.MEDIUM; j++)
+                    {
+                        if(terrain[i,j] != null && (terrain[i,j].getTypeId() == 1 || terrain[i,j].getTypeId() == 2 || terrain[i,j].getTypeId() == 5))
+                        {
+                            obj.revert();
+                            return;
+                        }
+                    }
+                }
+            }
 
         }
 

@@ -19,7 +19,7 @@ namespace Tanks2014
 			string mapData = System.IO.File.ReadAllText(@"medium.map");
 			map = new Map(mapData);
             map.addObject(pt);
-            map.addObject(new AITank(60,60,0));
+            //map.addObject(new AITank(60,60,0));
             map.focus = pt;
         }
 
