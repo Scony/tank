@@ -119,6 +119,12 @@
     <Compile Include="..\..\XNA\Tanks2014\Tanks2014\Tanks2014\NetworkPlayerTank.cs">
       <Link>NetworkPlayerTank.cs</Link>
     </Compile>
+    <Compile Include="..\..\XNA\Tanks2014\Tanks2014\Tanks2014\Grenade.cs">
+      <Link>Grenade.cs</Link>
+    </Compile>
+    <Compile Include="..\..\XNA\Tanks2014\Tanks2014\Tanks2014\Hud.cs">
+      <Link>Hud.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Icon.png" />
