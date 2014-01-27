@@ -8,14 +8,21 @@ namespace Tanks2014
 {
     public abstract class Tank : MapObject
     {
-        protected int hp;
-        protected int maxHp;
-        protected int fuel;
+        public int hp;
+		public int fuel;
+
+		protected int maxHp;
         protected int maxFuel;
         protected double speed = 100;
         protected Weapon[] weapons = new Weapon[10];
 		protected int activeWeapon = 0;
 		protected Color color = Color.White;
+
+		public int ammo {
+			get {
+				return weapons[activeWeapon].ammo;
+			}
+		}
 
         public Tank()
         {

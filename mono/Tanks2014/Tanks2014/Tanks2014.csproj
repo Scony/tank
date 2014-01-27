@@ -126,6 +126,16 @@
     <Compile Include="..\..\..\XNA\Tanks2014\Tanks2014\Tanks2014\NetworkMap.cs">
       <Link>Tanks2014\NetworkMap.cs</Link>
     </Compile>
+    <Compile Include="..\..\..\XNA\Tanks2014\Tanks2014\Tanks2014\NetworkTank.cs">
+      <Link>Tanks2014\NetworkTank.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\XNA\Tanks2014\Tanks2014\Tanks2014\NetworkPlayerTank.cs">
+      <Link>Tanks2014\NetworkPlayerTank.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\XNA\Tanks2014\Tanks2014\Tanks2014\AITank.cs">
+      <Link>Tanks2014\AITank.cs</Link>
+    </Compile>
+    <Compile Include="Tanks2014\Hud.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Icon.png" />

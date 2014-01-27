@@ -25,7 +25,8 @@ namespace Tanks2014
 		}
 		public override void shoot(double x, double y, Rotation rot, Map map)
 		{
-			if (reload <= 0) {
+			if (reload <= 0 && ammo > 0) {
+				ammo--;
 				map.addObject(new Projectible(x,y,rot));
 				reload = 0.5;
 			}

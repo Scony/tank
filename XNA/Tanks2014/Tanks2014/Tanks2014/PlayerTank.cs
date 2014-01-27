@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Tanks2014
 {
-    class PlayerTank : Tank
+    public class PlayerTank : Tank
     {
         private DrawInfo info = new DrawInfo(0, 0, Size.LARGE);
 

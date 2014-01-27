@@ -44,7 +44,7 @@ namespace Tanks2014
         public TanksGame()
         {
             graphics = new GraphicsDeviceManager(this);
-        	graphics.PreferredBackBufferWidth = 640;
+        	graphics.PreferredBackBufferWidth = 800;
         	graphics.PreferredBackBufferHeight = 480;
         	graphics.IsFullScreen = false;
 
