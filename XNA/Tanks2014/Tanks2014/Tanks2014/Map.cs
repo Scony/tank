@@ -194,13 +194,15 @@ namespace Tanks2014
             {
                 if (collides(obj, objects [i]))
                 {
-                    if (obj.collisionId > objects [i].collisionId)
+                    /*if (obj.collisionId > objects [i].collisionId)
                     {
-                        obj.handleCollision(objects [i]);
+                        obj.handleCollision(objects [i],this);
                     } else
                     {
-                        objects [i].handleCollision(obj);
-                    }
+                        objects [i].handleCollision(obj,this);
+                    }*/
+                    obj.handleCollision(objects [i],this);
+                    objects [i].handleCollision(obj,this);
                 }
             }
         }

@@ -33,7 +33,7 @@ namespace Tanks2014
             return this;
         }
 
-        public MapObject commit()
+        public virtual MapObject commit()
         {
             realRotation = rotation;
             realX = x;
@@ -49,13 +49,8 @@ namespace Tanks2014
             return this;
         }
 
-		public void handleCollision(MapObject other)
+		public virtual void handleCollision(MapObject other, Map map)
         {
-            if (getTypeId() == 100 && other.getTypeId() == 100)
-            {
-                revert();
-                other.revert();
-            }
 		}
 
 		public virtual void draw(Spriter drawer, GameTime gameTime, int offsetX, int offsetY)

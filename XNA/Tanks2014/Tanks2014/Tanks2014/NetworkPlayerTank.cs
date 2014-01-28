@@ -89,6 +89,12 @@ namespace Tanks2014
                 y = Math.Round(realY / Size.MEDIUM) * Size.MEDIUM;
             }
 
+            if(fuel == 0)
+            {
+                rotation = realRotation;
+                revert();
+            }
+
             //caterpillar move
             if ((int)realX != (int)x || (int)realY != (int)y)
             {

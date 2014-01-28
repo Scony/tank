@@ -13,9 +13,9 @@ namespace Tanks2014
 		}
 		public void draw(Spriter drawer){
 			drawer.drawRect(0,0,Hud.Width, drawer.getScreenHeight(), new Color(.1f,.1f,.1f));
-			drawer.drawText(Size.LARGE,0,"AMMO " + tank.ammo);
-			drawer.drawText(Size.LARGE,Size.MEDIUM,"LIFE " + tank.hp);
-			drawer.drawText(Size.LARGE,2*Size.MEDIUM,"FUEL " + tank.fuel);
+			drawer.drawText(0,0,"AMMO " + tank.ammo);
+			drawer.drawText(0,Size.MEDIUM,"LIFE " + tank.hp);
+			drawer.drawText(0,2*Size.MEDIUM,"FUEL " + tank.fuel);
 		}
 	}
 }

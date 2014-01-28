@@ -27,6 +27,21 @@ namespace Tanks2014
 		{
 			if (reload <= 0 && ammo > 0) {
 				ammo--;
+                switch((int)rot)
+                {
+                    case 0:
+                        y -= 20;
+                        break;
+                    case 1:
+                        x += 20;
+                        break;
+                    case 2:
+                        y += 20;
+                        break;
+                    case 3:
+                        x -= 20;
+                        break;
+                }
 				map.addObject(new Projectible(x,y,rot));
 				reload = 0.5;
                 return true;
