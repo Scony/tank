@@ -14,7 +14,7 @@ namespace Tanks2014
         private string message = "";
 
         private Int32 port = 1338;
-        private string server = "127.0.0.1";
+        private string server = System.IO.File.ReadAllText(@"server.dat");
         private TcpClient client;
         private NetworkStream stream;
         private StreamReader sReader;
@@ -22,6 +22,7 @@ namespace Tanks2014
 
         private int gameId;
         private Map map;
+        Hud hud;
         private NetworkTank playerTank;
         private List<NetworkTank> tanks; //TODO: map
 
@@ -31,7 +32,7 @@ namespace Tanks2014
             {
                 client = new TcpClient(server, port);
                 stream = client.GetStream();
-                sReader = new StreamReader(stream, Encoding.ASCII);
+                sReader = new StreamReader(stream, Encoding.Default);
                 sWriter = new StreamWriter(stream, Encoding.ASCII)
                 {
                     AutoFlush = true
@@ -45,11 +46,12 @@ namespace Tanks2014
                 gameId = int.Parse(parts[0]);
                 playerTank = new NetworkPlayerTank(parts[1]);
                 tanks = new List<NetworkTank>();
+                hud = new Hud(playerTank);
                 tanks.Add(playerTank);
                 map.addObject(playerTank);
                 map.focus = playerTank;
                 //send player data
-                sWriter.WriteLine(gameId + " " + playerTank.ToString() + " 0");
+                sWriter.Write(gameId + " " + playerTank.ToString() + " 0\n");
                 //receive tank amount
                 int tankCount = int.Parse(sReader.ReadLine().Trim().Split(' ')[1]);
                 //add each tank if he is not playerTank
@@ -73,7 +75,12 @@ namespace Tanks2014
         public override void update(GameTime gameTime)
         {
             if (established)
-            {
+            {                
+                if(playerTank.deleted)
+                {
+                    established = false;
+                    message = "Game over";
+                }
                 try
                 {
                     foreach(NetworkTank nt in tanks)
@@ -89,14 +96,14 @@ namespace Tanks2014
                         if(id == playerTank.id)
                         {
                             playerTank.deleted = false;
-                            break;
+                            continue;
                         }
                         foreach(NetworkTank nt in tanks)
                         {
                             if(id == nt.id)
                             {
                                 nt.deleted = false;
-                                nt.update(line);
+                                nt.update(line,map);
                                 break;
                             }
                         }
@@ -115,6 +122,7 @@ namespace Tanks2014
             if (established)
             {
                 map.draw(gameTime, drawer);
+                hud.draw(drawer);
             } else
             {                
                 drawer.drawText(0,0,message);

@@ -47,7 +47,18 @@ namespace Tanks2014
             //shoot
             if (state.IsKeyDown(Keys.Space))
             {
-                weapons [activeWeapon].shoot(x + 12, y + 12, rotation, map);
+                if(weapons [activeWeapon].shoot(x + 12, y + 12, rotation, map))
+                {
+                    switch(activeWeapon)
+                    {
+                        case 0:
+                            shoot += 1;
+                            break;
+                        case 1:
+                            shoot += 10000;
+                            break;
+                    }
+                }
             }
 
             //tank move

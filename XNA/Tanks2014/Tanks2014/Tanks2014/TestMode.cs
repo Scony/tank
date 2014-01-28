@@ -21,7 +21,7 @@ namespace Tanks2014
 			map = new Map(mapData);
 			hud = new Hud(pt);
 			map.addObject(pt);
-            //map.addObject(new AITank(60,60,0));
+            map.addObject(new AITank(128,128,0));
             map.focus = pt;
         }
 

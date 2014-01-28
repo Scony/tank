@@ -11,7 +11,7 @@ namespace Tanks2014
     class LobbyMode : Mode
     {
         private Int32 port = 1337;
-        private string server = "127.0.0.1";
+        private string server = System.IO.File.ReadAllText(@"server.dat");
         private TcpClient client;
         private NetworkStream stream;
         private StreamReader sReader;

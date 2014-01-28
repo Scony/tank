@@ -49,11 +49,13 @@ namespace Tanks2014
             return this;
         }
 
-		public void handleCollision (MapObject other)
-		{
-            //Random rnd = new Random();
-            //System.Console.Out.WriteLine(realX + "x" + other.realX + " " + rnd.Next());
-			//TODO: abstract
+		public void handleCollision(MapObject other)
+        {
+            if (getTypeId() == 100 && other.getTypeId() == 100)
+            {
+                revert();
+                other.revert();
+            }
 		}
 
 		public virtual void draw(Spriter drawer, GameTime gameTime, int offsetX, int offsetY)

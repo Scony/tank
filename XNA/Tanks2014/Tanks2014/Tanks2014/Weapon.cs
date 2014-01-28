@@ -42,7 +42,7 @@ namespace Tanks2014
 				traveled += speed * gameTime.ElapsedGameTime.TotalSeconds;
 			}
 		}
-		public abstract void shoot(double x, double y, Rotation rot, Map map);
+		public abstract bool shoot(double x, double y, Rotation rot, Map map);
 		protected double reload = 0;
 		protected int mAmmo = 100;
 			public int ammo {

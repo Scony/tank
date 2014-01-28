@@ -19,13 +19,15 @@ namespace Tanks2014
 				return info;
 			}
 		}
-		public override void shoot(double x, double y, Rotation rot, Map map)
+		public override bool shoot(double x, double y, Rotation rot, Map map)
 		{
 			if (reload <= 0 && ammo > 0) {
 				ammo--;
 				map.addObject(new Projectible(x,y,rot));
 				reload = 0.1;
+                return true;
 			}
+            return false;
 		}
     }
 }

@@ -207,15 +207,15 @@ namespace Tanks2014
 
         public bool collides(MapObject o1, MapObject o2)
         {
-            int x11 = (int)o1.realX;
-            int y11 = (int)o1.realY;
-            int x12 = (int)o1.realX + (int)o1.getDrawInfo().size - 1;
-            int y12 = (int)o1.realY + (int)o1.getDrawInfo().size - 1;
+            int x11 = (int)o1.x;
+            int y11 = (int)o1.y;
+            int x12 = (int)o1.x + (int)o1.getDrawInfo().size - 1;
+            int y12 = (int)o1.y + (int)o1.getDrawInfo().size - 1;
 
-            int x21 = (int)o2.realX;
-            int y21 = (int)o2.realY;
-            int x22 = (int)o2.realX + (int)o2.getDrawInfo().size - 1;
-            int y22 = (int)o2.realY + (int)o2.getDrawInfo().size - 1;
+            int x21 = (int)o2.x;
+            int y21 = (int)o2.y;
+            int x22 = (int)o2.x + (int)o2.getDrawInfo().size - 1;
+            int y22 = (int)o2.y + (int)o2.getDrawInfo().size - 1;
 
 
             if ((x11 <= x21 && x21 <= x12 && y11 <= y21 && y21 <= y12) ||

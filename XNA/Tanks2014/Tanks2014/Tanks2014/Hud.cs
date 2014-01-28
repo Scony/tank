@@ -6,8 +6,8 @@ namespace Tanks2014
 	public class Hud
 	{
 		public const int Width = 180;
-		private PlayerTank tank;
-		public Hud (PlayerTank tank)
+		private Tank tank;
+		public Hud (Tank tank)
 		{
 			this.tank = tank;
 		}
