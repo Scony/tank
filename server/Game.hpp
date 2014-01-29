@@ -12,7 +12,7 @@ class Game
 {
 public:
   Game();
-  void updateTank(int id, int x, int y, int rotation, int shoot);
+  void updateTank(int id, int x, int y, int rotation, int shoot, std::string nick, int r, int g, int b, int frags);
   void deleteTank(int id);
   bool isOver();
   std::string getInitData(int id);

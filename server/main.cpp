@@ -109,9 +109,14 @@ int main(int argc, char** argv)
 		      int y;
 		      int rotation;
 		      int shoot;
+		      string nick;
+		      int r;
+		      int g;
+		      int b;
+		      int frags;
 
-		      str >> id >> x >> y >> rotation >> shoot;
-		      it->updateTank(id,x,y,rotation,shoot);
+		      str >> id >> x >> y >> rotation >> shoot >> nick >> r >> g >> b >> frags;
+		      it->updateTank(id,x,y,rotation,shoot,nick,r,g,b,frags);
 
 		      int nDeaths;
 

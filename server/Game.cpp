@@ -13,15 +13,15 @@ Game::Game() : map("medium.map")
   for(int i = 0; i < GAME_SIZE; i++)
     {
       pair<int,int> ab = map.getTankPosition();
-      tanks.push_back(Tank(i,ab.first,ab.second,0,0));
+      tanks.push_back(Tank(i,ab.first,ab.second,0,0,"unknown",0,255,0,0));
     }
 }
 
-void Game::updateTank(int id, int x, int y, int rotation, int shoot)
+void Game::updateTank(int id, int x, int y, int rotation, int shoot, string nick, int r, int g, int b, int frags)
 {
   for(list<Tank>::iterator i = tanks.begin(); i != tanks.end(); i++)
     if(i->getId() == id)
-      *i = Tank(id,x,y,rotation,shoot);
+      *i = Tank(id,x,y,rotation,shoot,nick,r,g,b,frags);
 }
 
 void Game::deleteTank(int id)
