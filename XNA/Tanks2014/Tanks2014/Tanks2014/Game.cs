@@ -59,7 +59,7 @@ namespace Tanks2014
         /// </summary>
         protected override void Initialize()
         {
-            //TargetElapsedTime = TimeSpan.FromMilliseconds(1000.0 / FPS);
+            TargetElapsedTime = TimeSpan.FromMilliseconds(1000.0 / FPS);
             menuMode = new MenuMode(this);
             currentMode = menuMode;
             base.Initialize();

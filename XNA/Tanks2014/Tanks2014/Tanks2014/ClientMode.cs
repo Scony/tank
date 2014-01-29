@@ -122,7 +122,7 @@ namespace Tanks2014
             if (established)
             {
                 map.draw(gameTime, drawer);
-                hud.draw(drawer, map.tanks);
+                hud.draw(drawer, gameTime, map.tanks);
             } else
             {                
                 drawer.drawText(0,0,message);

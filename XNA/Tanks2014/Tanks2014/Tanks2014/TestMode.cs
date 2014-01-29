@@ -46,7 +46,7 @@ namespace Tanks2014
         public override void draw(GameTime gameTime, Drawer drawer)
         {
             map.draw(gameTime, drawer);
-			hud.draw(drawer, map.tanks);
+			hud.draw(drawer, gameTime, map.tanks);
         }
     }
 }
