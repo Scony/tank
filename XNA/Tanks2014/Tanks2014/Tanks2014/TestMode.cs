@@ -12,9 +12,16 @@ namespace Tanks2014
         Map map;
 		Hud hud;
 
-        public TestMode (TanksGame host) : base(host)
-		{
-			string playerData = System.IO.File.ReadAllText (@"config.txt");
+        public TestMode(TanksGame host) : base(host)
+        {
+            string playerData;
+            try
+            {
+                playerData = System.IO.File.ReadAllText(@"config.txt");
+            } catch (Exception e)
+            {
+                playerData = "\nscony\n\n255,150,0";
+            }
 			string[] lines = playerData.Split ('\n');
 			string[] colors = lines [3].Split (',');
 

@@ -74,9 +74,6 @@
     <Compile Include="..\..\XNA\Tanks2014\Tanks2014\Tanks2014\Size.cs">
       <Link>Size.cs</Link>
     </Compile>
-    <Compile Include="..\..\XNA\Tanks2014\Tanks2014\Tanks2014\Spriter.cs">
-      <Link>Spriter.cs</Link>
-    </Compile>
     <Compile Include="..\..\XNA\Tanks2014\Tanks2014\Tanks2014\Tank.cs">
       <Link>Tank.cs</Link>
     </Compile>
@@ -124,6 +121,9 @@
     </Compile>
     <Compile Include="..\..\XNA\Tanks2014\Tanks2014\Tanks2014\Hud.cs">
       <Link>Hud.cs</Link>
+    </Compile>
+    <Compile Include="..\..\XNA\Tanks2014\Tanks2014\Tanks2014\Drawer.cs">
+      <Link>Drawer.cs</Link>
     </Compile>
   </ItemGroup>
   <ItemGroup>
