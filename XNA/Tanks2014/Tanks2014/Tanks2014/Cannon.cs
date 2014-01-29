@@ -13,6 +13,8 @@ namespace Tanks2014
 			static DrawInfo info = new DrawInfo(16,16,Size.SMALL);
 			public Projectible(double x, double y, Rotation rot) : base(x,y,rot, 200, 500)
 			{
+				dmg = 50;
+				hp = 25;
 			}
 			public override int getTypeId ()
 			{
@@ -47,6 +49,10 @@ namespace Tanks2014
                 return true;
 			}
             return false;
+		}
+		public Cannon ()
+		{
+			ammo = 10;
 		}
     }
 }

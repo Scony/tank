@@ -57,7 +57,7 @@ namespace Tanks2014
     {
         public override int getTypeId()
         {
-            return 300;
+            return 1000;
         }
         private static DrawInfo info = new DrawInfo(0, 256 + 48, Size.MEDIUM);
 

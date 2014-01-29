@@ -1,15 +1,30 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="../../XNA/Tanks2014/Tanks2014/Tanks2014/TestMode.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="../../XNA/Tanks2014/Tanks2014/Tanks2014/Tank.cs">
     <Files>
-      <File FileName="Tanks2014/Program.cs" Line="24" Column="3" />
-      <File FileName="../../XNA/Tanks2014/Tanks2014/Tanks2014/Program.cs" Line="1" Column="1" />
-      <File FileName="../../XNA/Tanks2014/Tanks2014/Tanks2014/Game.cs" Line="39" Column="17" />
-      <File FileName="Tanks2014/Properties/AssemblyInfo.cs" Line="13" Column="34" />
-      <File FileName="../../XNA/Tanks2014/Tanks2014/Tanks2014/Cannon.cs" Line="25" Column="4" />
-      <File FileName="../../XNA/Tanks2014/Tanks2014/Tanks2014/Map.cs" Line="22" Column="46" />
-      <File FileName="../../XNA/Tanks2014/Tanks2014/Tanks2014/TestMode.cs" Line="31" Column="5" />
+      <File FileName="../../XNA/Tanks2014/Tanks2014/Tanks2014/Map.cs" Line="80" Column="29" />
+      <File FileName="../../XNA/Tanks2014/Tanks2014/Tanks2014/Cannon.cs" Line="18" Column="5" />
+      <File FileName="../../XNA/Tanks2014/Tanks2014/Tanks2014/MachineGun.cs" Line="13" Column="12" />
+      <File FileName="../../XNA/Tanks2014/Tanks2014/Tanks2014/Weapon.cs" Line="70" Column="32" />
+      <File FileName="../../XNA/Tanks2014/Tanks2014/Tanks2014/Consumable.cs" Line="28" Column="32" />
+      <File FileName="../../XNA/Tanks2014/Tanks2014/Tanks2014/Fuel.cs" Line="10" Column="6" />
+      <File FileName="../../XNA/Tanks2014/Tanks2014/Tanks2014/Terrain.cs" Line="60" Column="24" />
+      <File FileName="../../XNA/Tanks2014/Tanks2014/Tanks2014/Ammo.cs" Line="20" Column="37" />
+      <File FileName="../../XNA/Tanks2014/Tanks2014/Tanks2014/TestMode.cs" Line="21" Column="27" />
+      <File FileName="../../XNA/Tanks2014/Tanks2014/Tanks2014/Tank.cs" Line="68" Column="18" />
+      <File FileName="../../XNA/Tanks2014/Tanks2014/Tanks2014/Hud.cs" Line="20" Column="3" />
     </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State expanded="True">
+          <Node name="Tanks2014" expanded="True">
+            <Node name="Tanks2014" expanded="True">
+              <Node name="Tank.cs" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />

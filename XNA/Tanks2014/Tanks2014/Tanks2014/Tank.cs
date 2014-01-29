@@ -9,12 +9,12 @@ namespace Tanks2014
     public abstract class Tank : MapObject
     {
         public int hp = 100;
-		public int fuel = 1000;
+		public int fuel = 5000;
 
 		protected int maxHp;
         protected int maxFuel;
         protected double speed = 100;
-        protected Weapon[] weapons = new Weapon[10];
+        public Weapon[] weapons = new Weapon[10];
 		protected int activeWeapon = 0;
 		protected Color color = Color.White;
 

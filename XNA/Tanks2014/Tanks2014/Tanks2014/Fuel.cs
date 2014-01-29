@@ -16,12 +16,12 @@ namespace Tanks2014
 
         public override void extractTo(Tank tank)
         {
-            //
+			tank.fuel += amount;
         }
 
         public override int getTypeId()
         {
-            return -1;//TODO
+			return 301;
         }
 
         public override DrawInfo getDrawInfo()

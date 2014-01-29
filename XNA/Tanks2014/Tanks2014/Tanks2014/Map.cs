@@ -70,8 +70,9 @@ namespace Tanks2014
 
                 switch (kind)
                 {
+					case 0:
                     case 1:
-                        Ammo ammo = new Ammo(amount);
+                        Ammo ammo = new Ammo(amount,kind);
                         ammo.setXY(a * Size.MEDIUM, b * Size.MEDIUM).commit();
                         objects.Add(ammo);
                         break;
@@ -140,7 +141,7 @@ namespace Tanks2014
                 }
             }
 
-            for (int i=0; i<objects.Count; i++)
+           for (int i=0; i<objects.Count; i++)
             {
                 if (!objects [i].deleted)
                 {
@@ -175,7 +176,8 @@ namespace Tanks2014
                     {
                         obj.deleted = true;
                         toRemove.Add(obj);
-                        terrain[i,j] = null;
+                        if(obj.getTypeId() == 200)
+							terrain[i,j] = null;
                     }
                     if((obj.getTypeId() == 200 || obj.getTypeId() == 201) && terrain[i,j] != null && terrain[i,j].getTypeId() == 2)
                     {
@@ -194,15 +196,15 @@ namespace Tanks2014
             {
                 if (collides(obj, objects [i]))
                 {
-                    /*if (obj.collisionId > objects [i].collisionId)
+                    if (obj.collisionId > objects [i].collisionId)
                     {
                         obj.handleCollision(objects [i],this);
                     } else
                     {
                         objects [i].handleCollision(obj,this);
-                    }*/
-                    obj.handleCollision(objects [i],this);
-                    objects [i].handleCollision(obj,this);
+                    }
+                    //obj.handleCollision(objects [i],this);
+                    //objects [i].handleCollision(obj,this);
                 }
             }
         }
@@ -234,7 +236,7 @@ namespace Tanks2014
             int mapW = width * Size.MEDIUM;
             int mapH = height * Size.MEDIUM;
 
-            int screenW = drawer.getScreenWidth();
+			int screenW = drawer.getScreenWidth();
             int screenH = drawer.getScreenHeight();
 
             int centerX = (int)focus.realX + focus.getDrawInfo().size / 2;
@@ -244,14 +246,13 @@ namespace Tanks2014
             int offsetY = 0;
 
             // X axis calculations
-            offsetX = screenW / 2 - centerX;
-            if (mapW <= screenW)
-                offsetX = (screenW - mapW) / 2;
-            else if (screenW / 2 > centerX)
-                offsetX = 0;
-            else if (screenW / 2 > mapW - centerX)
+            offsetX = (screenW - Hud.Width)/ 2 - centerX + Hud.Width;
+            if (mapW <= screenW - Hud.Width)
+                offsetX = (screenW - mapW - Hud.Width) / 2;
+            else if ((screenW - Hud.Width) / 2 > centerX)
+                offsetX = Hud.Width;
+            else if ((screenW  - Hud.Width) / 2> mapW - centerX)
                 offsetX = screenW - mapW;
-			offsetX += Hud.Width;
 
             // Y axis calculations
             offsetY = screenH / 2 - centerY;

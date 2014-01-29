@@ -14,6 +14,9 @@ namespace Tanks2014
 			protected double range;
 			protected double traveled;
 
+			public int hp = 1;
+			public int dmg = 1;
+
 			public Projectible(double x, double y, Rotation rot, double speed, double range){
 				setXY(x,y);
 				rotation = rot;
@@ -41,18 +44,30 @@ namespace Tanks2014
 				}
 				traveled += speed * gameTime.ElapsedGameTime.TotalSeconds;
 			}
+
+			public override void handleCollision (MapObject other, Map map)
+			{
+				if (other.getTypeId () / 100 == 1) {
+					Tank t = (Tank)other;
+					t.hp -= dmg;
+					if (t.hp <= 0) {
+						map.removeObject(t);
+					}
+					map.removeObject (this);
+				}
+				if (other.getTypeId () / 100 == 2) {
+					Projectible p = (Projectible) other;
+					p.hp -= dmg;
+					if (p.hp <= 0) {
+						map.removeObject(p);
+					}
+					map.removeObject (this);
+				}
+			}
 		}
 		public abstract bool shoot(double x, double y, Rotation rot, Map map);
 		protected double reload = 0;
-		protected int mAmmo = 100;
-			public int ammo {
-			get {
-				return mAmmo;
-			}
-			protected set {
-				mAmmo = value;
-			}
-			}
+		public int ammo { get; set; }
 		public void update(GameTime gameTime)
 		{
 			if(reload > 0) reload -= gameTime.ElapsedGameTime.TotalSeconds;

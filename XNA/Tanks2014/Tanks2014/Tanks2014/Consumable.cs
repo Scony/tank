@@ -8,6 +8,8 @@ namespace Tanks2014
 {
     public abstract class Consumable : MapObject
     {
+		protected double inactive = 0;
+		protected double maxInactive = 10000.0;
         protected int amount;
         protected bool hidden = false;
         protected Color color = Color.White;
@@ -19,20 +21,36 @@ namespace Tanks2014
         {
             this.amount = amount;
         }
+	
+		public override void handleCollision (MapObject other, Map map)
+		{
+			if (inactive == 0) {
+				if (other.getTypeId () / 100 == 1) {
+					Tank t = (Tank)other;
+					extractTo (t);
+				}
+				inactive = maxInactive;
+			}
+		}
 
-        public override void update(GameTime gameTime, Map map)
-        {
-            blink += speed * gameTime.ElapsedGameTime.TotalSeconds;
-            if (blink > blinkMax)
-            {
-                hidden = !hidden;
-                blink = blink - blinkMax;
-            }
+        public override void update (GameTime gameTime, Map map)
+		{
+			if (inactive > 0) {
+				inactive -= speed * gameTime.ElapsedGameTime.TotalSeconds;
+				hidden = true;
+				if(inactive < 0) inactive = 0;
+			} else {
+				blink += speed * gameTime.ElapsedGameTime.TotalSeconds;
+				if (blink > blinkMax) {
+					hidden = !hidden;
+					blink = blink - blinkMax;
+				}
+			}
         }
         
         public override int getTypeId()
         {
-            return -1;//TODO
+            return 300;//TODO
         }
 
         public abstract void extractTo(Tank tank);

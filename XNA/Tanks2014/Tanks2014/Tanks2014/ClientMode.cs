@@ -46,7 +46,7 @@ namespace Tanks2014
                 gameId = int.Parse(parts[0]);
                 playerTank = new NetworkPlayerTank(parts[1]);
                 tanks = new List<NetworkTank>();
-                hud = new Hud(playerTank);
+                //hud = new Hud(playerTank);
                 tanks.Add(playerTank);
                 map.addObject(playerTank);
                 map.focus = playerTank;
