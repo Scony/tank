@@ -7,20 +7,23 @@ using Microsoft.Xna.Framework;
 
 namespace Tanks2014
 {
-    public class Spriter
+    public class Drawer
     {
         private Texture2D sprite;
         private SpriteBatch spriteBatch;
 		private Game host;
 
-        public Spriter(Game host, SpriteBatch sb, Texture2D sprite)
+        public Drawer(Game host, SpriteBatch sb, Texture2D sprite)
         {
 			this.host = host;
             spriteBatch = sb;
             this.sprite = sprite;
         }
-
 		public void drawText (int x, int y, String text)
+		{
+			drawText(x,y,text,Color.White);
+		}
+		public void drawText (int x, int y, String text, Color color)
 		{
 			for (int i=0; i<text.Length; i++) {
 				int spriteX=0, spriteY=976;
@@ -39,7 +42,7 @@ namespace Tanks2014
 				spriteBatch.Draw(sprite,
 					new Rectangle(x + i*Size.MEDIUM + Size.SMALL, y + Size.SMALL, Size.MEDIUM, Size.MEDIUM),
 				    new Rectangle(spriteX, spriteY, Size.MEDIUM, Size.MEDIUM),
-				    Color.White);
+				    color);
 			}
 		}
 

@@ -11,13 +11,16 @@ namespace Tanks2014
     {
         private DrawInfo info = new DrawInfo(0, 0, Size.LARGE);
 
-        public AITank()
+		private int op = 0;
+		private double time = 0;
+
+        public AITank()  : base("player",Color.White)
         {
             rotation = Rotation.RIGHT;
             color = Color.Red;
         }
 
-        public AITank(int x, int y, int rotation)
+        public AITank(int x, int y, int rotation) : base("player",Color.White)
         {
             this.realX = x;
             this.realY = y;
@@ -30,13 +33,20 @@ namespace Tanks2014
             return info;
         }
 
-        public override void update(GameTime gameTime, Map map)
-        {
-            weapons [activeWeapon].update(gameTime);
-
-            //tank move
-            Random rnd = new Random();
-            int op = rnd.Next(0,4);
+        public override void update (GameTime gameTime, Map map)
+		{
+			weapons [activeWeapon].update (gameTime);
+			
+			//tank move
+			if (time == 0) {
+				Random rnd = new Random ();
+				op = rnd.Next (0, 4);
+				time = rnd.Next (0, 5000);
+			} else {
+				time -= gameTime.ElapsedGameTime.TotalMilliseconds;
+				if (time < 0)
+					time = 0;
+			}
             bool moving = true;
             if (op == 1)
             {

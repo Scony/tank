@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,7 +7,7 @@ namespace Tanks2014
 {
     class Fog
     {
-        public static void draw(int screenW, int screenH, int centerX, int centerY, float radius, Spriter drawer)
+        public static void draw(int screenW, int screenH, int centerX, int centerY, float radius, Drawer drawer)
         {
             int offsetX = centerX % Size.MEDIUM;
             int offsetY = centerY % Size.MEDIUM;

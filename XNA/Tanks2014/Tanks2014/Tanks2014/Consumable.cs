@@ -9,7 +9,7 @@ namespace Tanks2014
     public abstract class Consumable : MapObject
     {
 		protected double inactive = 0;
-		protected double maxInactive = 10000.0;
+		protected double maxInactive = 20000.0;
         protected int amount;
         protected bool hidden = false;
         protected Color color = Color.White;

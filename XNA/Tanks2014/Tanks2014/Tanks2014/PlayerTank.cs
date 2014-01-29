@@ -11,13 +11,12 @@ namespace Tanks2014
     {
         private DrawInfo info = new DrawInfo(0, 0, Size.LARGE);
 
-        public PlayerTank()
+        public PlayerTank(string nick, Color color) : base(nick, color)
         {
             rotation = Rotation.RIGHT;
-            color = Color.LightGreen;
         }
 
-        public PlayerTank(int x, int y, int rotation)
+        public PlayerTank(int x, int y, int rotation, string nick, Color color) : base(nick, color)
         {
             this.x = x;
             this.y = y;
@@ -67,21 +66,22 @@ namespace Tanks2014
 
             //tank move
             bool moving = true;
+			double realSpeed = fuel == 0 ? speed / 5 : speed;
             if (state.IsKeyDown(Keys.Down))
             {
-                y += speed * gameTime.ElapsedGameTime.TotalSeconds;
+                y += realSpeed * gameTime.ElapsedGameTime.TotalSeconds;
                 rotation = Rotation.DOWN;
             } else if (state.IsKeyDown(Keys.Up))
             {
-                y -= speed * gameTime.ElapsedGameTime.TotalSeconds;
+                y -= realSpeed * gameTime.ElapsedGameTime.TotalSeconds;
                 rotation = Rotation.UP;
             } else if (state.IsKeyDown(Keys.Left))
             {
-                x -= speed * gameTime.ElapsedGameTime.TotalSeconds;
+                x -= realSpeed * gameTime.ElapsedGameTime.TotalSeconds;
                 rotation = Rotation.LEFT;
             } else if (state.IsKeyDown(Keys.Right))
             {
-                x += speed * gameTime.ElapsedGameTime.TotalSeconds;
+                x += realSpeed * gameTime.ElapsedGameTime.TotalSeconds;
                 rotation = Rotation.RIGHT;
             } else
             {
@@ -91,12 +91,6 @@ namespace Tanks2014
             {
                 x = Math.Round(realX / Size.MEDIUM) * Size.MEDIUM;
                 y = Math.Round(realY / Size.MEDIUM) * Size.MEDIUM;
-            }
-
-            if(fuel == 0)
-            {
-                rotation = realRotation;
-                revert();
             }
 
             //caterpillar move

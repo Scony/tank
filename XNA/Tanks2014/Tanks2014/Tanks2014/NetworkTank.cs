@@ -13,7 +13,7 @@ namespace Tanks2014
         public int shoot;
         protected DrawInfo info = new DrawInfo(0, 0, Size.LARGE);
 
-        public NetworkTank(string initData)
+        public NetworkTank(string initData) : base("player",Color.White)
         {
             string[] numbers = initData.Trim().Split(' ');
             id = int.Parse(numbers [0]);

@@ -63,7 +63,7 @@ namespace Tanks2014
             }
         }
 
-        public override void draw(GameTime gameTime, Spriter drawer)
+        public override void draw(GameTime gameTime, Drawer drawer)
         {           
             drawer.drawText(0,0,message);
         }

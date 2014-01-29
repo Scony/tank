@@ -11,8 +11,9 @@ namespace Tanks2014
 		new class Projectible : Weapon.Projectible
 		{
 			static DrawInfo info = new DrawInfo(16,16,Size.SMALL);
-			public Projectible(double x, double y, Rotation rot) : base(x,y,rot, 200, 500)
+			public Projectible(Tank owner, double x, double y, Rotation rot) : base(owner, x,y,rot, 200, 500)
 			{
+
 				dmg = 50;
 				hp = 25;
 			}
@@ -44,14 +45,15 @@ namespace Tanks2014
                         x -= 20;
                         break;
                 }
-				map.addObject(new Projectible(x,y,rot));
+				map.addObject(new Projectible(owner, x,y,rot));
 				reload = 0.5;
                 return true;
 			}
             return false;
 		}
-		public Cannon ()
+		public Cannon (Tank owner) : base(owner)
 		{
+			name = "Cannon";
 			ammo = 10;
 		}
     }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -33,7 +33,7 @@ namespace Tanks2014
             }
         }
 
-        public override void draw(GameTime gameTime, Spriter drawer)
+        public override void draw(GameTime gameTime, Drawer drawer)
         {
 			drawer.drawText(100,100,"1 Test mode");
 			drawer.drawText(100,200,"2 Network mode");

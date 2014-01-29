@@ -25,7 +25,7 @@ namespace Tanks2014
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Texture2D sprite;
-        Spriter drawer;
+        Drawer drawer;
 
         Mode menuMode;
         Mode currentMode;
@@ -73,7 +73,7 @@ namespace Tanks2014
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             sprite = Content.Load<Texture2D>("sprite");
-            drawer = new Spriter(this, spriteBatch, sprite);
+            drawer = new Drawer(this, spriteBatch, sprite);
 
             // TODO: use this.Content to load your game content here
         }

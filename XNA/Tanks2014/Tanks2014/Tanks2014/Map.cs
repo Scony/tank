@@ -13,6 +13,7 @@ namespace Tanks2014
         protected MapObject[,] terrain;
         protected List<MapObject> objects;
         protected List<MapObject> toRemove;
+		public List<Tank> tanks;
 
         public MapObject focus { set; get; }
 
@@ -58,6 +59,7 @@ namespace Tanks2014
 
             objects = new List<MapObject>();
             toRemove = new List<MapObject>();
+			tanks = new List<Tank>();
 
             int consumables = int.Parse(lines [height + 1]);
             for (int i = 0; i < consumables; i++)
@@ -115,9 +117,12 @@ namespace Tanks2014
             toRemove = new List<MapObject>();
         }
 
-        public void addObject(MapObject obj)
-        {
-            objects.Add(obj);
+        public void addObject (MapObject obj)
+		{
+			objects.Add (obj);
+			if (obj.getTypeId () / 100 == 1) {
+				tanks.Add((Tank) obj);
+			}
         }
 
         public void removeObject(MapObject obj)
@@ -231,7 +236,7 @@ namespace Tanks2014
             return false;
         }
 
-        public void draw(GameTime gameTime, Spriter drawer)
+        public void draw(GameTime gameTime, Drawer drawer)
         {
             int mapW = width * Size.MEDIUM;
             int mapH = height * Size.MEDIUM;
@@ -278,16 +283,25 @@ namespace Tanks2014
                 }
             foreach (MapObject mo in objects)
             {
-                toDraw.Add(mo);
+				if(isVisible(mo))
+                	toDraw.Add(mo);
             }
             toDraw.Sort();
             foreach (MapObject mo in toDraw)
             {
+
                 mo.draw(drawer, gameTime, offsetX, offsetY);
                 //drawer.draw((int)mo.x+offsetX, (int)mo.y+offsetY, mo.getDrawInfo(), mo.rotation);
             }
 
-            Fog.draw(screenW, screenH, centerX - Size.SMALL + offsetX, centerY - Size.SMALL + offsetY, 8.2f, drawer);       
+            Fog.draw(screenW, screenH, centerX - Size.SMALL + offsetX, centerY - Size.SMALL + offsetY, 11.2f, drawer);       
+		}
+
+		private bool isVisible (MapObject mo)
+		{
+			double x = (focus.x - mo.x) / Size.MEDIUM;
+			double y = (focus.y - mo.y) / Size.MEDIUM;
+			return x * x + y * y < 11.2f * 11.2f;
 		}
     }
 }

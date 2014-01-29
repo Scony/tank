@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -117,12 +117,12 @@ namespace Tanks2014
             }
         }
 
-        public override void draw(GameTime gameTime, Spriter drawer)
+        public override void draw(GameTime gameTime, Drawer drawer)
         {
             if (established)
             {
                 map.draw(gameTime, drawer);
-                hud.draw(drawer);
+                hud.draw(drawer, map.tanks);
             } else
             {                
                 drawer.drawText(0,0,message);

@@ -8,26 +8,42 @@ namespace Tanks2014
 {
     public abstract class Tank : MapObject
     {
+		public string nick;
+		public Color color;
+		public int frags = 0;
+
         public int hp = 100;
-		public int fuel = 5000;
+		public int fuel = 2000;
 
 		protected int maxHp;
         protected int maxFuel;
         protected double speed = 100;
         public Weapon[] weapons = new Weapon[10];
 		protected int activeWeapon = 0;
-		protected Color color = Color.White;
 
 		public int ammo {
 			get {
 				return weapons[activeWeapon].ammo;
 			}
 		}
+		public string weaponName {
+			get {
+				return weapons[activeWeapon].name;
+			}
+		}
 
-        public Tank()
-        {
-            weapons[0] = new Cannon();
-			weapons[1] = new MachineGun();
+        public Tank (string nick, Color color)
+		{
+			this.nick = nick;
+			int light = color.R + color.G + color.B;
+			if (light < 100) {
+				color.R += (byte)((100-light)/2);
+				color.G += (byte)((100-light)/2);
+				color.B += (byte)((100-light)/2);
+			}
+			this.color = color;
+            weapons[0] = new Cannon(this);
+			weapons[1] = new MachineGun(this);
         }
 
         public override MapObject commit()
@@ -70,7 +86,7 @@ namespace Tanks2014
             }
         }
 
-		public override void draw (Spriter drawer, GameTime gameTime, int offsetX, int offsetY)
+		public override void draw (Drawer drawer, GameTime gameTime, int offsetX, int offsetY)
 		{
 			drawer.draw((int)realX+offsetX, (int)realY+offsetY, getDrawInfo(), realRotation, color);
 		}

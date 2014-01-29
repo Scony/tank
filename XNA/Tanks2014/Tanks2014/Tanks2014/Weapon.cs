@@ -13,13 +13,14 @@ namespace Tanks2014
 			protected double speed;
 			protected double range;
 			protected double traveled;
-
+			protected Tank owner;
 			public int hp = 1;
 			public int dmg = 1;
 
-			public Projectible(double x, double y, Rotation rot, double speed, double range){
+			public Projectible(Tank tank, double x, double y, Rotation rot, double speed, double range){
 				setXY(x,y);
 				rotation = rot;
+				owner = tank;
 				this.speed = speed;
 				this.range = range;
 				this.traveled = 0;
@@ -52,6 +53,7 @@ namespace Tanks2014
 					t.hp -= dmg;
 					if (t.hp <= 0) {
 						map.removeObject(t);
+						owner.frags++;
 					}
 					map.removeObject (this);
 				}
@@ -65,6 +67,13 @@ namespace Tanks2014
 				}
 			}
 		}
+
+		public Weapon (Tank owner)
+		{
+			this.owner = owner;
+		}
+		protected Tank owner;
+		public string name;
 		public abstract bool shoot(double x, double y, Rotation rot, Map map);
 		protected double reload = 0;
 		public int ammo { get; set; }

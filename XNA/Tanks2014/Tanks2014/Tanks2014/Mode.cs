@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +15,6 @@ namespace Tanks2014
             this.host = host;
         }
         public abstract void update(GameTime gameTime);
-        public abstract void draw(GameTime gameTime, Spriter drawer);
+        public abstract void draw(GameTime gameTime, Drawer drawer);
     }
 }

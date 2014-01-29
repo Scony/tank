@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -53,7 +53,7 @@ namespace Tanks2014
         {
 		}
 
-		public virtual void draw(Spriter drawer, GameTime gameTime, int offsetX, int offsetY)
+		public virtual void draw(Drawer drawer, GameTime gameTime, int offsetX, int offsetY)
         {
 			drawer.draw((int)realX+offsetX, (int)realY+offsetY, getDrawInfo(), realRotation);
 		}

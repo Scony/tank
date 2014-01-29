@@ -33,7 +33,7 @@ int main(){
 	for(int i=0;i<X;i++){
 		for(int j=0;j<Y;j++){
 		if(i%5 == 0 && j%5 == 0) continue;
-			int rnd = rand()%10;
+			int rnd = rand()%15;
 			if(rnd == 1){
 				map[i][j] = 2;
             }else if(!rnd){
@@ -63,7 +63,7 @@ int main(){
 			if(map[i][j]) continue;
 			int rnd = rand()%5;
 			if(i%5 == 0 && j%5 == 0) rnd = 0;
-			if(rnd == 2)rnd = 0;
+			if(rnd == 2 || rnd == 3) rnd = 0;
 			map[i][j] = rnd;
 			if(rnd != 1 && rand()%50 == 0)
 				powerups.push_back(make_pair(i,j));
@@ -82,11 +82,13 @@ int main(){
     
     printf("%d\n", powerups.size());
     for(int i=0;i<powerups.size();i++){
+    	int type = rand()%5;
+    	if(type > 2) type = 2;
     	int amm;
     	int x = powerups[i].first;
     	int y = powerups[i].second;
-    	if(i==0) amm = 20; if(i==1) amm = 100; if(i==2) amm = 1000; 
-    		printf("%d %d %d %d\n",2*x + 1, 2*y + 1, (x+y)%3, amm/2 + rand()%amm);
+    	if(type==0) amm = 20; if(type==1) amm = 100; if(type==2) amm = 1000; 
+    		printf("%d %d %d %d\n",2*x + 1, 2*y + 1, type, amm/2 + rand()%amm);
     }
     	
 }
