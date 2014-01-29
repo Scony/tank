@@ -172,6 +172,10 @@ namespace Tanks2014
             {
                 for(int j = (int)obj.y / Size.MEDIUM; j <= ((int)obj.y + obj.getDrawInfo().size - 1) / Size.MEDIUM; j++)
                 {
+					if(i >= width || i <0 || j >= height || j < 0){
+						obj.revert();
+						return;
+					}
                     if(obj.getTypeId() == 100 && terrain[i,j] != null && (terrain[i,j].getTypeId() == 1 || terrain[i,j].getTypeId() == 2 || terrain[i,j].getTypeId() == 5))
                     {
                         obj.revert();

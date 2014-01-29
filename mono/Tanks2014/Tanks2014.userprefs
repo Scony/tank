@@ -1,11 +1,11 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="../../XNA/Tanks2014/Tanks2014/Tanks2014/Tank.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="../../XNA/Tanks2014/Tanks2014/Tanks2014/Hud.cs">
     <Files>
-      <File FileName="../../XNA/Tanks2014/Tanks2014/Tanks2014/Hud.cs" Line="20" Column="23" />
+      <File FileName="../../XNA/Tanks2014/Tanks2014/Tanks2014/Hud.cs" Line="14" Column="25" />
       <File FileName="../../XNA/Tanks2014/Tanks2014/Tanks2014/PlayerTank.cs" Line="17" Column="10" />
-      <File FileName="../../XNA/Tanks2014/Tanks2014/Tanks2014/TestMode.cs" Line="26" Column="30" />
-      <File FileName="../../XNA/Tanks2014/Tanks2014/Tanks2014/Tank.cs" Line="66" Column="11" />
+      <File FileName="../../XNA/Tanks2014/Tanks2014/Tanks2014/TestMode.cs" Line="45" Column="3" />
+      <File FileName="../../XNA/Tanks2014/Tanks2014/Tanks2014/Tank.cs" Line="55" Column="14" />
       <File FileName="../../XNA/Tanks2014/Tanks2014/Tanks2014/Map.cs" Line="170" Column="10" />
       <File FileName="../../XNA/Tanks2014/Tanks2014/Tanks2014/Drawer.cs" Line="15" Column="3" />
       <File FileName="../../XNA/Tanks2014/Tanks2014/Tanks2014/Weapon.cs" Line="76" Column="16" />
@@ -13,13 +13,15 @@
       <File FileName="../../XNA/Tanks2014/Tanks2014/Tanks2014/MachineGun.cs" Line="51" Column="4" />
       <File FileName="../../XNA/Tanks2014/Tanks2014/Tanks2014/Grenade.cs" Line="15" Column="7" />
       <File FileName="../../XNA/Tanks2014/Tanks2014/Tanks2014/AITank.cs" Line="34" Column="10" />
+      <File FileName="../../XNA/Tanks2014/Tanks2014/Tanks2014/Game.cs" Line="64" Column="36" />
+      <File FileName="../../XNA/Tanks2014/Tanks2014/Tanks2014/ClientMode.cs" Line="112" Column="18" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="Tanks2014" expanded="True">
             <Node name="Tanks2014" expanded="True">
-              <Node name="Tank.cs" selected="True" />
+              <Node name="Hud.cs" selected="True" />
             </Node>
           </Node>
         </State>

@@ -11,7 +11,6 @@ namespace Tanks2014
     {
         public NetworkPlayerTank(string initData) : base(initData)
         {
-            color = Color.DarkGoldenrod;
         }
 
         public override void update(GameTime gameTime, Map map)
