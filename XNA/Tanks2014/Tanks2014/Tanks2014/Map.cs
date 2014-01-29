@@ -239,7 +239,7 @@ namespace Tanks2014
 
         public bool collides(MapObject o1, MapObject o2)
         {
-			if(o1.deleted || o2.deleted) return false;
+			if(o1.deleted && o2.deleted) return false;
             int x11 = (int)o1.x;
             int y11 = (int)o1.y;
             int x12 = (int)o1.x + (int)o1.getDrawInfo().size - 1;

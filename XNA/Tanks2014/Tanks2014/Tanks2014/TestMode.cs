@@ -18,7 +18,7 @@ namespace Tanks2014
             try
             {
                 playerData = System.IO.File.ReadAllText(@"config.txt");
-            } catch (Exception e)
+            } catch (Exception)
             {
                 playerData = "\nunknown\n\n255,255,255";
             }

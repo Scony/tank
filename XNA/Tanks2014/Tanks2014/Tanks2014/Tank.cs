@@ -9,7 +9,22 @@ namespace Tanks2014
     public abstract class Tank : MapObject
     {
 		public string nick;
-		public Color color;
+		private Color _color;
+		public Color color {
+			get {
+				return _color;
+			}
+			set {
+				_color = value;
+				int light = _color.R + _color.G + _color.B;
+				if (light < 100) {
+					_color.R += (byte)((100 - light) / 2);
+					_color.G += (byte)((100 - light) / 2);
+					_color.B += (byte)((100 - light) / 2);
+				}
+			}
+		}
+
 		public int frags = 0;
 
         public int hp = 100;
@@ -34,15 +49,9 @@ namespace Tanks2014
 			}
 		}
 
-        public Tank (string nick, Color color)
+        public Tank(string nick, Color color)
 		{
 			this.nick = nick;
-			int light = color.R + color.G + color.B;
-			if (light < 100) {
-				color.R += (byte)((100-light)/2);
-				color.G += (byte)((100-light)/2);
-				color.B += (byte)((100-light)/2);
-			}
 			this.color = color;
             weapons[0] = new Cannon(this);
 			weapons[1] = new MachineGun(this);
