@@ -20,7 +20,7 @@ namespace Tanks2014
                 playerData = System.IO.File.ReadAllText(@"config.txt");
             } catch (Exception e)
             {
-                playerData = "\nscony\n\n255,150,0";
+                playerData = "\nunknown\n\n255,255,255";
             }
 			string[] lines = playerData.Split ('\n');
 			string[] colors = lines [3].Split (',');
@@ -30,7 +30,7 @@ namespace Tanks2014
 			int b = (int)Convert.ToDecimal(colors[2]);
 
 			pt = new PlayerTank(lines[1], new Color(r,g,b));
-            pt.setXY(48, 48);
+
             //map = new Map(100,100);
 			string mapData = System.IO.File.ReadAllText(@"medium.map");
 
@@ -39,6 +39,11 @@ namespace Tanks2014
 
 			map = new Map(mapData);
 			hud = new Hud(pt);
+
+			pt.m = map;
+
+			pt.respawn();
+
 			map.addObject(pt);
             map.addObject(new AITank(Size.MEDIUM * 11,Size.MEDIUM ,0));
 			map.addObject(new AITank(Size.MEDIUM,11*Size.MEDIUM ,0));

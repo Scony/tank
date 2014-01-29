@@ -52,10 +52,11 @@ namespace Tanks2014
 					Tank t = (Tank)other;
 					t.hp -= dmg;
 					if (t.hp <= 0) {
-						map.removeObject(t);
+						t.respawn();
 						owner.frags++;
-					}
-					map.removeObject (this);
+						map.addObject(new Bang((int)x,(int)y,Size.LARGE));
+					}else map.addObject(new Bang((int)x,(int)y,Size.MEDIUM));
+					map.removeObject(this);
 				}
 				if (other.getTypeId () / 100 == 2) {
 					Projectible p = (Projectible) other;
@@ -64,6 +65,7 @@ namespace Tanks2014
 						map.removeObject(p);
 					}
 					map.removeObject (this);
+					map.addObject(new Bang((int)x,(int)y,Size.MEDIUM));
 				}
 			}
 		}

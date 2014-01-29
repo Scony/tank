@@ -11,6 +11,8 @@ namespace Tanks2014
     {
         private DrawInfo info = new DrawInfo(0, 0, Size.LARGE);
 
+		private double resp = 1;
+
         public PlayerTank(string nick, Color color) : base(nick, color)
         {
             rotation = Rotation.RIGHT;
@@ -30,6 +32,7 @@ namespace Tanks2014
 
         public override void update(GameTime gameTime, Map map)
         {
+			resp -= gameTime.ElapsedGameTime.TotalSeconds;
             weapons [activeWeapon].update(gameTime);
 
             KeyboardState state = Keyboard.GetState();
@@ -42,6 +45,16 @@ namespace Tanks2014
             if (state.IsKeyDown(Keys.D2))
             {
                 activeWeapon = 1;
+            }
+
+			if (state.IsKeyDown(Keys.R))
+            {
+				if(resp <= 0){
+					frags--;
+					respawn();
+					resp = 1;
+				}
+				return;
             }
 
             //color switching

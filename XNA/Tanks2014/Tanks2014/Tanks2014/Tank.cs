@@ -21,6 +21,8 @@ namespace Tanks2014
         public Weapon[] weapons = new Weapon[10];
 		protected int activeWeapon = 0;
 
+
+
 		public int ammo {
 			get {
 				return weapons[activeWeapon].ammo;
@@ -45,6 +47,26 @@ namespace Tanks2014
             weapons[0] = new Cannon(this);
 			weapons[1] = new MachineGun(this);
         }
+
+		public Map m;
+
+		public void respawn()
+		{
+			deleted = true;
+			fuel = 2000;
+			hp = 100;
+			weapons [0] = new Cannon (this);
+			weapons [1] = new MachineGun (this);
+
+			Random r = new Random();
+			do {
+				x = r.Next(0,5) * 5 * Size.LARGE + Size.MEDIUM;
+				y = r.Next(0,5) * 5 * Size.LARGE + Size.MEDIUM;
+			}while(m.collidesWithObjects(this));
+			realX = x;
+			realY = y;
+			deleted = false;
+		}
 
         public override MapObject commit()
         {

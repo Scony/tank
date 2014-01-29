@@ -141,6 +141,9 @@
     <Compile Include="..\..\..\XNA\Tanks2014\Tanks2014\Tanks2014\Drawer.cs">
       <Link>Tanks2014\Spriter.cs</Link>
     </Compile>
+    <Compile Include="..\..\..\XNA\Tanks2014\Tanks2014\Tanks2014\Bang.cs">
+      <Link>Tanks2014\Bang.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Icon.png" />

@@ -39,6 +39,10 @@ namespace Tanks2014
 					spriteY = 1024 - Size.MEDIUM;
 					spriteX = Size.MEDIUM * (text[i] - '0');
 				}
+				if(text[i] == '-'){
+					spriteY = 1024 - Size.MEDIUM;
+					spriteX = Size.MEDIUM * 16;
+				}
 				spriteBatch.Draw(sprite,
 					new Rectangle(x + i*Size.MEDIUM + Size.SMALL, y + Size.SMALL, Size.MEDIUM, Size.MEDIUM),
 				    new Rectangle(spriteX, spriteY, Size.MEDIUM, Size.MEDIUM),
@@ -60,8 +64,11 @@ namespace Tanks2014
 		{
 			draw(x,  y,  size, spriteX,  spriteY,  rotation, Color.White);
 		}
-
-        public void draw(int x, int y, int size, int spriteX, int spriteY, int rotation, Color color)
+		public void draw (int x, int y, int size, int spriteX, int spriteY, int rotation, Color color)
+		{
+			draw (x, y, size, size, spriteX, spriteY, rotation, color);
+		}
+        public void draw(int x, int y, int size, int spriteSize, int spriteX, int spriteY, int rotation, Color color)
         {
             SpriteEffects effect = SpriteEffects.None;
             float rotationAngle = 0;
@@ -82,7 +89,7 @@ namespace Tanks2014
             {
                 rotationAngle = (float)Math.PI;
             }
-            spriteBatch.Draw(sprite, new Rectangle(x + (int)size / 2, y + (int)size / 2, (int)size, (int)size), new Rectangle(spriteX, spriteY, (int)size, (int)size), color, rotationAngle, new Vector2((int)size / 2, (int)size / 2), effect, 0);
+            spriteBatch.Draw(sprite, new Rectangle(x + (int)size / 2, y + (int)size / 2, (int)size, (int)size), new Rectangle(spriteX, spriteY, (int)spriteSize, (int)spriteSize), color, rotationAngle, new Vector2((int)size / 2, (int)size / 2), effect, 0);
         }
 
 		public void drawRect(int x, int y, int sizeX, int sizeY, Color color)

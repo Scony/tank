@@ -122,6 +122,7 @@ namespace Tanks2014
 			objects.Add (obj);
 			if (obj.getTypeId () / 100 == 1) {
 				tanks.Add((Tank) obj);
+				((Tank)obj).m = this;
 			}
         }
 
@@ -185,18 +186,36 @@ namespace Tanks2014
                     {
                         obj.deleted = true;
                         toRemove.Add(obj);
-                        if(obj.getTypeId() == 200)
+                        if(obj.getTypeId() == 200){
 							terrain[i,j] = null;
+							addObject(new Bang((int)obj.x,(int)obj.y,Size.MEDIUM));
+						}
+						else
+							addObject(new Bang((int)obj.x,(int)obj.y,Size.SMALL));
                     }
                     if((obj.getTypeId() == 200 || obj.getTypeId() == 201) && terrain[i,j] != null && terrain[i,j].getTypeId() == 2)
                     {
                         obj.deleted = true;
                         toRemove.Add(obj);
+						addObject(new Bang((int)obj.x,(int)obj.y,Size.SMALL));
                         return;
                     }
                 }
             }
+        }
 
+		public bool collidesWithObjects(MapObject obj)
+        {
+			if(obj.x > (width-2) * width) return true;
+			if(obj.y > (width-2) * width) return true;
+            for (int i = 0; i<objects.Count; i++)
+            {
+                if (collides(obj, objects[i]))
+                {
+					return true;
+                }
+            }
+			return false;
         }
 
         protected void checkObjectsCollision(MapObject obj, int idx)
@@ -220,6 +239,7 @@ namespace Tanks2014
 
         public bool collides(MapObject o1, MapObject o2)
         {
+			if(o1.deleted || o2.deleted) return false;
             int x11 = (int)o1.x;
             int y11 = (int)o1.y;
             int x12 = (int)o1.x + (int)o1.getDrawInfo().size - 1;

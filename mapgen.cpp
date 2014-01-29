@@ -4,8 +4,8 @@
 #include <vector>
 #include <utility>
 
-#define X 50
-#define Y 50
+#define X 25
+#define Y 25
 
 using namespace std;
 
