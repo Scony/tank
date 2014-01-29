@@ -6,7 +6,7 @@
 #include "Map.hpp"
 #include "Tank.hpp"
 
-#define GAME_SIZE 2
+#define GAME_SIZE 4
 
 class Game
 {

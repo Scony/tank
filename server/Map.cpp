@@ -1,5 +1,5 @@
 #include <fstream>
-#include <sstream>
+#include <cstdlib>
 
 #include "Map.hpp"
 
@@ -7,54 +7,19 @@ using namespace std;
 
 Map::Map(string fileName)
 {
+  system("./mapgen.out > medium.map");
   ifstream in(fileName.c_str());
-  stringstream ss;
+  string line;
+  data = "";
+  while(getline(in,line))
+    data += line + "\n";
 
-  int n;
-  int m;
-
-  // map matrix
-  in >> n >> m;
-  ss << n << " " << m << endl;
-  for(int i = 0; i < m; i++)
+  for(int i = 0; i < 10; i++)
     {
-      for(int j = 0; j < n; j++)
-	{
-	  int val;
-	  in >> val;
-	  ss << val;
-	  if(j+1 < n)
-	    ss << " ";
-	}
-      ss << endl;
-    }
-
-  // consumables list
-  in >> n;
-  ss << n << endl;
-  for(int i = 0; i < n; i++)
-    {
-      int a;
-      int b;
-      int c;
-      int d;
-      in >> a >> b >> c >> d;
-      ss << a << " " << b << " " << c << " " << d;
-      if(i+1 < n)
-	ss << endl;
-    }
-
-  // spots list
-  in >> n;
-  for(int i = 0; i < n; i++)
-    {
-      int a;
-      int b;
-      in >> a >> b;
+      int a = 5 * 32 * i + 16;
+      int b = 5 * 32 * i + 16;
       tankPositions.push_back(pair<int,int>(a,b));
     }
-
-  data = ss.str();
 }
 
 pair<int,int> Map::getTankPosition()

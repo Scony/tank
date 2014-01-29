@@ -12,7 +12,7 @@ namespace Tanks2014
 		public Color color;
 		public int frags = 0;
 
-        public int hp = 10000000;
+        public int hp = 100;
 		public int fuel = 2000;
 
 		protected int maxHp;

@@ -23,4 +23,7 @@ size:
 todo:
 	ack-grep todo
 
+mapgen:
+	g++ mapgen.cpp -o mapgen.out
+
 .PHONY: clean

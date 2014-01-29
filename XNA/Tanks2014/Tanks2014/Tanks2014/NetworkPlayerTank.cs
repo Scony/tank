@@ -11,6 +11,23 @@ namespace Tanks2014
     {
         public NetworkPlayerTank(string initData) : base(initData)
         {
+            string playerData;
+            try
+            {
+                playerData = System.IO.File.ReadAllText(@"config.txt");
+            } catch (Exception)
+            {
+                playerData = "\nunknown\n\n255,255,255";
+            }
+            string[] lines = playerData.Split ('\n');
+            string[] colors = lines [3].Split (',');
+
+            int r = (int)Convert.ToDecimal(colors[0]);
+            int g = (int)Convert.ToDecimal(colors[1]);
+            int b = (int)Convert.ToDecimal(colors[2]);
+
+            nick = lines[1];
+            color = new Color(r,g,b);
         }
 
         public override void update(GameTime gameTime, Map map)
